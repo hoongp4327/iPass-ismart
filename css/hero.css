@@ -1,0 +1,318 @@
+/* =========================================================
+   SECTION 01 — HERO BANNER
+   Canvas thiết kế: 1440 × 900 · lưới 12 cột
+   lề 120 | nội dung 1200 | cột 78 | gutter 24
+
+   Đây là layout responsive thật: cỡ chữ cố định, bố cục co
+   theo cột. Nền và ảnh học sinh tràn ra ngoài cột nội dung.
+   ========================================================= */
+
+.hero{
+  position: relative;
+  min-height: 900px;
+  overflow: hidden;
+  background: var(--ipass-sky);
+  isolation: isolate;
+}
+
+/* --- nền: phủ kín toàn bộ chiều rộng màn hình -------------------------- */
+
+.hero__bg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+  z-index: 0;
+}
+
+/* --- cột nội dung: 12 cột, căn giữa ------------------------------------ */
+
+/* Căn giữa cụm nội dung theo chiều dọc so với ảnh nền.
+   Thanh nav cố định cao ~72px đè lên phần trên, nên cộng thêm
+   padding-top bằng chiều cao nav để phần "giữa" là giữa vùng
+   NHÌN THẤY, không phải giữa thẻ section. */
+.hero__inner{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  min-height: 900px;
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+  padding-top: 72px;
+}
+
+/* --- ảnh học sinh: bám mép phải, tràn ra ngoài cột nội dung ------------
+   .hero__media chính là khung bao của ảnh (tỉ lệ đúng bằng file gốc),
+   nhờ vậy 2 huy hiệu định vị theo % của ảnh và luôn giữ nguyên khoảng
+   cách với đầu 2 bạn nhỏ ở mọi cỡ màn hình.                            */
+
+.hero__media{
+  position: absolute;
+  right:  -10px;
+  bottom: -4px;
+  z-index: 1;
+  width: clamp(560px, 62.5vw, 900px);
+  aspect-ratio: 953 / 514;
+  pointer-events: none;
+}
+
+/* Ảnh đã tách nền sẵn (42% pixel trong suốt) nên không cần mask. */
+.hero__students{
+  width: 100%;
+  height: 100%;
+}
+
+.hero__badge-score,
+.hero__badge-aplus{
+  position: absolute;
+  filter: drop-shadow(0 6px 16px rgba(23, 63, 138, .18));
+  animation: heroFloat 5s ease-in-out infinite;
+}
+
+/* đỉnh tóc bạn nữ ở 5% chiều cao ảnh → badge kết thúc trên đó 50px */
+.hero__badge-score{
+  right: 14.4%;
+  top:  -28%;
+  width: 14.7%;
+}
+
+/* đỉnh đầu bạn nam ở 14% chiều cao ảnh → badge kết thúc trên đó 30px */
+.hero__badge-aplus{
+  right: 41.3%;
+  top:   -8.9%;
+  width:  9.3%;
+  animation-delay: -2.2s;
+}
+
+@keyframes heroFloat{
+  0%, 100%{ transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+
+/* --- logo iSMART ------------------------------------------------------- */
+
+.hero__brand{
+  width: 140px;
+  margin-top: 78px;
+  flex: none;
+}
+
+/* --- khối nội dung ----------------------------------------------------- */
+
+/* Hero không còn logo riêng (đã chuyển lên thanh điều hướng cố định).
+   Khoảng đệm đầu do justify-content:center của .hero__inner lo, nên ở
+   đây không cần margin-top nữa. */
+.hero__content{
+  width: 100%;
+}
+
+/* logo iPass: 6 cột */
+.hero__logo{
+  width: calc(6 * var(--col) + 5 * var(--gutter));
+  max-width: 588px;
+  height: auto;
+}
+
+/* card #HỌC CHẮC: 7 cột */
+.hero__card{
+  width: calc(7 * var(--col) + 6 * var(--gutter));
+  max-width: 690px;
+  height: auto;
+  margin-top: 26px;
+}
+
+.hero__tagline{
+  margin-top: 40px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.2px;
+  color: var(--ipass-navy);
+}
+
+/* --- nút bấm ----------------------------------------------------------- */
+
+.hero__actions{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease,
+              background-color .18s ease, color .18s ease;
+}
+
+.btn--primary{
+  gap: 12px;
+  padding: 0 9px 0 24px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--ipass-orange) 0%, var(--ipass-orange-2) 100%);
+  box-shadow: 0 6px 16px rgba(240, 78, 35, .28);
+}
+
+.btn--primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(240, 78, 35, .38);
+}
+
+.btn__arrow{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.6px solid rgba(255, 255, 255, .95);
+}
+
+.btn__arrow svg{ width: 13px; height: 13px; }
+
+.btn--ghost{
+  padding: 0 26px;
+  color: var(--ipass-orange);
+  background: transparent;
+  border: 1.6px solid var(--ipass-orange);
+}
+
+.btn--ghost:hover{
+  color: #fff;
+  background: var(--ipass-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(240, 78, 35, .28);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* --- Laptop: cột nội dung bắt đầu co lại ------------------------------- */
+
+@media (max-width: 1247px){
+  .hero{ min-height: 780px; }
+  .hero__inner{ min-height: 780px; }
+  .hero__brand{ margin-top: 56px; }
+  /* không đặt margin-top: việc căn giữa dọc do justify-content lo */
+  .hero__tagline{ font-size: 26px; margin-top: 30px; }
+}
+
+/* --- Tablet & mobile: xếp dọc, ảnh xuống dưới -------------------------- */
+
+@media (max-width: 1023px){
+  .hero{
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding-top: clamp(24px, 4.5vw, 44px);
+  }
+
+  .hero__bg{ object-position: 70% top; }
+
+  .hero__inner{
+    flex: 1;
+    min-height: 0;
+    padding-inline: clamp(20px, 5vw, 48px);
+  }
+
+  .hero__brand{
+    width: clamp(104px, 15vw, 140px);
+    margin-top: 0;
+  }
+
+  .hero__content{
+    max-width: 660px;
+    /* dưới 1023px hero xếp dọc (ảnh xuống dưới) nên khối chữ bám lên
+       trên chứ không căn giữa — chỉ cần chừa chỗ cho thanh nav */
+    margin-top: clamp(16px, 3vw, 28px);
+  }
+
+  .hero__logo{ width: min(100%, 470px); }
+
+  .hero__card{
+    width: 100%;
+    max-width: 620px;
+    margin-top: clamp(14px, 3vw, 22px);
+  }
+
+  .hero__tagline{
+    margin-top: clamp(18px, 3.5vw, 30px);
+    font-size: clamp(20px, 3.4vw, 30px);
+  }
+
+  .hero__actions{
+    gap: clamp(10px, 2vw, 16px);
+    margin-top: clamp(14px, 2.5vw, 20px);
+  }
+
+  .btn{
+    height: clamp(42px, 6vw, 48px);
+    font-size: clamp(13px, 1.9vw, 16px);
+  }
+
+  .btn--primary{ gap: 10px; padding: 0 8px 0 20px; }
+  .btn__arrow{ width: 26px; height: 26px; }
+  .btn__arrow svg{ width: 14px; height: 14px; }
+
+  .btn--ghost{
+    padding: 0 20px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* ảnh học sinh chuyển xuống đáy, chiếm trọn bề ngang */
+  .hero__media{
+    position: static;
+    order: 2;
+    width: min(120%, 780px);
+    margin-top: clamp(24px, 5vw, 48px);
+    margin-inline: auto -4vw;
+  }
+
+  /* huy hiệu 9.0 lên góc trên phải của section, không đè lên ảnh nữa */
+  .hero__badge-score{
+    position: absolute;
+    top:   clamp(20px, 4vw, 44px);
+    right: clamp(20px, 5vw, 48px);
+    width: clamp(96px, 13vw, 132px);
+  }
+
+  /* khu vực quanh đầu 2 bạn nhỏ quá hẹp cho cả 2 huy hiệu → ẩn A+ */
+  .hero__badge-aplus{ display: none; }
+}
+
+/* --- Mobile: bỏ hẳn 2 huy hiệu ---------------------------------------- */
+
+@media (max-width: 767px){
+  .hero__badge-score,
+  .hero__badge-aplus{ display: none; }
+}
+
+/* --- Mobile nhỏ -------------------------------------------------------- */
+
+@media (max-width: 599px){
+  .hero__actions{ flex-direction: column; align-items: stretch; }
+  .hero__actions .btn{ width: 100%; }
+  .btn--primary{ justify-content: space-between; }
+}

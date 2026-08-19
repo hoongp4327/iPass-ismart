@@ -1,0 +1,345 @@
+/* =========================================================
+   SECTION 06 — MÔ HÌNH HỌC TẬP SONG HÀNH (iPASS 2P)
+   Canvas thiết kế 1440 × 790 (PSD y 3560 → 4350) · nền TRẮNG.
+
+   Bố cục 2 cột, khối nội dung rộng 1011px canh giữa canvas:
+
+     CỘT TRÁI  (x 190…678 · y 33…757 — khung 488 × 724)
+       vòng tròn vàng  249,33   404 × 404   #ffc600
+       ảnh nữ sinh     190,110  483 × 647   (bậc thang 7·8·9·10)
+       mascot iSacc    551,298  127 × 131   (đứng trên bậc "10")
+       chấm vuông navy 433,175  11 × 11     #0f50a3
+       "70 Phút"       453,167  35px        #0f50a3
+       "Live Class"    454,196  22px        #0f50a3
+       chấm vuông cam  433,245  11 × 11     #fe5c25
+       "20 Phút"       452,235  35px        #fe5c25
+       "Guided LMS"    453,264  22px        #fe5c25
+
+     CỘT PHẢI  (x 713…1201 — rộng 488)
+       eyebrow         715,30   20px        #14226b
+       "iPASS 2P"      716,64   67px        #2467ff
+       pill cam        714,133  391 × 48    #fe5c25 · bo góc ~4
+       thẻ P1 navy     713,201  488 × 235   #0f50a3 · bo góc 30
+       thẻ P2 vàng     713,452  488 × 235   #ffc600 · bo góc 30
+
+     dòng chốt         388,748  26px        #fe5c25 · canh giữa
+
+   Cỡ chữ KHÔNG lấy từ transform trong PSD (hay sai khi layer bị
+   scale) mà đo trực tiếp ink-bbox từng dòng trên psd-ref/s6.png:
+   font ≈ chiều cao chữ hoa / 0.7.
+
+   Lưu ý màu, đối chiếu ảnh render:
+     • tiêu đề thẻ P1 là chữ TRẮNG (không phải vàng);
+     • cả "20 Phút" lẫn "Guided LMS" đều màu CAM;
+     • toàn bộ chữ trong thẻ P2 dùng #0f50a3.
+
+   Cột trái dùng cqw (gốc 488px) nên cụm vòng tròn — ảnh — chữ
+   luôn giữ đúng tỉ lệ bản vẽ ở mọi cỡ màn hình.
+   ========================================================= */
+
+.plan{
+  /* bảng màu lấy từ vectorFillColor / màu chữ trong PSD */
+  --plan-yellow: #ffc600;   /* Ellipse 3 · Rectangle 8 copy     */
+  --plan-orange: #fe5c25;   /* Rectangle 7 · mốc 20 phút · chốt */
+  --plan-navy:   #0f50a3;   /* Rectangle 8 · chữ trên thẻ vàng  */
+  --plan-blue:   #2467ff;   /* "iPASS 2P"                       */
+  --plan-ink:    #14226b;   /* eyebrow                          */
+
+  position: relative;
+  padding-block: 30px 21px;
+  background: #fff;
+  font-family: var(--font-sans);
+  letter-spacing: -.025em;  /* tracking -25 dùng chung cả PSD */
+}
+
+.plan__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+.plan__row{
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;                /* mép ảnh 678 → mép thẻ 713 */
+  width: 100%;
+  max-width: 1011px;        /* 190 → 1201 */
+  margin-inline: auto;
+}
+
+/* =========================================================
+   CỘT TRÁI — vòng tròn vàng · nữ sinh · mascot · 2 mốc giờ
+   ========================================================= */
+
+.plan__photo{
+  position: relative;
+  container-type: inline-size;   /* gốc của mọi cqw bên dưới = 483px */
+  flex: 1 1 483px;
+  max-width: 483px;
+  margin-top: 3px;               /* mép vòng tròn thấp hơn eyebrow 3px */
+  aspect-ratio: 483 / 724;
+}
+
+/* Vòng tròn vàng + nữ sinh + bậc thang gộp sẵn trong 1 ảnh.
+   Trước đây vòng tròn dựng bằng CSS còn nữ sinh là ảnh riêng, nhưng
+   ảnh nữ sinh trong PSD có LAYER MASK; bản export cũ chưa áp mask nên
+   nền trắng của ảnh che mất gần hết vòng vàng. Nay đã áp mask rồi ghép
+   2 layer thành "stage-tieuhoc.png" nên phần vàng hiện đủ.            */
+.plan__student{
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;                   /* ảnh 483 × 724 = đúng khung */
+  height: auto;
+}
+
+/* mascot robot iSacc đứng trên bậc "10" */
+.plan__mascot{
+  position: absolute;
+  z-index: 2;
+  left: 74.74%;                  /* 551 − 190 = 361 → /483 */
+  top: 36.60%;                   /* 3858 − 3593 = 265 → /724 */
+  width: 26.29%;                 /* 127 / 483 */
+  height: auto;
+}
+
+/* --- 2 mốc thời lượng: nằm ĐÈ trong vùng vòng tròn, phía phải ----------- */
+
+.plan__times{
+  position: absolute;
+  z-index: 3;
+  left: 54.24%;                  /* mép trái chữ 452 − 190 = 262 → /483 */
+  top: 18.51%;                   /* 3727 − 3593 = 134 → /724            */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plan__time-item{
+  position: relative;
+  display: block;
+  color: var(--plan-navy);
+}
+
+.plan__time-item--lms{ color: var(--plan-orange); }
+
+.plan__time-item + .plan__time-item{ margin-top: 2.838cqw; }  /* 13.85px */
+
+/* chấm VUÔNG nhỏ đầu dòng — PSD "Rectangle 9" 11 × 11 */
+.plan__time-item::before{
+  content: "";
+  position: absolute;
+  left: -3.893cqw;               /* 433 so với mép chữ 452 */
+  top: 2.6cqw;
+  width: 2.254cqw;               /* 11px */
+  height: 2.254cqw;
+  background: currentColor;
+}
+
+.plan__time-value{
+  display: block;
+  font-size: max(7.172cqw, 20px);  /* 35px @488 */
+  font-weight: 800;
+  line-height: 1;
+  color: inherit;
+}
+
+.plan__time-label{
+  display: block;
+  margin-top: -.82cqw;             /* 2 dòng bám sát nhau đúng như PSD */
+  font-size: max(4.508cqw, 13px);  /* 22px @488 */
+  font-weight: 800;
+  line-height: 1;
+  color: inherit;
+}
+
+/* =========================================================
+   CỘT PHẢI — tiêu đề · pill · thẻ P1 · thẻ P2   (488px)
+   ========================================================= */
+
+.plan__col{
+  flex: 1 1 488px;
+  max-width: 488px;
+  min-width: 0;
+}
+
+.plan__heading{ display: block; }
+
+.plan__eyebrow{
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--plan-ink);
+}
+
+.plan__name{
+  display: block;
+  margin-top: 10.5px;
+  font-size: 67px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--plan-blue);
+}
+
+/* pill CAM — Rectangle 7 gần như vuông góc, chỉ bo rất nhẹ */
+.plan__pill{
+  display: inline-block;
+  margin-top: 5.5px;
+  padding: 10.5px 19px;
+  border-radius: 4px;
+  background: var(--plan-orange);
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* --- 2 thẻ chương trình (PSD 488 × 235, bo góc 30) --------------------- */
+
+.plan__cards{ margin-top: 20px; }      /* đáy pill 181 → đỉnh thẻ 201 */
+
+.plan__card{
+  position: relative;
+  padding: 36px 40px 26.5px;
+  border-radius: 30px;
+}
+
+.plan__card + .plan__card{ margin-top: 16px; }
+
+.plan__card--p1{ background: var(--plan-navy);   color: #fff; }
+.plan__card--p2{ background: var(--plan-yellow); color: var(--plan-navy); }
+
+.plan__card-eyebrow{
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+/* "P1" / "P2" — rất lớn, đậm, góc phải trên của thẻ */
+.plan__card-tag{
+  position: absolute;
+  top: 26px;
+  right: 31px;
+  font-size: 57px;
+  font-weight: 800;
+  line-height: 1;
+  color: inherit;
+}
+
+.plan__card-title{
+  margin-top: 28.5px;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.plan__card-desc{
+  margin-top: 9px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.19;             /* 20.3px giữa 2 baseline */
+  text-align: justify;
+  color: inherit;
+}
+
+/* thẻ P2 ít chữ hơn nên nội dung được đẩy xuống vài px so với thẻ P1 */
+.plan__card--p2{ padding-top: 41px; padding-bottom: 35px; }
+.plan__card--p2 .plan__card-tag{ top: 22px; }
+.plan__card--p2 .plan__card-title{ margin-top: 38px; }
+.plan__card--p2 .plan__card-desc{ margin-top: 6.5px; }
+
+/* =========================================================
+   DÒNG CHỐT CUỐI SECTION
+   ========================================================= */
+
+.plan__tagline{
+  margin-top: -14px;             /* chữ nhô lên phần trong suốt dưới ảnh */
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--plan-orange);
+}
+
+
+/* =========================================================
+   RESPONSIVE — breakpoint dùng chung với hero.css / section4.css
+   ========================================================= */
+
+@media (max-width: 1247px){
+  .plan__row{ gap: clamp(20px, 3vw, 35px); }
+}
+
+/* --- Tablet trở xuống: xếp dọc, ảnh lên trên -------------------------- */
+
+@media (max-width: 1023px){
+  .plan{ padding-block: clamp(40px, 6vw, 56px); }
+
+  .plan__row{
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(24px, 4vw, 40px);
+    max-width: 520px;
+  }
+
+  .plan__photo{
+    flex: none;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 0;
+  }
+
+  .plan__col{ flex: none; width: 100%; }
+
+  .plan__tagline{ margin-top: clamp(28px, 5vw, 44px); }
+}
+
+@media (max-width: 767px){
+  .plan__inner{ padding-inline: clamp(20px, 5vw, 24px); }
+
+  .plan__eyebrow{ font-size: 17px; }
+  .plan__name{ font-size: 52px; }
+  .plan__pill{ font-size: 21px; padding: 9px 15px; }
+
+  .plan__cards{ margin-top: 18px; }
+  .plan__card{ padding: 28px 28px 24px; border-radius: 24px; }
+  .plan__card--p2{ padding-top: 30px; padding-bottom: 28px; }
+  .plan__card-eyebrow{ font-size: 21px; }
+  .plan__card-tag{ top: 22px; right: 24px; font-size: 44px; }
+  .plan__card--p2 .plan__card-tag{ top: 19px; }
+  .plan__card-title{ margin-top: 20px; font-size: 21px; line-height: 1.15; }
+  .plan__card--p2 .plan__card-title{ margin-top: 26px; }
+  .plan__card-desc{ margin-top: 10px; font-size: 15px; line-height: 1.35; }
+  .plan__card--p2 .plan__card-desc{ margin-top: 10px; }
+
+  .plan__tagline{ font-size: 20px; line-height: 1.45; }
+}
+
+@media (max-width: 599px){
+  .plan__photo{ max-width: 340px; }
+
+  .plan__eyebrow{ font-size: 15px; }
+  .plan__name{ font-size: 40px; }
+  .plan__pill{ font-size: 16px; padding: 8px 13px; }
+
+  .plan__card{ padding: 24px 22px 22px; border-radius: 20px; }
+  .plan__card--p2{ padding-top: 26px; padding-bottom: 24px; }
+  .plan__card-eyebrow{ font-size: 18px; }
+  .plan__card-tag{ top: 18px; right: 20px; font-size: 36px; }
+  .plan__card--p2 .plan__card-tag{ top: 16px; }
+  .plan__card-title{ margin-top: 16px; font-size: 19px; }
+  .plan__card--p2 .plan__card-title{ margin-top: 20px; }
+  .plan__card-desc{ font-size: 14px; text-align: left; }
+
+  .plan__tagline{ font-size: 16px; }
+}

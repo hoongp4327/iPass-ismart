@@ -1,0 +1,326 @@
+/* =========================================================
+   SECTION 11 — ĐĂNG KÝ TƯ VẤN
+   Phần này KHÔNG có trong file PSD gốc — dựng theo ảnh mẫu
+   khách gửi: nền navy đậm, 2 cột.
+     · trái  — eyebrow cam, tiêu đề trắng cỡ lớn, 4 gạch đầu dòng
+               có dấu tick xanh lá, 2 ô thông tin liên hệ
+     · phải  — thẻ trắng bo góc chứa form
+
+   LƯU Ý KỸ THUẬT: trang tĩnh, form CHƯA nối nơi nhận dữ liệu —
+   xem ghi chú đầu file js/form.js.
+   ========================================================= */
+
+.cta{
+  --cta-navy:    #14226b;   /* nền section            */
+  --cta-orange:  #ff4800;   /* eyebrow + nút gửi      */
+  --cta-gold:    #ffc600;   /* số hotline / website   */
+  --cta-sky:     #7ea6ff;   /* nhãn nhỏ trong ô liên hệ */
+  --cta-green:   #16a34a;   /* dấu tick               */
+  --cta-ink:     #14226b;   /* chữ trong thẻ trắng    */
+  --cta-muted:   #6b7280;   /* chú thích xám          */
+  --cta-line:    #d8dee9;   /* viền ô nhập            */
+
+  background: var(--cta-navy);
+  padding-block: clamp(48px, 6vw, 88px);
+}
+
+.cta__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+.cta__row{
+  display: grid;
+  grid-template-columns: 46fr 54fr;
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+}
+
+/* =========================================================
+   CỘT TRÁI — lời mời + danh sách quyền lợi + liên hệ
+   ========================================================= */
+
+.cta__eyebrow{
+  font-weight: 800;
+  font-size: clamp(12px, 1.04vw, 15px);
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--cta-orange);
+}
+
+.cta__title{
+  margin-top: 12px;
+  font-weight: 800;
+  font-size: clamp(32px, 4.03vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  color: #fff;
+}
+
+/* --- 4 quyền lợi, mỗi dòng một dấu tick tròn xanh lá ------------------ */
+
+.cta__benefits{
+  margin: clamp(22px, 2.6vw, 36px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.4vw, 20px);
+}
+
+.cta__benefits li{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  font-size: clamp(13px, 1.11vw, 16px);
+  line-height: 1.4;
+  color: #fff;
+}
+
+.cta__tick{
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cta-green);
+  color: #fff;
+}
+
+.cta__tick svg{ width: 14px; height: 14px; }
+
+/* --- 2 ô liên hệ ------------------------------------------------------- */
+
+.cta__contacts{
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(12px, 1.2vw, 18px);
+  margin-top: clamp(24px, 2.8vw, 40px);
+}
+
+.cta__contact{
+  display: block;
+  padding: 12px 18px;
+  border: 1.6px solid rgba(255, 255, 255, .22);
+  border-radius: 10px;
+  transition: border-color .18s ease, background-color .18s ease;
+}
+
+.cta__contact:hover{
+  border-color: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, .05);
+}
+
+.cta__contact-label{
+  display: block;
+  font-weight: 700;
+  font-size: clamp(9.5px, .76vw, 11px);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cta-sky);
+}
+
+.cta__contact-value{
+  display: block;
+  margin-top: 4px;
+  font-weight: 800;
+  font-size: clamp(15px, 1.32vw, 19px);
+  letter-spacing: -.01em;
+  color: var(--cta-gold);
+}
+
+/* =========================================================
+   CỘT PHẢI — thẻ trắng chứa form
+   ========================================================= */
+
+.cta__card{
+  padding: clamp(24px, 2.6vw, 38px);
+  border-radius: clamp(16px, 1.7vw, 24px);
+  background: #fff;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, .22);
+}
+
+.cta__card-eyebrow{
+  font-weight: 800;
+  font-size: clamp(11px, .9vw, 13px);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--cta-orange);
+}
+
+.cta__card-title{
+  margin-top: 6px;
+  font-weight: 800;
+  font-size: clamp(19px, 1.94vw, 28px);
+  line-height: 1.22;
+  letter-spacing: -.025em;
+  color: var(--cta-ink);
+}
+
+.cta__card-note{
+  margin-top: 8px;
+  font-size: clamp(11.5px, .97vw, 14px);
+  line-height: 1.5;
+  color: var(--cta-muted);
+}
+
+/* --- lưới ô nhập ------------------------------------------------------- */
+
+.cta__form{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(12px, 1.25vw, 18px);
+  margin-top: clamp(16px, 1.8vw, 26px);
+}
+
+.cta__field{ display: flex; flex-direction: column; gap: 6px; }
+
+/* ô chiếm trọn 2 cột */
+.cta__field--wide,
+.cta__actions,
+.cta__status{ grid-column: 1 / -1; }
+
+.cta__label{
+  font-weight: 700;
+  font-size: clamp(11.5px, .97vw, 13.5px);
+  color: var(--cta-ink);
+}
+
+/* dấu * đánh dấu trường bắt buộc */
+.cta__label span{ color: var(--cta-orange); }
+
+.cta__input,
+.cta__select,
+.cta__textarea{
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.6px solid var(--cta-line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--cta-ink);
+  font-family: inherit;
+  font-size: clamp(12.5px, 1.04vw, 15px);
+  line-height: 1.4;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.cta__textarea{ min-height: 104px; resize: vertical; }
+
+.cta__input::placeholder,
+.cta__textarea::placeholder{ color: #9aa3b2; }
+
+.cta__input:hover,
+.cta__select:hover,
+.cta__textarea:hover{ border-color: #b9c2d1; }
+
+.cta__input:focus,
+.cta__select:focus,
+.cta__textarea:focus{
+  outline: none;
+  border-color: var(--cta-orange);
+  box-shadow: 0 0 0 3px rgba(255, 72, 0, .14);
+}
+
+/* --- báo lỗi ----------------------------------------------------------- */
+
+.cta__error{
+  min-height: 1em;
+  font-size: clamp(10.5px, .87vw, 12.5px);
+  line-height: 1.3;
+  color: #d92d20;
+}
+
+.cta__input[aria-invalid="true"],
+.cta__select[aria-invalid="true"]{ border-color: #d92d20; }
+
+/* --- nút gửi ----------------------------------------------------------- */
+
+.cta__actions{ margin-top: 4px; }
+
+.cta__submit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 56px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--cta-orange);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: clamp(14px, 1.18vw, 17px);
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(255, 72, 0, .30);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+
+.cta__submit:hover{
+  background: #f2682b;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(255, 72, 0, .40);
+}
+
+.cta__submit:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cta__submit svg{ width: 18px; height: 18px; }
+
+.cta__consent{
+  grid-column: 1 / -1;
+  margin-top: 2px;
+  font-size: clamp(10.5px, .87vw, 12.5px);
+  line-height: 1.45;
+  text-align: center;
+  color: var(--cta-muted);
+}
+
+/* --- thông báo sau khi gửi -------------------------------------------- */
+
+.cta__status{
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.45;
+}
+
+.cta__status:empty{ display: none; padding: 0; }
+
+.cta__status--ok{
+  background: #eafaf0;
+  border: 1.6px solid #7bd8a4;
+  color: #14663a;
+}
+
+.cta__status--err{
+  background: #fdecea;
+  border: 1.6px solid #f3a89f;
+  color: #a3221a;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1023px){
+  .cta__row{ grid-template-columns: 1fr; gap: 32px; }
+  .cta__title{ font-size: clamp(30px, 5.4vw, 44px); }
+}
+
+@media (max-width: 599px){
+  .cta{ padding-block: 40px; }
+  .cta__form{ grid-template-columns: 1fr; }
+  .cta__contacts{ flex-direction: column; }
+  .cta__contact{ text-align: center; }
+}

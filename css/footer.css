@@ -1,0 +1,131 @@
+/* =========================================================
+   FOOTER
+   Phần này KHÔNG có trong file PSD gốc — dựng mới theo hệ màu.
+   Nền trắng, chữ navy, vạch ngăn mảnh, để nhẹ hơn khối form
+   navy đậm ngay phía trên.
+
+   LƯU Ý NỘI DUNG: các mục liên hệ (địa chỉ, điện thoại, email,
+   mạng xã hội) đang để trống chờ điền — xem chú thích trong
+   index.html. KHÔNG tự bịa thông tin liên hệ.
+   ========================================================= */
+
+.site-footer{
+  --ft-navy: #14226b;
+  --ft-gray: #6b7280;
+
+  background: #fff;
+  padding-block: clamp(36px, 4.4vw, 64px) clamp(20px, 2.4vw, 32px);
+  border-top: 1px solid rgba(20, 34, 107, .1);
+}
+
+.site-footer__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* --- hàng trên: thương hiệu + các cột liên kết ------------------------- */
+
+.site-footer__top{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.site-footer__brand-logo{
+  width: clamp(120px, 11vw, 152px);
+  height: auto;
+}
+
+.site-footer__tagline{
+  margin-top: 12px;
+  max-width: 38ch;
+  /* thu nhỏ so với bản trước (13–15px) cho nhẹ mắt, đây chỉ là dòng phụ */
+  font-size: clamp(11px, .87vw, 12.5px);
+  line-height: 1.55;
+  color: var(--ft-gray);
+}
+
+/* liên hệ nhanh ngay dưới dòng giới thiệu */
+.site-footer__quick{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 14px;
+}
+
+.site-footer__quick a{
+  font-weight: 700;
+  font-size: clamp(12.5px, 1vw, 14.5px);
+  color: var(--ipass-orange);
+  transition: opacity .18s ease;
+}
+
+.site-footer__quick a:hover{ opacity: .75; }
+
+.site-footer__col-title{
+  font-weight: 800;
+  font-size: clamp(13px, 1.04vw, 15px);
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: var(--ft-navy);
+}
+
+.site-footer__list{
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.site-footer__list a,
+.site-footer__list span{
+  font-size: clamp(12.5px, 1vw, 14.5px);
+  line-height: 1.45;
+  color: var(--ft-gray);
+}
+
+.site-footer__list a{ transition: color .18s ease; }
+.site-footer__list a:hover{ color: var(--ipass-orange); }
+
+/* chỗ chờ điền thông tin thật — hiện dạng gạch mờ cho dễ nhận ra */
+.site-footer__todo{
+  font-style: italic;
+  color: rgba(107, 114, 128, .65);
+}
+
+/* --- hàng dưới: bản quyền -------------------------------------------- */
+
+.site-footer__bottom{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: clamp(26px, 3vw, 44px);
+  padding-top: clamp(16px, 1.8vw, 24px);
+  border-top: 1px solid rgba(20, 34, 107, .1);
+}
+
+.site-footer__copy{
+  font-size: clamp(11.5px, .95vw, 13.5px);
+  line-height: 1.45;
+  color: var(--ft-gray);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1023px){
+  .site-footer__top{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 599px){
+  .site-footer__top{ grid-template-columns: 1fr; gap: 28px; }
+  .site-footer__bottom{ flex-direction: column; align-items: flex-start; }
+}

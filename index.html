@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iPass – Tiếng Anh dành cho học sinh lớp 3 – 9 | iSMART Education</title>
+<meta name="description" content="iPass – Chương trình tiếng Anh trực tuyến bám sát sách giáo khoa và cấu trúc bài kiểm tra trên lớp dành cho học sinh lớp 3 – 9. Pass hôm nay, Passport ngày mai.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..800;1,400..700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/section2.css">
+<link rel="stylesheet" href="css/section3.css">
+<link rel="stylesheet" href="css/section4.css">
+<link rel="stylesheet" href="css/section5.css">
+<link rel="stylesheet" href="css/section6.css">
+<link rel="stylesheet" href="css/section7.css">
+<link rel="stylesheet" href="css/section8.css">
+<link rel="stylesheet" href="css/section9.css">
+<link rel="stylesheet" href="css/section10.css">
+<link rel="stylesheet" href="css/section11.css">
+<link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+<!-- ==================== THANH ĐIỀU HƯỚNG (cố định) ====================
+     Logo chỉ hiện sau khi cuộn qua hero, vì hero đã có sẵn logo iSMART
+     ở góc trái — xem chú thích trong css/nav.css.
+     ==================================================================== -->
+<nav class="nav" aria-label="Điều hướng chính">
+  <div class="nav__inner">
+
+    <a class="nav__logo" href="#hero" aria-label="iPass – về đầu trang">
+      <img src="assets/hero/ismart-logo.png"
+           alt="iSMART – Transforming Education. A member of EQuest Education">
+    </a>
+
+    <ul class="nav__list" id="nav-menu">
+      <li><a class="nav__link" href="#section3">Lộ trình</a></li>
+      <li><a class="nav__link" href="#section5">Mô hình ACES</a></li>
+      <li><a class="nav__link" href="#section6">iPASS 2P</a></li>
+      <li><a class="nav__link" href="#section7">Phương pháp</a></li>
+      <li><a class="nav__link" href="#section8">Speak Up Day</a></li>
+      <li><a class="nav__link" href="#section10">Giáo viên</a></li>
+    </ul>
+
+    <a class="nav__cta" href="#dang-ky">Đăng ký tư vấn</a>
+
+    <button class="nav__toggle" type="button"
+            aria-expanded="false" aria-controls="nav-menu" aria-label="Mở menu">
+      <svg class="nav__icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+      <svg class="nav__icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ==================== SECTION 01 · HERO BANNER ==================== -->
+<section class="hero" id="hero">
+
+  <!-- nền full-bleed -->
+  <img class="hero__bg" src="assets/hero/hero-bg.png" alt="" aria-hidden="true">
+
+  <!-- ảnh học sinh + huy hiệu, bám mép phải màn hình -->
+  <div class="hero__media">
+    <img class="hero__students" src="assets/hero/hero-students.png"
+         alt="Học sinh học tiếng Anh trực tuyến cùng iPass">
+
+    <img class="hero__badge-score" src="assets/hero/badge-score.png"
+         alt="Điểm kiểm tra 9.0 – Tiến bộ rõ ràng">
+
+    <img class="hero__badge-aplus" src="assets/hero/badge-aplus.png"
+         alt="Xếp loại A+">
+  </div>
+
+  <!-- nội dung: cột 1200px, lưới 12 cột -->
+  <div class="hero__inner grid-scope">
+
+    <!-- logo iSMART đã chuyển lên thanh điều hướng cố định -->
+
+    <div class="hero__content">
+      <h1 class="sr-only">iPass – Tiếng Anh dành cho học sinh lớp 3 – 9</h1>
+
+      <img class="hero__logo" src="assets/hero/ipass-logo.png"
+           alt="iPass – Tiếng Anh dành cho học sinh lớp 3 – 9">
+
+      <img class="hero__card" src="assets/hero/hero-card.png"
+           alt="#HỌC CHẮC #THI TỐT – Chương trình tiếng Anh trực tuyến bám sát sách giáo khoa và cấu trúc bài kiểm tra trên lớp, giúp con củng cố từ vựng, ngữ pháp, phát triển kỹ năng giao tiếp và rèn phương pháp làm bài hiệu quả, nâng cao điểm số và tự tin chinh phục các kỳ thi học kỳ, chuyển cấp.">
+
+      <p class="hero__tagline">Pass hôm nay, Passport ngày mai</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#">
+          <span>Đánh giá năng lực</span>
+          <i class="btn__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </i>
+        </a>
+        <a class="btn btn--ghost" href="#">Tư vấn lộ trình học tập cá nhân hóa</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ================== /SECTION 01 · HERO BANNER ==================== -->
+
+<!-- ==================== SECTION 02 · NỖI LO CỦA PHỤ HUYNH ==================== -->
+<section class="s2" id="section2">
+  <div class="s2__inner grid-scope">
+
+    <!-- cột trái: ảnh học sinh trong vòng tròn + 3 tag nỗi lo đè lên -->
+    <div class="s2__visual">
+      <span class="s2__circle" aria-hidden="true"></span>
+
+      <img class="s2__photo"
+           src="assets/section2/05-hf_20260817_085330_2a03fee5-19bf-4644-bce9-ef38004e23a4.png"
+           alt="Học sinh ngồi làm bài, trăn trở vì đã học nhưng điểm số chưa cải thiện">
+
+      <!-- tabindex để bàn phím tab tới được và điện thoại chạm vào mở ra
+           (thiết bị cảm ứng không có trạng thái hover) -->
+      <span class="s2__tag s2__tag--1" tabindex="0">
+        <span class="s2__tag-title">Hổng kiến thức kéo dài</span>
+        <span class="s2__tag-desc"><span>Kiến thức mới nối tiếp kiến thức cũ. Chỉ một phần chưa hiểu cũng có thể trở thành lỗ hổng kéo dài suốt học kỳ.</span></span>
+      </span>
+
+      <span class="s2__tag s2__tag--2" tabindex="0">
+        <span class="s2__tag-title">Ngại hỏi, sợ sai</span>
+        <span class="s2__tag-desc"><span>Con không dám nói điều mình chưa hiểu, dần mất tự tin và cảm thấy tiếng Anh ngày càng khó.</span></span>
+      </span>
+
+      <span class="s2__tag s2__tag--3" tabindex="0">
+        <span class="s2__tag-title">Hiểu bài nhưng vẫn mất điểm</span>
+        <span class="s2__tag-desc"><span>Con thiếu phương pháp làm bài, dễ sai ở chi tiết và lúng túng khi gặp dạng đề mới.</span></span>
+      </span>
+    </div>
+
+    <!-- cột phải: eyebrow + tiêu đề + thẻ giải pháp -->
+    <div class="s2__content">
+      <p class="s2__eyebrow">Nỗi lo không chỉ nằm ở một bài kiểm tra</p>
+
+      <!-- PSD chia tiêu đề thành 4 đoạn: cụm trong ngoặc kép to hơn,
+           cụm cuối đổi sang màu cam -->
+      <h2 class="s2__title">Khi con nói <span class="s2__title-quote">“Con học rồi”</span><br>nhưng <span class="s2__title-accent">điểm vẫn chưa cải thiện...</span></h2>
+
+      <div class="s2__card">
+        <img class="s2__card-pose" src="assets/section2/03-pose-3.png"
+             alt="" aria-hidden="true">
+
+        <img class="s2__card-logo" src="assets/section2/02-vector-smart-object.png"
+             alt="iPass" >
+
+        <img class="s2__card-badge" src="assets/section2/06-layer-4.png"
+             alt="" aria-hidden="true">
+
+        <div class="s2__card-text">
+          <h3 class="s2__card-heading">Xác định đúng lỗ hổng,<br>Xây đúng lộ trình</h3>
+          <p class="s2__card-sub">Để con học chắc và tiến bộ rõ ràng.</p>
+          <span class="s2__card-ribbon" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ================== /SECTION 02 · NỖI LO CỦA PHỤ HUYNH ==================== -->
+
+<!-- ==================== SECTION 03 · MỘT LỘ TRÌNH, TIẾN BỘ TOÀN DIỆN ==================== -->
+<section class="s3" id="section3">
+  <div class="s3__inner grid-scope">
+    <div class="s3__card">
+
+      <!-- nền thẻ: ảnh texture ánh sáng xanh công nghệ (layer PSD "hf_2026…") -->
+      <img class="s3__card-bg" src="assets/section3/02-hf_20260817_073400_0796b490-9572-4a5a-a7ce-aede8478f164.png" alt="" aria-hidden="true">
+      <!-- lớp phủ navy #090079 @29% (layer PSD "Color Fill 1") -->
+      <div class="s3__card-veil" aria-hidden="true"></div>
+
+      <div class="s3__body">
+
+        <!-- mascot nằm BÊN TRÁI khối tiêu đề, cùng một hàng ngang -->
+        <header class="s3__head">
+          <img class="s3__mascot" src="assets/section3/08-pose-4.png" alt="" aria-hidden="true">
+          <div class="s3__headline">
+            <p class="s3__eyebrow">MỘT LỘ TRÌNH – TIẾN BỘ TOÀN DIỆN</p>
+            <h2 class="s3__title">
+              <span class="s3__title-line1">NÂNG ĐIỂM HÔM NAY</span>
+              <span class="s3__title-line2">VỮNG NĂNG LỰC NGÀY MAI</span>
+            </h2>
+          </div>
+        </header>
+
+        <p class="s3__desc">iPass không chỉ giúp con học tốt hơn trên lớp, mà còn xây nền tảng tiếng Anh và sự tự tin để con tiến xa hơn trong tương lai.</p>
+
+        <!-- 4 thẻ lợi ích — ảnh đã flatten sẵn từ PSD (không tách được chữ),
+             dùng trực tiếp ảnh export, alt mô tả đầy đủ nội dung từng thẻ -->
+        <ul class="s3__cards">
+          <li class="s3__card-item">
+            <div class="s3__card-top">
+              <span class="s3__card-num">01</span>
+              <img class="s3__card-icon" src="assets/section3/icon-1.png" alt="" aria-hidden="true">
+            </div>
+            <h3 class="s3__card-name">Nắm chắc kiến thức nền tảng</h3>
+            <p class="s3__card-desc">Con được hệ thống lại từ vựng, ngữ pháp và phát âm, đồng thời học đúng trọng tâm, củng cố đúng những phần kiến thức còn thiếu.</p>
+            <dl class="s3__card-result">
+              <dt>Kết quả</dt>
+              <dd>Con hiểu bài sâu hơn, ghi nhớ lâu hơn và vận dụng kiến thức chính xác.</dd>
+            </dl>
+          </li>
+          <li class="s3__card-item">
+            <div class="s3__card-top">
+              <span class="s3__card-num">02</span>
+              <img class="s3__card-icon" src="assets/section3/icon-2.png" alt="" aria-hidden="true">
+            </div>
+            <h3 class="s3__card-name">Phát triển toàn diện 4 kỹ năng</h3>
+            <p class="s3__card-desc">Con được rèn luyện đồng đều các kỹ năng nghe, nói, đọc và viết thông qua bài học cùng hoạt động thực hành phù hợp với trình độ.</p>
+            <dl class="s3__card-result">
+              <dt>Kết quả</dt>
+              <dd>Con nâng cao khả năng đọc hiểu, diễn đạt rõ ràng và phản xạ tiếng Anh tốt hơn.</dd>
+            </dl>
+          </li>
+          <li class="s3__card-item">
+            <div class="s3__card-top">
+              <span class="s3__card-num">03</span>
+              <img class="s3__card-icon" src="assets/section3/icon-3.png" alt="" aria-hidden="true">
+            </div>
+            <h3 class="s3__card-name">Làm bài hiệu quả, nâng cao điểm số</h3>
+            <p class="s3__card-desc">Con được luyện tập theo cấu trúc bài kiểm tra, kỳ thi học kỳ và các cột mốc chuyển cấp, đồng thời rèn phương pháp xử lý từng dạng bài.</p>
+            <dl class="s3__card-result">
+              <dt>Kết quả</dt>
+              <dd>Con giảm lỗi sai, làm bài hiệu quả, đạt điểm cao trong các kỳ thi quan trọng.</dd>
+            </dl>
+          </li>
+          <li class="s3__card-item">
+            <div class="s3__card-top">
+              <span class="s3__card-num">04</span>
+              <img class="s3__card-icon" src="assets/section3/icon-4.png" alt="" aria-hidden="true">
+            </div>
+            <h3 class="s3__card-name">Chủ động và tự tin trong học tập</h3>
+            <p class="s3__card-desc">Con được rèn tư duy phản biện, thói quen tự học và khả năng chủ động giải quyết vấn đề.</p>
+            <dl class="s3__card-result">
+              <dt>Kết quả</dt>
+              <dd>Con biết cách học hiệu quả, mạnh dạn thể hiện bản thân và duy trì sự tiến bộ lâu dài.</dd>
+            </dl>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================== /SECTION 03 · MỘT LỘ TRÌNH, TIẾN BỘ TOÀN DIỆN ==================== -->
+
+<!-- ============ SECTION 04 · LỘ TRÌNH HỌC TẬP ============
+     Cuộn tới section → hiện bản TIỂU HỌC.
+     Cuộn tiếp    → nền đổi dần + thẻ xanh TRUNG HỌC dâng từ dưới lên.
+     ======================================================== -->
+<section class="rm" id="roadmap">
+  <div class="rm__stage">
+   <!-- khung bo góc 1200 × 638 nằm gọn trong cột nội dung (không tràn mép) -->
+   <div class="rm__frame">
+
+    <!-- nền: 2 lớp chồng nhau, lớp B mờ dần hiện ra theo độ cuộn -->
+    <img class="rm__bg rm__bg--a" src="assets/section4/bg-tieuhoc.jpg"  alt="" aria-hidden="true">
+    <img class="rm__bg rm__bg--b" src="assets/section4/bg-trunghoc.jpg" alt="" aria-hidden="true">
+
+    <div class="rm__inner grid-scope">
+      <div class="rm__block">
+
+        <header class="rm__head">
+          <p  class="rm__eyebrow">LỘ TRÌNH HỌC TẬP</p>
+          <h2 class="rm__title">ĐÚNG KIẾN THỨC CON CẦN</h2>
+          <p  class="rm__subtitle">VỮNG TỪNG CHẶNG CON ĐI</p>
+        </header>
+
+        <div class="rm__cards">
+
+          <!-- ---- Bản A · TIỂU HỌC ---- -->
+          <article class="rm__card rm__card--a">
+            <p class="card__level">TIỂU HỌC · LỚP 3–5</p>
+
+            <div class="card__row">
+              <span class="card__circle">
+                <img class="card__icon card__icon--a" src="assets/section4/icon-tieuhoc.png" alt="" aria-hidden="true">
+              </span>
+              <p class="card__benefit">
+                <span class="card__benefit-1">XÂY NỀN VỮNG CHẮC</span>
+                <span class="card__benefit-2">TẠO ĐÀ TỰ TIN</span>
+              </p>
+            </div>
+
+            <div class="card__bottom">
+              <p class="card__aim">Định hướng<br>năng lực cuối cấp</p>
+              <span class="card__badge">A1<sup>+</sup></span>
+            </div>
+          </article>
+
+          <!-- ---- Bản B · TRUNG HỌC CƠ SỞ ---- -->
+          <article class="rm__card rm__card--b">
+            <p class="card__level">TRUNG HỌC CƠ SỞ · LỚP 6–9</p>
+
+            <div class="card__row">
+              <span class="card__circle">
+                <img class="card__icon card__icon--b" src="assets/section4/icon-trunghoc.png" alt="" aria-hidden="true">
+              </span>
+              <p class="card__benefit">
+                <span class="card__benefit-1">CỦNG CỐ CHUYÊN SÂU</span>
+                <span class="card__benefit-2">TỰ TIN BỨT PHÁ</span>
+              </p>
+            </div>
+
+            <div class="card__bottom">
+              <p class="card__aim">Định hướng<br>năng lực cuối cấp</p>
+              <span class="card__badge">A2<sup>+</sup></span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+
+   </div>
+  </div>
+</section>
+<!-- ========== /SECTION 04 ========== -->
+
+<!-- ==================== SECTION 05 · MÔ HÌNH ACES ==================== -->
+<section class="aces" id="section5">
+  <div class="aces__inner grid-scope">
+
+    <header class="aces__head">
+      <p class="aces__eyebrow">ACES Learning Cycle</p>
+      <h2 class="aces__title">Mô hình học tập liền mạch</h2>
+      <p class="aces__subtitle">Trước – Trong – Sau mỗi buổi học</p>
+      <p class="aces__desc">Hành trình học của con không chỉ giới hạn trong thời gian kết nối với giáo viên. Với mô hình ACES, con được chuẩn bị trước buổi học, tương tác trực tiếp trong lớp, tiếp tục củng cố sau giờ học và luôn có ba mẹ đồng hành trong quá trình phát triển.</p>
+    </header>
+
+    <!-- sơ đồ chữ thập: 4 chặng quanh vòng tròn trung tâm -->
+    <div class="aces__diagram">
+
+      <!-- A · ACTIVATE — trước buổi học (thẻ trái trên) -->
+      <article class="aces__card aces__card--activate">
+        <span class="aces__badge" aria-hidden="true">A</span>
+        <p  class="aces__card-label">Trước buổi học</p>
+        <p  class="aces__kicker">Activate</p>
+        <h3 class="aces__card-title">Chủ động chuẩn bị</h3>
+        <p  class="aces__card-desc">Trước buổi học, con làm quen với chủ đề, từ vựng và hoạt động khởi động trên hệ thống để bước vào bài học với tâm thế chủ động.</p>
+      </article>
+
+      <!-- C · COMMUNICATE — trong buổi học (thẻ phải trên) -->
+      <article class="aces__card aces__card--communicate">
+        <span class="aces__badge" aria-hidden="true">C</span>
+        <p  class="aces__card-label">Trong buổi học</p>
+        <p  class="aces__kicker">Communicate</p>
+        <h3 class="aces__card-title">Tương tác trực tiếp</h3>
+        <p  class="aces__card-desc">Trong buổi học, con nghe, nói, thực hành, làm việc nhóm và nhận phản hồi trực tiếp từ giáo viên.</p>
+      </article>
+
+      <!-- S · SUPPORT — xuyên suốt (thẻ trái dưới) -->
+      <article class="aces__card aces__card--support">
+        <span class="aces__badge" aria-hidden="true">S</span>
+        <p  class="aces__card-label">Xuyên suốt</p>
+        <p  class="aces__kicker">Support</p>
+        <h3 class="aces__card-title">Đồng hành và theo dõi</h3>
+        <p  class="aces__card-desc">Ba mẹ được cập nhật chuyên cần, kết quả đánh giá và nội dung con cần cải thiện để đồng hành hiệu quả trong quá trình học.</p>
+      </article>
+
+      <!-- E · EXTEND — sau buổi học (thẻ phải dưới) -->
+      <article class="aces__card aces__card--extend">
+        <span class="aces__badge" aria-hidden="true">E</span>
+        <p  class="aces__card-label">Sau buổi học</p>
+        <p  class="aces__kicker">Extend</p>
+        <h3 class="aces__card-title">Củng cố và mở rộng</h3>
+        <p  class="aces__card-desc">Sau buổi học, con tiếp tục luyện tập trên LMS để củng cố kiến thức, cải thiện nội dung còn hạn chế và duy trì mạch học.</p>
+      </article>
+
+      <!-- vòng tròn trung tâm: nét đứt + logo ACES kèm mascot -->
+      <div class="aces__center">
+        <span class="aces__ring" aria-hidden="true"></span>
+
+        <span class="aces__arrow aces__arrow--top"    aria-hidden="true"></span>
+        <span class="aces__arrow aces__arrow--right"  aria-hidden="true"></span>
+        <span class="aces__arrow aces__arrow--bottom" aria-hidden="true"></span>
+        <span class="aces__arrow aces__arrow--left"   aria-hidden="true"></span>
+
+        <img class="aces__mascot" src="assets/section5/07-rectangle-1.png"
+             alt="ACES — mỗi buổi học một vòng tiến bộ">
+      </div>
+
+    </div>
+
+    <!-- 3 trụ cột hỗ trợ -->
+    <div class="aces__bar">
+      <div class="aces__tag">
+        <strong class="aces__tag-title">Live Class</strong>
+        <span class="aces__tag-desc">Tương tác cùng giáo viên</span>
+      </div>
+      <span class="aces__divider" aria-hidden="true"></span>
+      <div class="aces__tag">
+        <strong class="aces__tag-title">AI &amp; LMS 24/7</strong>
+        <span class="aces__tag-desc">Luyện tập mọi lúc</span>
+      </div>
+      <span class="aces__divider" aria-hidden="true"></span>
+      <div class="aces__tag">
+        <strong class="aces__tag-title">Parent Connect</strong>
+        <span class="aces__tag-desc">Ba mẹ đồng hành</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ================== /SECTION 05 · MÔ HÌNH ACES ==================== -->
+
+<!-- ==================== SECTION 06 · MÔ HÌNH HỌC TẬP SONG HÀNH ==================== -->
+<section class="plan" id="section6" aria-labelledby="section6-title">
+  <div class="plan__inner">
+    <div class="plan__row">
+
+      <!-- CỘT TRÁI — vòng tròn vàng + nữ sinh trên bậc thang điểm số
+           + mascot iSacc, 2 mốc thời lượng nằm đè trong vùng vòng tròn -->
+      <div class="plan__photo">
+        <!-- vòng tròn vàng + nữ sinh + bậc thang đã gộp sẵn trong 1 ảnh -->
+        <img class="plan__student"
+             src="assets/section6/stage-tieuhoc.png"
+             width="483" height="724"
+             alt="Học sinh iPass bước lên các bậc thang điểm số 7, 8, 9, 10">
+
+        <img class="plan__mascot"
+             src="assets/section6/08-isacc-retouch.png"
+             width="127" height="131"
+             alt="" aria-hidden="true">
+
+        <ul class="plan__times">
+          <li class="plan__time-item plan__time-item--live">
+            <span class="plan__time-value">70 Phút</span>
+            <span class="plan__time-label">Live Class</span>
+          </li>
+          <li class="plan__time-item plan__time-item--lms">
+            <span class="plan__time-value">20 Phút</span>
+            <span class="plan__time-label">Guided LMS</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- CỘT PHẢI — tiêu đề, pill cam và 2 thẻ chương trình P1 / P2 -->
+      <div class="plan__col">
+        <header class="plan__head">
+          <h2 class="plan__heading" id="section6-title">
+            <span class="plan__eyebrow">Mô hình học tập song hành</span>
+            <span class="plan__name">iPASS 2P</span>
+          </h2>
+          <p class="plan__pill">1 tuần học · 2 đích đến</p>
+        </header>
+
+        <div class="plan__cards">
+
+          <article class="plan__card plan__card--p1">
+            <span class="plan__card-tag" aria-hidden="true">P1</span>
+            <p class="plan__card-eyebrow">Performance</p>
+            <h3 class="plan__card-title">Học chắc – Nâng điểm</h3>
+            <p class="plan__card-desc">Bám sát Chương trình học Global Success, củng cố từ vựng – ngữ pháp và luyện đúng cấu trúc bài kiểm tra để con hiểu bài chắc hơn, giảm lỗi sai và cải thiện điểm số.</p>
+          </article>
+
+          <article class="plan__card plan__card--p2">
+            <span class="plan__card-tag" aria-hidden="true">P2</span>
+            <p class="plan__card-eyebrow">Proficiency</p>
+            <h3 class="plan__card-title">Giao tiếp tự tin – Vươn xa</h3>
+            <p class="plan__card-desc">Phát triển nghe – nói, phản xạ và khả năng giao tiếp qua những nhiệm vụ thực tế để con tự tin vận dụng tiếng Anh thay vì chỉ ghi nhớ kiến thức.</p>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+
+    <p class="plan__tagline">Học chắc → Luyện đúng → Nâng điểm → Tiến bộ</p>
+  </div>
+</section>
+<!-- ================== /SECTION 06 · MÔ HÌNH HỌC TẬP SONG HÀNH ==================== -->
+
+<!-- ==================== SECTION 07 · PHƯƠNG PHÁP TRONG TỪNG BUỔI HỌC ==================== -->
+<section class="s7" id="section7">
+  <div class="s7__inner grid-scope">
+    <div class="s7__panel">
+
+      <header class="s7__head">
+        <h2 class="s7__title">Phương pháp trong từng buổi học iPASS</h2>
+
+        <!-- dòng luồng: xanh dương đậm, cỡ rất lớn, ngắt đúng 2 dòng như PSD -->
+        <p class="s7__flow">
+          <span class="s7__flow-line">Học liền mạch <span class="s7__arrow" aria-hidden="true">&rarr;</span> Tương tác tạo phản xạ</span>
+          <span class="s7__flow-line"><span class="s7__arrow" aria-hidden="true">&rarr;</span> Vận dụng qua nhiệm vụ</span>
+        </p>
+      </header>
+
+      <div class="s7__cards">
+
+        <!-- ---- 01 · Học liền mạch ---- -->
+        <article class="s7__card">
+          <span class="s7__num" aria-hidden="true">01</span>
+          <p class="s7__name">Học liền mạch</p>
+          <h3 class="s7__term">Blended Learning</h3>
+          <p class="s7__desc">Con được giáo viên củng cố kiến thức và phát triển kỹ năng trong Live Class, sau đó luyện tập ngay trên nền tảng số với sự hướng dẫn của trợ giảng.</p>
+          <p class="s7__result">
+            <span class="s7__result-label">KẾT QUẢ</span>
+            Mạch học được duy trì xuyên suốt, giúp con hiểu chắc và ghi nhớ lâu hơn.
+          </p>
+          <span class="s7__bar s7__bar--a" aria-hidden="true"></span>
+        </article>
+
+        <!-- ---- 02 · Tương tác tạo phản xạ ---- -->
+        <article class="s7__card">
+          <span class="s7__num" aria-hidden="true">02</span>
+          <p class="s7__name">Tương tác tạo phản xạ</p>
+          <h3 class="s7__term">Communicative Language Teaching</h3>
+          <p class="s7__desc">Con được tăng thời lượng hỏi – đáp, đóng vai, mô tả tranh, làm việc theo cặp và giao tiếp trong những tình huống gần gũi.</p>
+          <p class="s7__result">
+            <span class="s7__result-label">KẾT QUẢ</span>
+            Con mạnh dạn nói, phản xạ nhanh và diễn đạt tự nhiên hơn bằng tiếng Anh.
+          </p>
+          <span class="s7__bar s7__bar--b" aria-hidden="true"></span>
+        </article>
+
+        <!-- ---- 03 · Vận dụng qua nhiệm vụ ---- -->
+        <article class="s7__card">
+          <span class="s7__num" aria-hidden="true">03</span>
+          <p class="s7__name">Vận dụng qua nhiệm vụ</p>
+          <h3 class="s7__term">Task-Based Language Teaching</h3>
+          <p class="s7__desc">Con sử dụng tiếng Anh để xử lý tình huống, tìm kiếm thông tin, mô tả, trình bày và hoàn thành các nhiệm vụ giao tiếp theo chủ đề.</p>
+          <p class="s7__result">
+            <span class="s7__result-label">KẾT QUẢ</span>
+            Kiến thức đã học được chuyển hóa thành khả năng vận dụng tiếng Anh trong thực tế.
+          </p>
+          <span class="s7__bar s7__bar--c" aria-hidden="true"></span>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================== /SECTION 07 · PHƯƠNG PHÁP TRONG TỪNG BUỔI HỌC ==================== -->
+
+<!-- ==================== SECTION 08 · SPEAK UP DAY ==================== -->
+<section class="s8" id="section8">
+  <div class="s8__inner grid-scope">
+
+    <header class="s8__head">
+      <p class="s8__eyebrow">Speak Up Day · Show what you can say!</p>
+
+      <h2 class="s8__title">
+        <span class="s8__title-a">Từ học tiếng Anh đến</span><br>
+        <span class="s8__title-b">Tự tin thể hiện năng lực tiếng Anh</span>
+      </h2>
+
+      <p class="s8__desc">Định kỳ hai tháng một lần, mỗi học sinh iPass sẽ được tham gia 1 buổi Speak Up Day — thử thách thuyết trình và giao tiếp tiếng Anh trực tiếp cùng giáo viên nước ngoài.</p>
+      <p class="s8__desc">Thông qua các hoạt động như kể chuyện, thuyết trình, đóng vai, mô tả tranh và chia sẻ dự án, con có cơ hội vận dụng những kỹ năng đã học vào các tình huống giao tiếp thực tế.</p>
+    </header>
+
+    <!-- khối hình chồng lớp: thẻ cam · cúp · ảnh · thẻ vàng -->
+    <div class="s8__visual">
+
+      <div class="s8__card">
+        <h3 class="s8__card-heading">
+          Không chỉ học để biết
+          <em>Con có một sân khấu<br>để tỏa sáng</em>
+        </h3>
+
+        <ul class="s8__list">
+          <li>Tự tin thể hiện sự tiến bộ và năng lực giao tiếp bằng tiếng Anh.</li>
+          <li>Diễn đạt suy nghĩ, chia sẻ ý tưởng và thể hiện cá tính theo cách riêng của mình.</li>
+          <li>Rèn khả năng nghe hiểu, phản xạ và tương tác trực tiếp cùng giáo viên nước ngoài.</li>
+          <li>Nhận đánh giá về điểm mạnh, kỹ năng cần cải thiện và mục tiêu cho chặng học tiếp theo.</li>
+        </ul>
+
+        <!-- cúp tràn ra ngoài góc trên-phải của chính thẻ cam -->
+        <img class="s8__trophy"
+             src="assets/section8/02-花瓣素材_促销系列轻拟物风红色渐变光感带翅膀奖杯元素_194290996.png"
+             alt="" aria-hidden="true">
+      </div>
+
+      <div class="s8__media">
+        <img class="s8__photo"
+             src="assets/section8/03-花瓣素材_手绘五星徽章元素_101152669.png"
+             alt="Học sinh iPass tự tin trò chuyện tiếng Anh với giáo viên nước ngoài qua màn hình">
+
+        <div class="s8__tag">
+          <p class="s8__tag-title">Con dám nói · Dám thể hiện</p>
+          <p class="s8__tag-sub">Mỗi 2 tháng · Một sân khấu để con tỏa sáng</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- ================== /SECTION 08 · SPEAK UP DAY ==================== -->
+
+<!-- ==================== SECTION 09 · RÈN LUYỆN MỖI BUỔI – TOẢ SÁNG MỖI KỲ ====================
+     Bản thiết kế mới trong PSD: dải vàng tràn mép, robot trái, bút phải.
+     ============================================================================================ -->
+<section class="s9" id="section9">
+
+  <img class="s9__robot" src="assets/section9/robot.png" alt="" aria-hidden="true">
+  <img class="s9__pen"   src="assets/section9/pen.png"   alt="" aria-hidden="true">
+
+  <div class="s9__inner grid-scope">
+
+    <h2 class="s9__title">Rèn luyện mỗi buổi – Toả sáng mỗi kỳ</h2>
+
+    <div class="s9__row">
+
+      <div class="s9__card">
+        <p class="s9__label">Rèn luyện<br>mỗi buổi</p>
+      </div>
+
+      <span class="s9__dash" aria-hidden="true"></span>
+
+      <div class="s9__card">
+        <p class="s9__label">Tích lũy<br>năng lực</p>
+      </div>
+
+      <span class="s9__dash" aria-hidden="true"></span>
+
+      <div class="s9__hub">
+        <img class="s9__medal" src="assets/section9/medal.png" alt="" aria-hidden="true">
+        <p class="s9__hub-label">Speak<br>Up Day</p>
+      </div>
+
+      <span class="s9__dash" aria-hidden="true"></span>
+
+      <div class="s9__card">
+        <p class="s9__label">Nhận<br>định hướng<br>tiếp theo</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ================== /SECTION 09 · RÈN LUYỆN MỖI BUỔI – TOẢ SÁNG MỖI KỲ ==================== -->
+
+<!-- ==================== SECTION 10 · ĐỘI NGŨ GIÁO VIÊN ====================
+     Số liệu do khách cung cấp (ảnh mẫu) — không tự thêm/sửa con số.
+     ======================================================================= -->
+<section class="team" id="section10">
+  <div class="team__inner grid-scope">
+
+    <header class="team__head">
+      <p class="team__eyebrow">Đội ngũ giáo viên</p>
+      <h2 class="team__title">Đội ngũ giáo viên giàu kinh nghiệm</h2>
+      <p class="team__desc">100% giáo viên có bằng cấp, chứng chỉ sư phạm và kinh nghiệm đồng hành cùng học sinh tiểu học.</p>
+    </header>
+
+    <div class="team__grid">
+
+      <article class="team__card team__card--1">
+        <p class="team__number">+300</p>
+        <h3 class="team__card-title">Giáo viên nước ngoài trình độ thạc sĩ</h3>
+        <p class="team__card-unit">Giáo viên</p>
+      </article>
+
+      <article class="team__card team__card--2">
+        <p class="team__number">+500</p>
+        <h3 class="team__card-title">Giáo viên Việt Nam trình độ thạc sĩ</h3>
+        <p class="team__card-unit">Giáo viên</p>
+      </article>
+
+      <article class="team__card team__card--3">
+        <p class="team__number">+2000</p>
+        <h3 class="team__card-title">Giáo viên nước ngoài và giáo viên Việt Nam trình độ cử nhân</h3>
+        <p class="team__card-unit">Giáo viên</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!-- ================== /SECTION 10 · ĐỘI NGŨ GIÁO VIÊN ==================== -->
+
+<!-- ==================== SECTION 11 · ĐĂNG KÝ TƯ VẤN ==================== -->
+<section class="cta" id="dang-ky">
+  <div class="cta__inner grid-scope">
+    <div class="cta__row">
+
+      <!-- cột trái: lời mời + quyền lợi + liên hệ -->
+      <div class="cta__intro">
+        <p class="cta__eyebrow">iPass – Tấm hộ chiếu cho hành trình học chắc, thi tốt, tự tin vươn xa.</p>
+        <h2 class="cta__title">Bắt đầu ngay<br>hôm nay.</h2>
+
+        <ul class="cta__benefits">
+          <li>
+            <span class="cta__tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>
+            </span>
+            Đánh giá năng lực tiếng Anh
+          </li>
+          <li>
+            <span class="cta__tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>
+            </span>
+            Tư vấn lộ trình học tập cá nhân hoá
+          </li>
+          <li>
+            <span class="cta__tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>
+            </span>
+            Trải nghiệm một buổi học trực tuyến
+          </li>
+          <li>
+            <span class="cta__tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>
+            </span>
+            Trải nghiệm hệ sinh thái học tập tích hợp AI
+          </li>
+        </ul>
+
+        <div class="cta__contacts">
+          <a class="cta__contact" href="tel:0967417895">
+            <span class="cta__contact-label">Hotline tư vấn</span>
+            <span class="cta__contact-value">0967 417 895</span>
+          </a>
+          <a class="cta__contact" href="https://ismart.edu.vn/" target="_blank" rel="noopener">
+            <span class="cta__contact-label">Website</span>
+            <span class="cta__contact-value">ismart.edu.vn</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- cột phải: thẻ trắng chứa form -->
+      <div class="cta__card">
+        <p class="cta__card-eyebrow">Đăng ký ngay</p>
+        <h3 class="cta__card-title">Bắt đầu hành trình học chắc, thi tốt</h3>
+        <p class="cta__card-note">Thông tin được bảo mật và chỉ dùng cho mục đích tư vấn.</p>
+
+        <form class="cta__form" id="ipassForm"
+              data-endpoint="https://script.google.com/macros/s/AKfycbwbngOhvkfRLducg7w3RE9LXz56SpHxsyHWxzO95xEx3UJ7QmFhjSTm660T3kOGNJ2G/exec"
+              novalidate>
+
+          <div class="sr-only" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <input name="refCode" type="hidden" value="direct">
+          <input name="request" type="hidden" value="Đăng ký đánh giá năng lực &amp; tư vấn iPass">
+
+          <div class="cta__field" data-field="name">
+            <label class="cta__label" for="f-name">Họ và tên phụ huynh <span aria-hidden="true">*</span></label>
+            <input class="cta__input" id="f-name" name="parentName" type="text"
+                   autocomplete="name" placeholder="VD: Nguyễn Minh Anh" required>
+            <p class="cta__error" role="alert"></p>
+          </div>
+
+          <div class="cta__field" data-field="phone">
+            <label class="cta__label" for="f-phone">Số điện thoại phụ huynh <span aria-hidden="true">*</span></label>
+            <input class="cta__input" id="f-phone" name="phone" type="tel"
+                   inputmode="tel" autocomplete="tel" placeholder="VD: 0901 234 567" required>
+            <p class="cta__error" role="alert"></p>
+          </div>
+
+          <div class="cta__field" data-field="child">
+            <label class="cta__label" for="f-child">Họ và tên con</label>
+            <input class="cta__input" id="f-child" name="childName" type="text"
+                   placeholder="VD: Nguyễn Bảo An">
+            <p class="cta__error" role="alert"></p>
+          </div>
+
+          <div class="cta__field" data-field="grade">
+            <label class="cta__label" for="f-grade">Lớp</label>
+            <select class="cta__select" id="f-grade" name="grade">
+              <option value="3" selected>Lớp 3</option>
+              <option value="4">Lớp 4</option>
+              <option value="5">Lớp 5</option>
+              <option value="6">Lớp 6</option>
+              <option value="7">Lớp 7</option>
+              <option value="8">Lớp 8</option>
+              <option value="9">Lớp 9</option>
+            </select>
+            <p class="cta__error" role="alert"></p>
+          </div>
+
+          <div class="cta__field cta__field--wide" data-field="school">
+            <label class="cta__label" for="f-school">Trường</label>
+            <input class="cta__input" id="f-school" name="school" type="text"
+                   placeholder="VD: Tiểu học Nguyễn Du">
+            <p class="cta__error" role="alert"></p>
+          </div>
+
+          <div class="cta__field cta__field--wide" data-field="goal">
+            <label class="cta__label" for="f-goal">Mục tiêu gần nhất của con</label>
+            <textarea class="cta__textarea" id="f-goal" name="goal"
+                      placeholder="VD: Củng cố ngữ pháp, nâng điểm thi học kỳ, chuẩn bị chuyển cấp..."></textarea>
+            <p class="cta__error" role="alert"></p>
+          </div>
+
+          <p class="cta__status" role="status" aria-live="polite"></p>
+
+          <div class="cta__actions">
+            <button class="cta__submit" type="submit">
+              Nhận đánh giá &amp; tư vấn miễn phí
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 12h15M13 6l6 6-6 6"/>
+              </svg>
+            </button>
+          </div>
+
+          <p class="cta__consent">Bằng việc gửi thông tin, ba mẹ đồng ý để iSMART liên hệ tư vấn chương trình.</p>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ================== /SECTION 11 · ĐĂNG KÝ TƯ VẤN ==================== -->
+
+<!-- ==================== FOOTER ====================
+     ⚠️ Các mục đánh dấu "cần điền" bên dưới đang để trống vì chưa có
+     thông tin thật (địa chỉ, hotline, email, mạng xã hội, số ĐKKD).
+     Điền đúng dữ liệu của iSMART trước khi đưa trang lên chạy.
+     ================================================ -->
+<footer class="site-footer">
+  <div class="site-footer__inner grid-scope">
+
+    <div class="site-footer__top">
+
+      <div class="site-footer__brand">
+        <img class="site-footer__brand-logo" src="assets/hero/ismart-logo.png"
+             alt="iSMART – Transforming Education. A member of EQuest Education">
+        <p class="site-footer__tagline">iPass – Chương trình tiếng Anh trực tuyến bám sát sách giáo khoa và cấu trúc bài kiểm tra trên lớp, dành cho học sinh lớp 3 – 9.</p>
+
+        <div class="site-footer__quick">
+          <a href="tel:0967417895">0967 417 895</a>
+          <a href="https://ismart.edu.vn/" target="_blank" rel="noopener">ismart.edu.vn</a>
+        </div>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Về chương trình">
+        <h2 class="site-footer__col-title">Chương trình</h2>
+        <ul class="site-footer__list">
+          <li><a href="#section3">Lộ trình toàn diện</a></li>
+          <li><a href="#roadmap">Lộ trình học tập</a></li>
+          <li><a href="#section5">Mô hình ACES</a></li>
+          <li><a href="#section6">iPASS 2P</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Về học tập">
+        <h2 class="site-footer__col-title">Học cùng iPass</h2>
+        <ul class="site-footer__list">
+          <li><a href="#section7">Phương pháp giảng dạy</a></li>
+          <li><a href="#section8">Speak Up Day</a></li>
+          <li><a href="#section10">Đội ngũ giáo viên</a></li>
+          <li><a href="#dang-ky">Đăng ký tư vấn</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__col-title">Liên hệ</h2>
+        <ul class="site-footer__list">
+          <li><a href="tel:0967417895">Hotline: 0967 417 895</a></li>
+          <li><a href="https://ismart.edu.vn/" target="_blank" rel="noopener">Website: ismart.edu.vn</a></li>
+          <!-- TODO: bổ sung khi có thông tin thật -->
+          <li><span class="site-footer__todo">Email: (cần điền)</span></li>
+          <li><span class="site-footer__todo">Địa chỉ: (cần điền)</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__copy">© 2026 iSMART Education. A member of EQuest Education.</p>
+      <p class="site-footer__copy site-footer__todo">Thông tin doanh nghiệp / giấy phép: (cần điền)</p>
+    </div>
+
+  </div>
+</footer>
+
+<a class="zalo-float"
+   href="https://zalo.me/0967417895"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Liên hệ iSMART qua Zalo số 0967 417 895"
+   title="Zalo 0967.417.895">
+  <img src="assets/zalo-is.png" alt="" width="464" height="408">
+</a>
+
+<!-- GSAP + ScrollTrigger (CDN, không dùng bundler theo quy ước dự án) -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<script src="js/nav.js"></script>
+<script src="js/section2.js"></script>
+<script src="js/section4.js"></script>
+<script src="js/form.js"></script>
+<script src="js/motion.js"></script>
+</body>
+</html>

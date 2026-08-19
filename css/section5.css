@@ -1,0 +1,418 @@
+/* =========================================================
+   SECTION 05 — MÔ HÌNH ACES
+   Canvas thiết kế 1440 · nền TRẮNG
+
+   Toạ độ gốc đọc từ layer PSD (extracted-section5.json):
+     eyebrow      627,2727  15.7px  #14226b
+     tiêu đề      360,2754  46.5px  #ff4800   (CAM)
+     phụ đề       291,2805  44.5px  #2467ff   (XANH)
+     mô tả        194,2879  16.7px  #14226b
+
+     SƠ ĐỒ  (x 238–1201 · y 2960–3402 → 963 × 442)
+       thẻ A      238,2960  388 × 201  #0c78e7  xanh dương
+       thẻ C      814,2960  387 × 201  #f05b15  cam
+       thẻ S      238,3201  388 × 201  #05b1c2  xanh ngọc
+       thẻ E      814,3201  387 × 201  #8cc324  xanh lá
+       vòng nét đứt 557,3013 328 × 329  #2467ff
+       logo ACES  595,3039  246 × 270
+       huy hiệu   511/844/511/840 · 84 × 84 nền trắng
+       tam giác   714,3010 · 877,3176 · 714,3333 · 553,3177  #f05b15
+
+     THANH 3 TRỤ  282,3428  876 × 79  #14226b
+       tiêu đề    20px   #ffc600 (VÀNG)
+       mô tả      13.3px #ffffff
+       vạch ngăn  565,3443 · 865,3443  5 × 51  #ffffff
+
+   Căn lề: 2 thẻ TRÁI (A, S) căn trái + huy hiệu ở mép PHẢI;
+           2 thẻ PHẢI (C, E) căn phải + huy hiệu ở mép TRÁI.
+   container-type đặt ở .aces__diagram, đơn vị cqi dùng ở CON.
+   ========================================================= */
+
+.aces{
+  --aces-orange: #ff4800;   /* tiêu đề chính */
+  --aces-blue:   #2467ff;   /* phụ đề + vòng nét đứt */
+  --aces-ink:    #14226b;   /* eyebrow, mô tả, nền thanh 3 trụ */
+  --aces-yellow: #ffc600;   /* tiêu đề trong thanh 3 trụ */
+  --aces-a:      #0c78e7;   /* Activate  — xanh dương */
+  --aces-c:      #f05b15;   /* Communicate — cam */
+  --aces-s:      #05b1c2;   /* Support   — xanh ngọc */
+  --aces-e:      #8cc324;   /* Extend    — xanh lá */
+
+  background: #fff;
+  padding-block: clamp(48px, 6vw, 88px);
+  overflow: hidden;
+}
+
+.aces__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* --- khối tiêu đề ------------------------------------------------------ */
+
+.aces__head{ text-align: center; }
+
+.aces__eyebrow{
+  font-weight: 700;
+  font-size: clamp(12px, 1.09vw, 15.7px);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--aces-ink);
+}
+
+.aces__title{
+  margin-top: 8px;
+  font-weight: 800;
+  font-size: clamp(24px, 3.23vw, 46.5px);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+  color: var(--aces-orange);
+}
+
+.aces__subtitle{
+  margin-top: 2px;
+  font-weight: 800;
+  font-size: clamp(22px, 3.09vw, 44.5px);
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+  color: var(--aces-blue);
+}
+
+.aces__desc{
+  max-width: 1052px;
+  margin: 16px auto 0;
+  font-size: clamp(13px, 1.16vw, 16.7px);
+  line-height: 1.62;
+  text-align: center;
+  color: var(--aces-ink);
+}
+
+/* =========================================================
+   SƠ ĐỒ — lưới 3×3, cột/dòng giữa là khe cho vòng tròn
+   ========================================================= */
+
+.aces__diagram{
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  max-width: 963px;
+  aspect-ratio: 963 / 442;
+  margin: clamp(32px, 4.2vw, 60px) auto 0;
+  display: grid;
+  grid-template-columns: 40.3% 19.5% 40.2%;   /* 388 · 188 · 387 */
+  grid-template-rows:    45.5% 9%    45.5%;   /* 201 · 40  · 201 */
+}
+
+.aces__card--activate    { grid-area: 1 / 1 / 2 / 2; background: var(--aces-a); }
+.aces__card--communicate { grid-area: 1 / 3 / 2 / 4; background: var(--aces-c); }
+.aces__card--support     { grid-area: 3 / 1 / 4 / 2; background: var(--aces-s); }
+.aces__card--extend      { grid-area: 3 / 3 / 4 / 4; background: var(--aces-e); }
+
+.aces__card{
+  position: relative;
+  z-index: 1;                   /* thẻ nằm TRÊN vòng nét đứt */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.2cqi 3.3cqi;
+  border-radius: 2.5cqi;
+  color: #fff;
+}
+
+/* 2 thẻ bên phải căn chữ sang phải */
+.aces__card--communicate,
+.aces__card--extend{ text-align: right; }
+
+/* Chừa chỗ cho huy hiệu: chỉ 3 dòng đầu bị thu hẹp, còn đoạn mô tả
+   nằm thấp hơn đáy huy hiệu nên vẫn dùng trọn bề ngang thẻ (đúng PSD). */
+.aces__card-label,
+.aces__kicker,
+.aces__card-title{ max-width: 68%; }
+
+.aces__card--communicate .aces__card-label,
+.aces__card--communicate .aces__kicker,
+.aces__card--communicate .aces__card-title,
+.aces__card--extend .aces__card-label,
+.aces__card--extend .aces__kicker,
+.aces__card--extend .aces__card-title{ margin-left: auto; }
+
+.aces__card-label{
+  font-weight: 700;
+  font-size: 2.09cqi;           /* 20.1/963 */
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+
+.aces__kicker{
+  margin-top: .9cqi;
+  font-weight: 800;
+  font-size: 2.77cqi;           /* 26.7/963 */
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+
+.aces__card-title{
+  font-weight: 700;
+  font-size: 2.09cqi;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+
+.aces__card-desc{
+  margin-top: 1.2cqi;
+  font-weight: 500;
+  font-size: 1.38cqi;           /* 13.3/963 */
+  line-height: 1.42;
+}
+
+/* --- huy hiệu chữ cái (84 × 84 nền trắng) ----------------------------- */
+
+/* Huy hiệu nằm TRỌN trong thẻ, lệch lên phía trên (không căn giữa dọc).
+   Không đặt transform ở đây: motion.js dùng scale để cho huy hiệu nảy,
+   GSAP sẽ ghi đè toàn bộ transform nên mọi căn chỉnh phải bằng top/left. */
+.aces__badge{
+  position: absolute;
+  width: 8.72cqi;               /* 84/963 */
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+  font-weight: 800;
+  font-size: 6.03cqi;           /* 58.1/963 */
+  line-height: 1;
+}
+
+/* khoảng cách tới mép thẻ đo trực tiếp từ PSD (theo % bề rộng/chiều cao thẻ) */
+.aces__card--activate    .aces__badge{ right: 8.0%;  top: 10.0%; color: var(--aces-a); }
+.aces__card--support     .aces__badge{ right: 8.0%;  top:  8.5%; color: var(--aces-s); }
+.aces__card--communicate .aces__badge{ left:  7.8%;  top: 10.0%; color: var(--aces-c); }
+.aces__card--extend      .aces__badge{ left:  6.7%;  top:  8.5%; color: var(--aces-e); }
+
+/* =========================================================
+   VÒNG TRÒN TRUNG TÂM — nét đứt + logo ACES + mascot
+   ========================================================= */
+
+.aces__center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34.1cqi;               /* 328/963 */
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* KHÔNG đặt z-index ở đây: nếu đặt sẽ tạo stacking context riêng, khiến
+     vòng nét đứt không thể chui xuống dưới 4 thẻ. Để con tự xếp lớp. */
+  z-index: auto;
+}
+
+/* Vòng nét đứt xanh (PSD "Ellipse 2" 328px) — CHỈ có nét, KHÔNG tô nền.
+   Đĩa trắng ở giữa nhỏ hơn hẳn vòng này và đã nằm sẵn trong ảnh logo,
+   nên nếu tô trắng ở đây sẽ thành một mảng trắng 328px ăn lẹm vào 4 thẻ. */
+.aces__ring{
+  position: absolute;
+  inset: 0;
+  z-index: 0;                   /* nằm DƯỚI 4 thẻ → nét đứt bị thẻ che bớt */
+  border-radius: 50%;
+  background: none;
+  border: max(2px, .32cqi) dashed var(--aces-blue);
+}
+
+/* Ảnh đã gộp sẵn: đĩa trắng 246px + chữ ACES + dòng phụ + robot.
+   Robot thò xuống dưới đáy đĩa nên khung ảnh cao hơn đường kính đĩa. */
+.aces__mascot{
+  position: relative;
+  width: 75%;                   /* 246/328 → đĩa trắng đúng 246px */
+  height: auto;
+  z-index: 2;                   /* đĩa trắng + logo nổi TRÊN 4 thẻ */
+}
+
+/* --- 4 tam giác chỉ chiều xoay, nằm trên vòng nét đứt ----------------- */
+
+.aces__arrow{
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 3;
+}
+
+/* tam giác hướng phải ở đỉnh vòng tròn */
+.aces__arrow--top{
+  left: 50%;
+  top: -.7cqi;
+  transform: translateX(-50%);
+  border-top:    .68cqi solid transparent;
+  border-bottom: .68cqi solid transparent;
+  border-left:   .88cqi solid var(--aces-c);
+}
+
+/* tam giác hướng xuống ở mép phải */
+.aces__arrow--right{
+  right: -.6cqi;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left:  .57cqi solid transparent;
+  border-right: .57cqi solid transparent;
+  border-top:   .83cqi solid var(--aces-c);
+}
+
+/* tam giác hướng trái ở đáy */
+.aces__arrow--bottom{
+  left: 50%;
+  bottom: -.7cqi;
+  transform: translateX(-50%);
+  border-top:    .68cqi solid transparent;
+  border-bottom: .68cqi solid transparent;
+  border-right:  .88cqi solid var(--aces-c);
+}
+
+/* tam giác hướng lên ở mép trái */
+.aces__arrow--left{
+  left: -.6cqi;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left:   .57cqi solid transparent;
+  border-right:  .57cqi solid transparent;
+  border-bottom: .83cqi solid var(--aces-c);
+}
+
+/* =========================================================
+   THANH 3 TRỤ CỘT
+   ========================================================= */
+
+.aces__bar{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 876px;
+  margin: clamp(20px, 2.6vw, 36px) auto 0;
+  padding: clamp(10px, 1.1vw, 16px) 0;
+  border-radius: clamp(12px, 1.4vw, 20px);
+  background: var(--aces-ink);
+}
+
+.aces__tag{
+  flex: 1;
+  text-align: center;
+  padding-inline: 8px;
+}
+
+.aces__tag-title{
+  display: block;
+  font-weight: 800;
+  font-size: clamp(13px, 1.39vw, 20px);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: var(--aces-yellow);
+}
+
+.aces__tag-desc{
+  display: block;
+  margin-top: 3px;
+  font-size: clamp(11px, .92vw, 13.3px);
+  line-height: 1.2;
+  color: #fff;
+}
+
+.aces__divider{
+  flex: none;
+  width: 2px;
+  height: clamp(30px, 3.54vw, 51px);
+  background: #fff;
+  opacity: .55;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* --- Tablet: chữ trong thẻ bắt đầu chật, nới padding ------------------ */
+
+@media (max-width: 1023px){
+  .aces__card{ padding: 2cqi 2.6cqi; }
+  .aces__card--activate,
+  .aces__card--support{ padding-right: 7cqi; }
+  .aces__card--communicate,
+  .aces__card--extend{ padding-left: 7cqi; }
+  .aces__card-desc{ font-size: 1.5cqi; }
+}
+
+/* --- Mobile: bỏ sơ đồ chữ thập, xếp 4 thẻ dọc ------------------------ */
+
+@media (max-width: 767px){
+  .aces__diagram{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;                   /* huy hiệu đã nằm trong thẻ, không cần chừa nhiều */
+    aspect-ratio: auto;
+    container-type: normal;      /* quay về đơn vị px khi đã xếp dọc */
+    max-width: 460px;
+  }
+
+  /* Xếp dọc: MỌI thẻ đều căn chữ trái, huy hiệu đều nằm góc trên-PHẢI.
+     Phải gỡ cả text-align lẫn margin-left:auto mà bản desktop đặt cho 2
+     thẻ bên phải — nếu chỉ đổi text-align thì margin-left:auto vẫn đẩy
+     3 dòng đầu sang phải và chui xuống dưới huy hiệu. */
+  .aces__card{
+    padding: 22px 20px;
+    border-radius: 18px;
+    text-align: left;
+  }
+
+  .aces__card--communicate,
+  .aces__card--extend{ text-align: left; }
+
+  /* Viết dạng 2 class (.aces__card .xxx) để có cùng độ ưu tiên với luật
+     desktop ".aces__card--communicate .aces__kicker" — nếu chỉ viết 1
+     class thì luật desktop thắng và margin-left:auto vẫn còn tác dụng. */
+  .aces__card .aces__card-label,
+  .aces__card .aces__kicker,
+  .aces__card .aces__card-title{
+    max-width: none;
+    margin-left: 0;
+    padding-right: 58px;         /* chừa chỗ cho huy hiệu 44px + khe */
+  }
+
+  .aces__card .aces__card-desc{ padding-right: 0; }
+
+  /* huy hiệu nằm TRONG thẻ, góc trên-phải, cho cả 4 thẻ */
+  .aces__card .aces__badge{
+    top: 18px;
+    right: 20px;
+    left: auto;
+    width: 44px;
+    font-size: 26px;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(20, 34, 107, .18);
+  }
+
+  .aces__card-label{ font-size: 14px; }
+  .aces__kicker    { font-size: 20px; margin-top: 4px; }
+  .aces__card-title{ font-size: 14px; }
+  .aces__card-desc { font-size: 13px; margin-top: 8px; }
+
+  /* bỏ hẳn vòng tròn ACES ở giữa khi xuống mobile */
+  .aces__center{ display: none; }
+
+  /* mũi tên chỉ chiều xoay không còn ý nghĩa khi xếp dọc */
+  .aces__arrow{ display: none; }
+
+  /* thanh 3 trụ xuống hàng dọc cho dễ đọc */
+  .aces__bar{
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+  .aces__divider{ width: 60%; height: 1px; }
+}

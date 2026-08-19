@@ -1,0 +1,238 @@
+/* =========================================================
+   SECTION 09 — RÈN LUYỆN MỖI BUỔI – TOẢ SÁNG MỖI KỲ
+   Bản thiết kế MỚI trong PSD (khách cập nhật): dải VÀNG tràn
+   hết bề ngang màn hình, mascot robot bên trái, cây bút bên phải.
+
+   Toạ độ gốc đọc từ layer PSD:
+     dải vàng   Rectangle 18   -6,5882  1448 × 372  #ffcc01
+     tiêu đề    305,5922  834 × 50   39px  #000094 (navy)
+     robot      POSE-3    49,5946   235 × 222
+     thẻ A      314,6003  168 × 169  #ffffff
+     thẻ B      533,6003  168 × 169  #ffffff
+     huy chương Ellipse 1 749,5993  177 × 242
+     thẻ C      967,6001  169 × 169  #ffffff
+     nét đứt    Shape 2   389,6082  678 × 6    #fd7e4f
+     cây bút    1230,5987 111 × 161
+     chữ trong thẻ  20.8px  #0d005d  IN HOA
+     chữ huy chương 20.8px  #2555fb  IN HOA
+
+   Dải vàng tràn mép nên .s9 không giới hạn bề ngang; chỉ khối
+   nội dung bên trong mới bó vào cột 1200.
+   ========================================================= */
+
+.s9{
+  --s9-yellow: #ffcc01;   /* nền dải             */
+  --s9-navy:   #000094;   /* tiêu đề             */
+  --s9-ink:    #0d005d;   /* chữ trong 3 thẻ     */
+  --s9-blue:   #2555fb;   /* chữ trên huy chương */
+  --s9-dash:   #fd7e4f;   /* nét đứt nối         */
+
+  position: relative;
+  background: var(--s9-yellow);
+  overflow: hidden;
+  /* Trong PSD: đệm trên 40px (tới tiêu đề), từ đáy 3 THẺ xuống mép dải
+     là 82px. Nhưng huy chương cao hơn thẻ nên phần ruy băng của nó đã
+     chiếm sẵn ~42px dưới đáy thẻ → đệm dưới chỉ cần 40px là tổng cộng
+     vừa đúng 82px như bản vẽ. */
+  padding-block: clamp(26px, 2.8vw, 40px) clamp(28px, 2.8vw, 40px);
+}
+
+.s9__inner{
+  position: relative;
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* --- tiêu đề ------------------------------------------------------------ */
+
+.s9__title{
+  margin: 0;
+  font-weight: 800;
+  /* 28.93 × 1.35 = 39px trên canvas 1440 */
+  font-size: clamp(20px, 2.71vw, 39px);
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--s9-navy);
+  text-wrap: balance;
+}
+
+/* --- hàng 4 chặng ------------------------------------------------------- */
+
+.s9__row{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.6vw, 24px);
+  margin-top: clamp(18px, 2.15vw, 31px);
+}
+
+/* --- 3 thẻ trắng bo góc ------------------------------------------------- */
+
+.s9__card{
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: clamp(104px, 11.67vw, 168px);
+  aspect-ratio: 1;
+  padding: 8px;
+  border-radius: 18%;            /* bán kính ~30/168 */
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(120, 90, 0, .14);
+}
+
+.s9__label{
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(12px, 1.45vw, 20.83px);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--s9-ink);
+}
+
+/* --- nét đứt nối -------------------------------------------------------- */
+
+.s9__dash{
+  flex: none;
+  align-self: center;
+  width: clamp(14px, 3.2vw, 46px);
+  height: 5px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--s9-dash) 0 7px,
+    transparent    7px 14px
+  );
+}
+
+/* --- huy chương vàng ---------------------------------------------------- */
+
+/* Ảnh medal.png đã kèm sẵn viền trắng 5px (hiệu ứng Stroke của layer
+   "Ellipse 1" trong PSD — ag-psd không xuất kèm nên phải dựng lại rồi
+   ghi đè vào file ảnh). Vì thế ảnh rộng 187×252 thay vì 177×242.
+
+   Quét màu từng dòng trên ảnh: MẶT VÀNG PHẲNG (chỗ đặt chữ, màu đặc
+   #ffcd02) nằm từ y=42 đến y=183 → tâm ở 112.5/252 = 44.6% chiều cao.
+   Lưu ý đây KHÔNG phải tâm của vòng tròn ngoài — vành trang trí phía
+   trên rộng hơn nên tâm hình học lệch cao hơn tâm mặt vàng.
+
+   Hàng dùng align-items:center nên tâm ẢNH đang trùng tâm 3 thẻ.
+   Muốn MẶT VÀNG trùng tâm thẻ thì đẩy xuống 50% − 44.6% = 5.4%. */
+.s9__hub{
+  position: relative;
+  flex: none;
+  width: clamp(116px, 12.99vw, 187px);
+  transform: translateY(5.4%);
+}
+
+.s9__medal{ display: block; width: 100%; height: auto; }
+
+.s9__hub-label{
+  position: absolute;
+  left: 50%;
+  top: 38.6%;                    /* chỉnh theo mắt nhìn của khách */
+  width: 76%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(11px, 1.45vw, 20.83px);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--s9-blue);
+}
+
+/* --- mascot robot & cây bút, neo 2 mép dải vàng ------------------------- */
+
+/* Trong PSD cả hai đều KHÔNG chạm đáy dải vàng:
+   đáy robot cách mép dưới 86px, đáy bút cách 106px.        */
+.s9__robot,
+.s9__pen{
+  position: absolute;
+  z-index: 0;
+  height: auto;
+  pointer-events: none;
+}
+
+/* robot: 49/1440 tính từ mép trái màn hình */
+.s9__robot{
+  left: 3.4%;
+  bottom: clamp(48px, 5.97vw, 86px);
+  width: clamp(96px, 16.32vw, 235px);
+}
+
+/* bút: 1230+111 = 1341 → cách mép phải 99/1440 */
+.s9__pen{
+  right: 6.9%;
+  bottom: clamp(58px, 7.36vw, 106px);
+  width: clamp(48px, 7.71vw, 111px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* --- Tablet: robot/bút bắt đầu chèn vào nội dung → thu nhỏ ------------- */
+
+@media (max-width: 1247px){
+  .s9__robot{ left: 1%;  width: clamp(88px, 13vw, 160px); }
+  .s9__pen  { right: 2%; width: clamp(44px, 6vw, 80px); }
+}
+
+/* --- Mobile ngang: ẩn hẳn 2 hình trang trí cho đỡ chật ----------------- */
+
+@media (max-width: 1023px){
+  .s9__robot,
+  .s9__pen{ display: none; }
+}
+
+/* --- Mobile dọc: xếp dọc, nét đứt xoay đứng --------------------------- */
+
+/* Mobile: GIỮ NGUYÊN hàng ngang 4 chặng, chỉ thu nhỏ lại — không xếp
+   dọc, vì đây là một sơ đồ tiến trình, bẻ xuống dòng sẽ mất mạch đọc
+   trái → phải. Mọi kích thước quy theo vw để vừa đúng bề ngang máy. */
+@media (max-width: 599px){
+  .s9{ padding-block: 26px 30px; }
+
+  .s9__row{
+    gap: 1.4vw;
+    margin-top: 16px;
+    flex-wrap: nowrap;
+  }
+
+  .s9__card{
+    width: 17.4vw;
+    padding: 4px;
+    border-radius: 16%;
+  }
+
+  .s9__label{
+    font-size: 2.35vw;
+    line-height: 1.15;
+    letter-spacing: -.03em;
+  }
+
+  .s9__dash{
+    width: 3.4vw;
+    height: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--s9-dash) 0 4px,
+      transparent    4px 8px
+    );
+  }
+
+  .s9__hub{ width: 19vw; }
+  .s9__hub-label{ font-size: 2.35vw; letter-spacing: -.03em; }
+
+  .s9__title{ font-size: clamp(15px, 4.4vw, 22px); }
+}

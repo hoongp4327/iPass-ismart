@@ -1,0 +1,123 @@
+/* =========================================================
+   SECTION 10 — ĐỘI NGŨ GIÁO VIÊN
+   Dựng theo ảnh mẫu khách gửi: nền xanh rất nhạt, tiêu đề navy
+   cỡ lớn, 3 thẻ trắng có VIỀN MÀU ở cạnh trên, mỗi thẻ một con số.
+   ========================================================= */
+
+.team{
+  --team-orange: #ff4800;   /* eyebrow                 */
+  --team-navy:   #0d2a5c;   /* tiêu đề + tên hạng mục  */
+  --team-muted:  #8b93a5;   /* nhãn "GIÁO VIÊN"        */
+  --team-desc:   #5b6478;   /* dòng mô tả              */
+  --team-cyan:   #29a8d8;   /* thẻ 1                   */
+  --team-red:    #f5522d;   /* thẻ 2                   */
+  --team-green:  #59bd45;   /* thẻ 3                   */
+
+  background: #eaf6fd;
+  padding-block: clamp(44px, 5.6vw, 80px);
+}
+
+.team__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* --- tiêu đề ----------------------------------------------------------- */
+
+.team__head{ text-align: center; }
+
+.team__eyebrow{
+  font-weight: 800;
+  font-size: clamp(11px, .97vw, 14px);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--team-orange);
+}
+
+.team__title{
+  margin-top: 12px;
+  font-weight: 800;
+  font-size: clamp(26px, 3.6vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  color: var(--team-navy);
+  text-wrap: balance;
+}
+
+.team__desc{
+  max-width: 780px;
+  margin: clamp(16px, 1.8vw, 26px) auto 0;
+  font-size: clamp(12.5px, 1.04vw, 15px);
+  line-height: 1.6;
+  color: var(--team-desc);
+}
+
+/* --- 3 thẻ số ---------------------------------------------------------- */
+
+.team__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 1.6vw, 24px);
+  margin-top: clamp(28px, 3.4vw, 48px);
+}
+
+.team__card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(26px, 2.8vw, 40px) clamp(18px, 1.9vw, 28px) clamp(30px, 3.2vw, 46px);
+  border-radius: clamp(12px, 1.1vw, 16px);
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(20, 60, 120, .08);
+
+  /* viền màu ở cạnh trên — mỗi thẻ một màu, đặt qua biến bên dưới */
+  border-top: 5px solid var(--card-accent);
+}
+
+.team__card--1{ --card-accent: var(--team-cyan);  }
+.team__card--2{ --card-accent: var(--team-red);   }
+.team__card--3{ --card-accent: var(--team-green); }
+
+.team__number{
+  font-weight: 800;
+  font-size: clamp(30px, 3.06vw, 44px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--card-accent);
+}
+
+.team__card-title{
+  margin-top: clamp(16px, 1.6vw, 24px);
+  font-weight: 700;
+  font-size: clamp(13px, 1.11vw, 16px);
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  text-align: center;
+  color: var(--team-navy);
+}
+
+.team__card-unit{
+  margin-top: clamp(14px, 1.5vw, 22px);
+  font-weight: 600;
+  font-size: clamp(9.5px, .8vw, 11.5px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--team-muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 767px){
+  .team__grid{ grid-template-columns: 1fr; }
+  .team__card{ padding-block: 24px 28px; }
+}
+
+@media (max-width: 599px){
+  .team{ padding-block: 36px; }
+}

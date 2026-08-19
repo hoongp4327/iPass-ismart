@@ -1,0 +1,286 @@
+/* =========================================================
+   SECTION 08 — SPEAK UP DAY
+   Canvas thiết kế 1440 · nền TRẮNG
+
+   Toạ độ gốc đọc từ layer PSD (extracted-section8.json):
+     eyebrow        543,5057  15.7px  #000b46
+     tiêu đề        328,5084  39.1px  dòng 1 #2354fb · dòng 2 #ff5400
+     mô tả          285,5201  16.7px  #14226b
+
+     KHỐI HÌNH  (x 124–1272 · y 5305–5873)
+       thẻ cam      124,5351  624 × 474  #ff5400
+         tiêu đề    180,5395  22.9px trắng + 30.4px vàng #ffde00
+         4 mục      226,5519 / 5577 / 5644 / 5715  21.3px trắng
+         icon tick  185,5522 / 5581 / 5648 / 5724  30 × 30
+       cúp          546,5305  263 × 254  (đè mép phải thẻ cam)
+       ảnh          806,5332  466 × 522  (khung viền hồng có sẵn trong ảnh)
+       thẻ vàng     901,5759  382 × 114  #ffde00  (xoay nhẹ)
+         chữ        921,5784  15.2px  #0d008c
+
+   Ghi chú: file "03-花瓣素材_手绘五星徽章元素" thực chất LÀ ẢNH bé gái
+   học online, viền hồng bo góc đã nằm sẵn trong ảnh — không dựng
+   thêm khung bằng CSS. "04-layer-5*" là icon dấu tick tròn xanh lá.
+   ========================================================= */
+
+.s8{
+  --s8-blue:   #2354fb;   /* dòng 1 tiêu đề */
+  --s8-orange: #ff5400;   /* dòng 2 tiêu đề + nền thẻ */
+  --s8-ink:    #14226b;   /* đoạn mô tả */
+  --s8-navy:   #000b46;   /* eyebrow */
+  --s8-yellow: #ffde00;   /* chữ nhấn trong thẻ + nền thẻ vàng */
+  --s8-indigo: #0d008c;   /* chữ trong thẻ vàng */
+
+  background: #fff;
+  /* đỉnh hẹp lại cho sát section 7 phía trên (xem chú thích ở section7.css),
+     đáy vẫn giữ rộng để tách với section 9 */
+  padding-block: clamp(18px, 2vw, 30px) clamp(48px, 6vw, 88px);
+  overflow: hidden;
+}
+
+.s8__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* --- khối tiêu đề, căn giữa ------------------------------------------- */
+
+.s8__head{ text-align: center; }
+
+.s8__eyebrow{
+  font-weight: 700;
+  font-size: clamp(12px, 1.09vw, 15.7px);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--s8-navy);
+}
+
+.s8__title{
+  margin-top: 10px;
+  font-weight: 800;
+  font-size: clamp(22px, 2.72vw, 39.1px);
+  line-height: 1.22;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.s8__title-a{ color: var(--s8-blue); }
+.s8__title-b{ color: var(--s8-orange); }
+
+.s8__desc{
+  max-width: 890px;
+  margin: 14px auto 0;
+  font-size: clamp(13px, 1.16vw, 16.7px);
+  line-height: 1.62;
+  color: var(--s8-ink);
+}
+
+.s8__desc + .s8__desc{ margin-top: 10px; }
+
+/* =========================================================
+   KHỐI HÌNH — thẻ cam + cúp + ảnh + thẻ vàng chồng lớp
+   Khung tham chiếu 1148 × 568, con định vị bằng %.
+   ========================================================= */
+
+/* Hàng 2 cột theo luồng tài liệu — KHÔNG khoá chiều cao.
+   Bản trước đặt thẻ cam position:absolute + height:83.5% nên chữ dài
+   ra là tràn khỏi nền cam (mục thứ 4 rơi hẳn ra ngoài). Giờ thẻ tự cao
+   theo nội dung nên nền cam luôn bọc trọn chữ.                        */
+.s8__visual{
+  position: relative;
+  container-type: inline-size;  /* gốc cqw cho CHÍNH thẻ cam = 1148 */
+  display: flex;
+  align-items: flex-start;
+  gap: 5.05%;                   /* (806-748)/1148 */
+  width: 100%;
+  max-width: 1148px;
+  margin: clamp(28px, 3.5vw, 50px) auto 0;
+}
+
+/* --- thẻ cam ---------------------------------------------------------- */
+
+/* Lưu ý: các giá trị cqw đặt TRÊN chính thẻ này (padding, bo góc) được
+   tính theo container CHA (.s8__visual = 1148), vì một phần tử không thể
+   tự truy vấn kích thước của chính nó. Còn cqw dùng ở các phần tử CON
+   bên trong thẻ mới lấy gốc là bề rộng thẻ (624). Đặt nhầm gốc ở đây
+   từng làm padding-bottom phình lên 141px và đội thẻ cao quá cỡ.      */
+.s8__card{
+  position: relative;
+  container-type: inline-size;  /* gốc cqw cho các phần tử CON = 624 */
+  flex: 0 0 54.4%;              /* 624/1148 */
+  margin-top: 4%;               /* (5351-5305)/1148 — cúp nhô lên trên thẻ */
+  padding: 3.83cqw 3.2cqw 5.3cqw 4.88cqw;   /* 44 / 37 / 61 / 56 px */
+  border-radius: 2.79cqw;                   /* 32px */
+  background: var(--s8-orange);
+  box-shadow: 0 24px 48px rgba(255, 84, 0, .22);
+}
+
+.s8__card-heading{
+  font-weight: 800;
+  font-size: 3.67cqw;           /* 22.9/624 */
+  line-height: 1.28;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  color: #fff;
+  /* chừa lối cho cúp ở góc phải, tránh chữ chui xuống dưới cúp */
+  max-width: 74%;
+}
+
+/* 2 dòng sau to hơn và đổi sang vàng */
+.s8__card-heading em{
+  display: block;
+  font-style: normal;
+  font-size: 1.327em;           /* 30.4 / 22.9 */
+  color: var(--s8-yellow);
+}
+
+/* --- danh sách 4 mục, icon tick tròn xanh lá -------------------------- */
+
+.s8__list{
+  margin: 6.5cqw 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s8__list li{
+  position: relative;
+  padding-left: 7.3cqw;         /* (226-124-56)/624 */
+  font-weight: 500;
+  font-size: 3.41cqw;           /* 21.3/624 */
+  line-height: 1.34;
+  color: #fff;
+}
+
+.s8__list li + li{ margin-top: 4.6cqw; }
+
+/* icon tick 30 × 30 trong PSD */
+.s8__list li::before{
+  content: "";
+  position: absolute;
+  left: .8cqw;
+  top: .1em;
+  width: 4.81cqw;               /* 30/624 */
+  height: 4.81cqw;
+  background: url("../assets/section8/04-layer-5.png") center / contain no-repeat;
+}
+
+/* --- cúp: tràn ra ngoài góc trên-phải của thẻ cam --------------------- */
+
+.s8__trophy{
+  position: absolute;
+  right: -9.8cqw;               /* (809-748)/624 */
+  top:   -7.4cqw;               /* (5351-5305)/624 */
+  width: 42.1cqw;               /* 263/624 */
+  height: auto;
+  z-index: 3;
+  filter: drop-shadow(0 14px 28px rgba(180, 40, 0, .28));
+}
+
+/* --- cột ảnh ---------------------------------------------------------- */
+
+.s8__media{
+  position: relative;
+  container-type: inline-size;  /* gốc cqw = bề rộng ảnh (466) */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* ảnh bé gái học online — viền hồng bo góc đã có sẵn trong file ảnh */
+.s8__photo{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- thẻ vàng xoay nhẹ, đè mép dưới-phải ảnh ------------------------- */
+
+.s8__tag{
+  position: absolute;
+  right:  -2.4cqw;              /* (1283-1272)/466 */
+  bottom: -4.1cqw;              /* (5873-5854)/466 */
+  width: 82cqw;                 /* 382/466 */
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .35em;
+  padding: 4cqw 5cqw;
+  background: var(--s8-yellow);
+  box-shadow: 0 12px 26px rgba(120, 90, 0, .20);
+  transform: rotate(-8deg);
+  text-align: center;
+  color: var(--s8-indigo);
+}
+
+.s8__tag-title{
+  font-weight: 800;
+  font-size: 3.26cqw;           /* 15.2/466 */
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+
+.s8__tag-sub{
+  font-weight: 600;
+  font-size: 2.9cqw;
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* --- Mobile: bỏ 2 cột, xếp dọc ---------------------------------------- */
+
+@media (max-width: 767px){
+  .s8__visual{
+    flex-direction: column;
+    gap: 20px;
+    max-width: 520px;
+  }
+
+  .s8__card{
+    flex: none;
+    width: 100%;
+    margin-top: 26px;            /* chừa chỗ cho cúp nhô lên */
+    container-type: normal;      /* bỏ container query, quay về đơn vị px */
+    padding: 28px 22px 26px;
+    border-radius: 20px;
+  }
+
+  .s8__card-heading{ font-size: 18px; max-width: 70%; }
+  .s8__list{ margin-top: 18px; }
+  .s8__list li{ font-size: 15px; padding-left: 30px; }
+  .s8__list li + li{ margin-top: 14px; }
+  .s8__list li::before{ left: 0; width: 20px; height: 20px; }
+
+  /* cúp thu nhỏ, nép góc phải phía trên thẻ */
+  .s8__trophy{
+    right: 2%;
+    top: -34px;
+    width: 108px;
+  }
+
+  .s8__media{ container-type: normal; }
+
+  .s8__tag{
+    position: static;
+    width: 100%;
+    margin: -26px auto 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transform: rotate(-3deg);
+  }
+
+  .s8__tag-title{ font-size: 14px; }
+  .s8__tag-sub  { font-size: 12.5px; }
+}
+
+@media (max-width: 599px){
+  .s8{ padding-block: 40px; }
+  .s8__desc{ font-size: 14px; }
+}

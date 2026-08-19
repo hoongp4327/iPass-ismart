@@ -1,0 +1,343 @@
+/* =========================================================
+   SECTION 02 — NỖI LO CỦA PHỤ HUYNH
+   Canvas thiết kế 1440 · lưới 12 cột · nền TRẮNG
+
+   Toạ độ gốc đọc từ layer PSD (extracted-section2.json):
+     ảnh học sinh   64,751  → 705,1230  (641 × 479)
+     vòng tròn nền  213,765 → 673,1226  (460 × 461) #ffffff
+     tag 1          175,837 → 368,909   (193 × 72)  #f85033
+     tag 2          175,919 → 312,980   (137 × 61)
+     tag 3          175,993 → 322,1053  (147 × 60)
+     eyebrow        757,787 → 1123,807  21×0.748 = 15.7px #797979
+     tiêu đề        755,813 → 1227,888  (2 dòng, IN HOA)
+     thẻ kem        752,906 → 1251,1124 (499 × 218) #fffcb2
+       robot        714,924 → 887,1087  (tràn trái ra ngoài thẻ)
+       logo iPass   888,947 → 1116,1019
+       huy hiệu    1135,930 → 1242,1036 (tràn phải ra ngoài thẻ)
+       dòng navy    884,1029→ 1135,1079 21×1.026 = 21.5px #002566
+       dòng cam     884,1083→ 1224,1104 21×0.765 = 16.1px #f85033
+       gạch chân    879,1109→ 1186,1124
+
+   Thẻ kem là thẻ NGANG (499×218) — mọi phần tử con định vị
+   theo % của khung thẻ, cỡ chữ dùng cqw để co đúng tỉ lệ.
+   container-type đặt ở .s2__card, cq* chỉ dùng ở phần tử CON
+   (không đặt cả hai trên cùng 1 phần tử — sẽ tự tham chiếu).
+   ========================================================= */
+
+.s2{
+  /* màu riêng của section — lệch so với bộ --ipass-* nên khai báo tại chỗ */
+  --s2-navy:        #002566;   /* chữ tiêu đề + dòng navy trong thẻ */
+  --s2-orange:      #f85033;   /* tag, chữ nhấn, gạch chân */
+  --s2-orange-deep: #ff3c00;   /* viền gạch chân */
+  --s2-gray:        #797979;   /* eyebrow */
+  --s2-cream:       #fffcb2;   /* nền thẻ giải pháp */
+
+  background: #fff;
+  padding-block: clamp(56px, 7vw, 96px);
+  overflow: hidden;
+}
+
+.s2__inner{
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.4vw, 48px);
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* =========================================================
+   CỘT TRÁI — ảnh học sinh + vòng tròn nền + 3 tag
+   Khung tham chiếu = ảnh gốc 641 × 479, con định vị bằng %.
+   ========================================================= */
+
+.s2__visual{
+  position: relative;
+  flex: 0 0 46.7%;              /* 641 / (641+732) trong PSD */
+  container-type: inline-size;
+  aspect-ratio: 641 / 479;
+}
+
+/* vòng tròn nền — PSD fill #ffffff, nổi trên nền trắng nhờ đổ bóng nhẹ */
+.s2__circle{
+  position: absolute;
+  left:  23.2%;                 /* (213-64)/641 */
+  top:   2.9%;                  /* (765-751)/479 */
+  width: 71.8%;                 /* 460/641 */
+  height: 96.2%;                /* 461/479 */
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(20, 40, 100, .12);
+}
+
+.s2__photo{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* --- 3 tag cam, IN HOA, đè lên mép trái ảnh ----------------------------
+   Mặc định chỉ hiện tiêu đề. Khi trỏ chuột vào (hoặc tab tới bằng bàn
+   phím / chạm trên điện thoại) thì tag nở rộng ra và hiện thêm đoạn mô
+   tả. Dùng grid-template-rows 0fr→1fr cho phần mô tả: mở/đóng mượt mà
+   mà không cần biết trước chiều cao đoạn văn.                        */
+
+.s2__tag{
+  position: absolute;
+  left: 17.3%;                  /* (175-64)/641 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4cqw 2.2cqw;
+  border-radius: 1.9cqw;
+  background: var(--s2-orange);
+  box-shadow: 0 10px 22px rgba(248, 80, 51, .30);
+  color: #fff;
+  font-weight: 700;
+  /* PSD 28.797 × 0.4275 = 12.3px trên nền rộng 641 → 1.92cqw */
+  font-size: 1.92cqw;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 2;
+  cursor: default;
+  transition: width .32s ease, background-color .32s ease,
+              box-shadow .32s ease, transform .32s ease;
+}
+
+/* chiều cao gốc giữ bằng min-height để tag còn nở ra được khi hover */
+.s2__tag--1{ top: 17.9%; width: 30.1%; min-height: 15.0%; }
+.s2__tag--2{ top: 35.1%; width: 21.4%; min-height: 12.7%; }
+.s2__tag--3{ top: 50.5%; width: 22.9%; min-height: 12.5%; }
+
+/* --- phần mô tả, mặc định thu về 0 ------------------------------------ */
+
+.s2__tag-desc{
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+  font-weight: 500;
+  font-size: 1.62cqw;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: grid-template-rows .32s ease, opacity .24s ease, margin-top .32s ease;
+}
+
+/* con trực tiếp của grid phải có min-height:0 mới co được về 0 */
+.s2__tag-desc > span{ min-height: 0; overflow: hidden; }
+
+/* --- trạng thái mở ----------------------------------------------------- */
+
+/* .is-open do JS gắn: tự mở một lần khi cuộn tới section (xem js/section2.js) */
+.s2__tag:hover,
+.s2__tag:focus-visible,
+.s2__tag:focus-within,
+.s2__tag.is-open{
+  width: 64%;
+  z-index: 6;                   /* nổi lên trên 2 tag còn lại */
+  background: var(--s2-orange-deep);
+  box-shadow: 0 16px 34px rgba(248, 80, 51, .42);
+  transform: translateY(-2px);
+}
+
+.s2__tag:hover .s2__tag-desc,
+.s2__tag:focus-visible .s2__tag-desc,
+.s2__tag:focus-within .s2__tag-desc,
+.s2__tag.is-open .s2__tag-desc{
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: .7em;
+}
+
+/* =========================================================
+   CỘT PHẢI — eyebrow + tiêu đề + thẻ giải pháp
+   ========================================================= */
+
+.s2__content{
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.s2__eyebrow{
+  font-size: clamp(12px, 1.09vw, 15.7px);
+  font-weight: 700;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--s2-gray);
+}
+
+/* --- tiêu đề: IN HOA, 2 cỡ chữ, 2 màu ---------------------------------
+   PSD: "KHI CON NÓI " 25.4px navy · "“CON HỌC RỒI”" 38.2px navy
+        "NHƯNG " 25.4px navy · "ĐIỂM VẪN CHƯA CẢI THIỆN..." 25.4px cam  */
+
+.s2__title{
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: clamp(18px, 1.76vw, 25.4px);   /* cỡ nền của tiêu đề */
+  line-height: 1.24;
+  letter-spacing: -.025em;                   /* tracking -25 */
+  text-transform: uppercase;
+  color: var(--s2-navy);
+}
+
+/* cụm trong ngoặc kép được phóng to hơn phần còn lại (31.57 vs 21 trong PSD) */
+.s2__title-quote{
+  font-size: clamp(26px, 2.65vw, 38.2px);
+  line-height: 1.1;
+}
+
+.s2__title-accent{ color: var(--s2-orange); }
+
+/* --- thẻ giải pháp: THẺ NGANG 499 × 218 -------------------------------- */
+
+.s2__card{
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  max-width: 499px;
+  aspect-ratio: 499 / 218;
+  margin-top: clamp(18px, 2vw, 28px);
+  border-radius: 5%;
+  background: var(--s2-cream);
+  box-shadow: 0 22px 48px rgba(20, 60, 120, .10);
+}
+
+/* mascot robot — tràn ra ngoài mép TRÁI thẻ (PSD left 714 < thẻ 752) */
+.s2__card-pose{
+  position: absolute;
+  left:  -7.6%;                 /* (714-752)/499 */
+  top:    8.3%;                 /* (924-906)/218 */
+  width: 34.7%;                 /* 173/499 */
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 10px 20px rgba(20, 40, 100, .18));
+}
+
+/* logo chữ "iPass" cỡ lớn */
+.s2__card-logo{
+  position: absolute;
+  left:  27.3%;                 /* (888-752)/499 */
+  top:   18.8%;                 /* (947-906)/218 */
+  width: 45.7%;                 /* 228/499 */
+  height: auto;
+  z-index: 1;
+}
+
+/* huy hiệu tròn — tràn ra ngoài mép PHẢI thẻ (PSD right 1242 > thẻ 1251) */
+.s2__card-badge{
+  position: absolute;
+  left:  76.8%;                 /* (1135-752)/499 */
+  top:   11.0%;                 /* (930-906)/218 */
+  width: 21.4%;                 /* 107/499 */
+  height: auto;
+  z-index: 3;
+}
+
+/* khối chữ nằm nửa dưới thẻ, bắt đầu từ 26.5% bề ngang */
+.s2__card-text{
+  position: absolute;
+  left:  26.5%;                 /* (884-752)/499 */
+  top:   56.4%;                 /* (1029-906)/218 */
+  right: 3%;
+}
+
+.s2__card-heading{
+  font-weight: 700;
+  font-size: 4.3cqw;            /* 21.5/499 */
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  color: var(--s2-navy);
+}
+
+.s2__card-sub{
+  margin-top: 2.4cqw;
+  font-weight: 700;
+  font-size: 3.23cqw;           /* 16.1/499 */
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: var(--s2-orange);
+}
+
+/* gạch chân cong dưới dòng cam (PSD "Shape 1": 307 × 15) */
+.s2__card-ribbon{
+  display: block;
+  width: 61.5%;                 /* 307/499 */
+  height: 3cqw;
+  margin-top: 1.2cqw;
+  border-bottom: .6cqw solid var(--s2-orange-deep);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1247px){
+  .s2__inner{ gap: clamp(20px, 2.6vw, 32px); }
+}
+
+/* --- Tablet & mobile: xếp dọc, ảnh lên trên ---------------------------- */
+
+@media (max-width: 1023px){
+  .s2__inner{
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(32px, 6vw, 48px);
+  }
+
+  .s2__visual{
+    flex-basis: auto;
+    width: min(100%, 520px);
+    margin-inline: auto;
+  }
+
+  .s2__title{ font-size: clamp(19px, 3.1vw, 25.4px); }
+  .s2__title-quote{ font-size: clamp(27px, 4.6vw, 38.2px); }
+
+  .s2__card{ margin-inline: auto; }
+}
+
+/* --- Mobile: thẻ ngang quá chật → bỏ khoá tỉ lệ, cho chữ tự giãn ------- */
+
+@media (max-width: 599px){
+  .s2{ padding-block: 44px; }
+
+  .s2__card{
+    aspect-ratio: auto;
+    padding: 30cqw 4% 6cqw 4%;   /* chừa chỗ phía trên cho robot + logo */
+    border-radius: 20px;
+  }
+
+  /* robot và logo lên hàng trên, huy hiệu nép góc phải */
+  .s2__card-pose{ left: 2%;  top: 2%;  width: 26%; }
+  .s2__card-logo{ left: 32%; top: 6%;  width: 40%; }
+  .s2__card-badge{ left: auto; right: 2%; top: 4%; width: 18%; }
+
+  .s2__card-text{
+    position: static;
+    left: auto; top: auto; right: auto;
+  }
+
+  .s2__card-heading{ font-size: 5.6cqw; }
+  .s2__card-sub    { font-size: 4.2cqw; margin-top: 3cqw; }
+  .s2__card-ribbon { height: 4cqw; border-bottom-width: .8cqw; }
+
+  /* màn nhỏ: chữ to lên theo khung ảnh, tag mở rộng gần hết bề ngang */
+  .s2__tag{ font-size: 2.5cqw; }
+  .s2__tag-desc{ font-size: 2.2cqw; }
+
+  .s2__tag:hover,
+  .s2__tag:focus-visible,
+  .s2__tag:focus-within,
+  .s2__tag.is-open{ width: 74%; }
+}

@@ -1,0 +1,296 @@
+/* =========================================================
+   SECTION 03 — MỘT LỘ TRÌNH, TIẾN BỘ TOÀN DIỆN
+   Canvas thiết kế 1440 · thẻ lớn 117→1324 (rộng 1207) × cao 710
+   Toạ độ / màu / cỡ chữ đọc từ layer PSD (extracted-section3.json).
+
+   Nền thẻ lớn = ảnh texture ánh sáng công nghệ (layer "hf_2026…", 82→1338)
+   phủ thêm lớp "Color Fill 1" navy #090079 @29% → ra tông XANH NAVY ĐẬM.
+   (Layer "Rectangle 4" #f85033 nằm DƯỚI ảnh texture nên không nhìn thấy —
+   vòng dựng trước lấy nhầm màu cam này làm nền.)
+
+   Bên trong thẻ: [mascot] [eyebrow + 2 dòng tiêu đề] xếp CÙNG HÀNG NGANG,
+   canh giữa thẻ; dưới là dòng mô tả trắng; cuối là 4 thẻ trắng
+   (ảnh đã flatten từ PSD, không tách được chữ).
+
+   Mọi cỡ/khoảng cách bên trong thẻ tính theo cqw của chính thẻ
+   (1cqw = 12.07px ở canvas gốc) → tỉ lệ giữ nguyên khi thu nhỏ.
+   container-type đặt ở .s3__card, đơn vị cq* chỉ dùng ở phần tử con.
+   ========================================================= */
+
+:root{
+  /* nền navy dự phòng khi ảnh texture chưa tải */
+  --s3-navy-deep:  #04123A;
+  --s3-navy-mid:   #0A3F9E;
+  --s3-navy-lit:   #1F8EF1;
+  /* lớp phủ "Color Fill 1" — #090079 @29% */
+  --s3-veil:       rgba(9, 0, 121, .29);
+  --s3-cyan:       #00F0FF; /* dòng tiêu đề thứ 2 */
+}
+
+.s3{
+  padding-block: clamp(40px, 5vw, 72px);
+  background: #fff;
+}
+
+.s3__inner{
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--page-pad));
+  margin-inline: auto;
+  padding-inline: var(--page-pad);
+}
+
+/* --- thẻ lớn navy, chiếm trọn cột nội dung ------------------------------ */
+
+.s3__card{
+  container-type: inline-size;
+  container-name: s3card;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: clamp(18px, 2.6vw, 36px);
+  /* gradient navy làm nền gốc (và dự phòng nếu ảnh texture lỗi) */
+  background:
+    linear-gradient(158deg,
+      var(--s3-navy-deep)  0%,
+      var(--s3-navy-mid)  56%,
+      var(--s3-navy-lit) 100%);
+  box-shadow: 0 24px 48px rgba(9, 0, 121, .22);
+}
+
+/* ảnh texture ánh sáng xanh — trải kín thẻ, làm nền chính */
+.s3__card-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+/* lớp phủ navy #090079 @29% — kéo tông ảnh về navy đậm như PSD */
+.s3__card-veil{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--s3-veil);
+  pointer-events: none;
+}
+
+/* nội dung nằm trên 2 lớp nền */
+.s3__body{
+  position: relative;
+  z-index: 2;
+  /* trên 54px · dưới 72px · hai bên 66px (theo bounds PSD) */
+  padding: 4.47cqw 5.5cqw 5.97cqw;
+}
+
+/* --- hàng ngang: mascot BÊN TRÁI khối tiêu đề --------------------------- */
+
+.s3__head{
+  display: flex;
+  align-items: center;      /* mascot 1273→1411 canh giữa khối chữ 1285→1405 */
+  justify-content: center;
+  gap: 2.9cqw;              /* 35px giữa mascot và chữ */
+}
+
+.s3__mascot{
+  flex: none;
+  width: 11.27cqw;          /* 136px @1207 */
+  height: auto;
+}
+
+.s3__headline{
+  text-align: left;
+}
+
+.s3__eyebrow{
+  font-family: var(--font-sans);
+  font-size: 1.30cqw;       /* 15.7px */
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.s3__title{
+  margin-top: .5cqw;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+
+.s3__title-line1,
+.s3__title-line2{
+  display: block;
+}
+
+.s3__title-line1{
+  font-size: 3.85cqw;       /* 46.5px — dòng lớn nhất, TRẮNG */
+  color: #fff;
+}
+
+.s3__title-line2{
+  font-size: 2.63cqw;       /* 31.7px — XANH CYAN */
+  color: var(--s3-cyan);
+}
+
+/* --- dòng mô tả, canh giữa dưới khối tiêu đề ---------------------------- */
+
+.s3__desc{
+  position: relative;
+  z-index: 2;
+  max-width: 70cqw;
+  margin: 1.6cqw auto 0;
+  font-family: var(--font-sans);
+  font-size: 1.15cqw;       /* 13.9px */
+  font-weight: 500;
+  line-height: 1.5;
+  color: #fff;
+  text-align: center;
+}
+
+/* --- hàng 4 thẻ trắng ---------------------------------------------------
+   Trong PSD 4 thẻ này là Smart Object nên chữ bị khoá bên trong, trước
+   đây phải dùng ảnh phẳng. Nay dựng lại bằng CHỮ THẬT (chọn được, đọc
+   được bằng trình đọc màn hình, tự xuống dòng theo bề rộng), chỉ giữ
+   lại phần icon cắt riêng ra từ ảnh gốc.                              */
+
+.s3__cards{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4.47cqw;             /* 54px giữa các thẻ */
+  margin: 3.48cqw 0 0;      /* 42px dưới dòng mô tả */
+  padding: 0;
+  list-style: none;
+}
+
+.s3__card-item{
+  display: flex;
+  flex-direction: column;
+  padding: 2.15cqw 1.9cqw 2.4cqw;
+  border-radius: 1.2cqw;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(4, 18, 58, .18);
+}
+
+/* hàng trên: số thứ tự lớn bên trái, icon tròn bên phải */
+.s3__card-top{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .8cqw;
+}
+
+.s3__card-num{
+  font-weight: 800;
+  font-size: 3.6cqw;                 /* ~43px */
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: #1868ed;
+}
+
+.s3__card-icon{
+  flex: none;
+  width: 4.8cqw;                     /* ~58px như trong ảnh gốc */
+  height: auto;
+}
+
+.s3__card-name{
+  margin-top: 1.7cqw;
+  font-weight: 800;
+  font-size: 1.42cqw;                /* ~17px */
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: #f4511e;
+}
+
+.s3__card-desc{
+  margin-top: 1.2cqw;
+  font-size: 1.16cqw;                /* ~14px */
+  line-height: 1.5;
+  text-align: justify;
+  color: #123a7a;
+}
+
+/* khối "KẾT QUẢ" đẩy xuống đáy để 4 thẻ thẳng hàng nhau */
+.s3__card-result{
+  margin-top: auto;
+  padding-top: 1.5cqw;
+}
+
+.s3__card-result dt{
+  font-weight: 700;
+  font-size: 1.08cqw;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #f4511e;
+}
+
+.s3__card-result dd{
+  margin: .5cqw 0 0;
+  font-size: 1.16cqw;
+  line-height: 1.5;
+  text-align: justify;
+  color: #123a7a;
+}
+
+/* =========================================================
+   RESPONSIVE — dưới 1024px bỏ tỉ lệ cqw cho chữ, chuyển sang clamp
+   để chữ không nhỏ quá ngưỡng đọc được.
+   ========================================================= */
+
+@media (max-width: 1023px){
+  .s3__body{ padding: 32px 28px 40px; }
+
+  .s3__head{
+    flex-direction: column;
+    gap: 12px;
+  }
+  .s3__headline{ text-align: center; }
+
+  .s3__mascot{ width: clamp(88px, 16vw, 128px); }
+
+  .s3__eyebrow{ font-size: clamp(12px, 2vw, 15px); }
+  .s3__title-line1{ font-size: clamp(28px, 5.4vw, 44px); }
+  .s3__title-line2{ font-size: clamp(19px, 3.7vw, 30px); }
+
+  .s3__desc{
+    max-width: 56ch;
+    margin-top: 16px;
+    font-size: clamp(13px, 1.8vw, 15px);
+  }
+
+  .s3__cards{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  /* dưới 1024px khung thẻ hẹp lại nhiều → khoá cỡ chữ bằng clamp
+     thay cho cqw để không tụt xuống dưới ngưỡng đọc được */
+  .s3__card-item{ border-radius: 14px; padding: 20px 18px 22px; }
+  .s3__card-num { font-size: clamp(30px, 4.4vw, 40px); }
+  .s3__card-icon{ width: clamp(42px, 6vw, 56px); }
+  .s3__card-name{ font-size: clamp(14px, 1.9vw, 17px); margin-top: 14px; }
+  .s3__card-desc,
+  .s3__card-result dd{ font-size: clamp(12.5px, 1.6vw, 14px); }
+  .s3__card-result dt{ font-size: clamp(11px, 1.4vw, 13px); }
+  .s3__card-result   { padding-top: 14px; }
+}
+
+@media (max-width: 599px){
+  .s3__body{ padding: 26px 20px 32px; }
+
+  .s3__cards{
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin-inline: auto;
+    gap: 18px;
+  }
+}
