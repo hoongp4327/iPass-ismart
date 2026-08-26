@@ -95,16 +95,23 @@
    SƠ ĐỒ — lưới 3×3, cột/dòng giữa là khe cho vòng tròn
    ========================================================= */
 
+/* Trước đây khung sơ đồ khoá cứng tỉ lệ 963/442 của PSD → chiều cao
+   thẻ đóng băng ở 201px. Chữ trong thẻ (nhất là khi tăng cỡ cho dễ
+   đọc) không đủ chỗ, tràn ra ngoài phần đệm khiến dòng "Trước buổi
+   học / Trong buổi học…" dính sát mép trên thẻ.
+
+   Nay thả tỉ lệ: 2 hàng thẻ dùng 1fr nên tự cao theo nội dung nhưng
+   luôn BẰNG NHAU, phần đệm 2.2cqi trên–dưới được tôn trọng. Vòng tròn
+   ACES ở giữa vẫn tự canh tâm (top/left 50%) nên không xê dịch. */
 .aces__diagram{
   position: relative;
   container-type: inline-size;
   width: 100%;
   max-width: 963px;
-  aspect-ratio: 963 / 442;
   margin: clamp(32px, 4.2vw, 60px) auto 0;
   display: grid;
   grid-template-columns: 40.3% 19.5% 40.2%;   /* 388 · 188 · 387 */
-  grid-template-rows:    45.5% 9%    45.5%;   /* 201 · 40  · 201 */
+  grid-template-rows: 1fr clamp(24px, 4.15cqi, 40px) 1fr;   /* khe giữa = 40px @963 */
 }
 
 .aces__card--activate    { grid-area: 1 / 1 / 2 / 2; background: var(--aces-a); }
@@ -117,8 +124,12 @@
   z-index: 1;                   /* thẻ nằm TRÊN vòng nét đứt */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 2.2cqi 3.3cqi;
+  /* Bám mép trên thay vì canh giữa dọc: 4 thẻ có độ dài chữ khác nhau,
+     canh giữa thì nhãn "Trước buổi học / Trong buổi học…" của mỗi thẻ
+     dừng ở một độ cao khác nhau. Bám mép trên thì cả 4 nhãn luôn cách
+     đỉnh thẻ đúng bằng phần đệm, phần dư dồn xuống đáy. */
+  justify-content: flex-start;
+  padding: 2.4cqi 3.3cqi 2.6cqi;
   border-radius: 2.5cqi;
   color: #fff;
 }
@@ -164,15 +175,19 @@
   text-transform: uppercase;
 }
 
+/* Cỡ chữ trong PSD là 13.3px — đọc trên màn hình thật thì nhỏ hơn hẳn
+   các đoạn mô tả khác của trang. Nâng lên ~15.4px và nới giãn dòng cho
+   dễ đọc; khung thẻ nay tự cao theo nội dung nên đủ chỗ.
+   (Không cần min-height giữ chỗ dòng nữa: thẻ đã bám mép trên.) */
 .aces__card-desc{
-  margin-top: 1.2cqi;
-  /* Thẻ canh giữa theo chiều dọc (justify-content: center) nên khối
-     chữ ngắn hơn sẽ nằm lệch xuống so với thẻ bên cạnh. Giữ chỗ 4
-     dòng — số dòng của thẻ dài nhất khi thu hẹp — để 4 thẻ cùng nhịp. */
-  min-height: calc(4 * 1.42em);
+  margin-top: 1.3cqi;
   font-weight: 500;
-  font-size: 1.38cqi;           /* 13.3/963 */
-  line-height: 1.42;
+  font-size: 1.6cqi;            /* ~15.4px @963 */
+  line-height: 1.5;
+  /* Siết tracking một chút (mắt không nhận ra) để mỗi dòng chứa thêm
+     được vài ký tự — vừa đủ cho các cụm từ ghép không bị bẻ đôi trong
+     khung thẻ hẹp. Cùng cách làm với các dòng chữ khác của trang. */
+  letter-spacing: -.01em;
 }
 
 /* --- huy hiệu chữ cái (84 × 84 nền trắng) ----------------------------- */
@@ -344,12 +359,21 @@
 /* --- Tablet: chữ trong thẻ bắt đầu chật, nới padding ------------------ */
 
 @media (max-width: 1023px){
-  .aces__card{ padding: 2cqi 2.6cqi; }
+  .aces__card{ padding: 2.2cqi 2.6cqi 2.4cqi; }
   .aces__card--activate,
   .aces__card--support{ padding-right: 7cqi; }
   .aces__card--communicate,
   .aces__card--extend{ padding-left: 7cqi; }
-  .aces__card-desc{ font-size: 1.5cqi; }
+  .aces__card-desc{ font-size: 1.8cqi; }
+
+  /* Phần đệm 7cqi là để chừa chỗ cho huy hiệu chữ cái ở góc trên.
+     Đoạn mô tả nằm THẤP HƠN đáy huy hiệu nên không cần né nó — trả
+     lại phần đệm thừa để đoạn văn dùng trọn bề ngang thẻ, đỡ vỡ
+     thành nhiều dòng ngắn (giống cách làm ở khổ desktop). */
+  .aces__card--activate .aces__card-desc,
+  .aces__card--support  .aces__card-desc{ margin-right: -4.4cqi; }
+  .aces__card--communicate .aces__card-desc,
+  .aces__card--extend      .aces__card-desc{ margin-left: -4.4cqi; }
 
   /* Thẻ hẹp lại nhưng chữ chưa nhỏ theo kịp: mức chặn 68% khiến
      "COMMUNICATE" — kicker dài nhất — bị bẻ làm 2 dòng, đẩy tiêu đề
@@ -363,14 +387,6 @@
      dòng ở khổ này — giữ chỗ 2 dòng cho cả 4 thẻ để mô tả bên dưới
      bắt đầu cùng độ cao. */
   .aces__card-title{ min-height: calc(2 * 1.2em); }
-
-  /* Giữ nguyên tỉ lệ 963/442 của PSD ở khổ này thì chiều cao thẻ bị
-     khoá cứng, chữ tràn ra ngoài đáy. Thả tỉ lệ và cho 2 hàng thẻ
-     dùng 1fr — hàng tự cao theo nội dung nhưng vẫn bằng nhau. */
-  .aces__diagram{
-    aspect-ratio: auto;
-    grid-template-rows: 1fr clamp(24px, 4vw, 40px) 1fr;
-  }
 }
 
 /* --- Mobile: bỏ sơ đồ chữ thập, xếp 4 thẻ dọc ------------------------ */
@@ -426,7 +442,9 @@
   .aces__kicker    { font-size: 20px; margin-top: 4px; }
   .aces__card-title{ font-size: 14px; }
   /* xếp dọc thì mỗi thẻ đứng riêng một hàng, không cần giữ chỗ dòng */
-  .aces__card-desc { font-size: 13px; margin-top: 8px; min-height: 0; }
+  /* nâng từ 13px lên 14.5px cho đồng cỡ với các đoạn mô tả khác
+     trên điện thoại; thẻ xếp dọc nên thừa chỗ */
+  .aces__card-desc { font-size: 14.5px; line-height: 1.5; margin-top: 8px; }
 
   /* bỏ hẳn vòng tròn ACES ở giữa khi xuống mobile */
   .aces__center{ display: none; }

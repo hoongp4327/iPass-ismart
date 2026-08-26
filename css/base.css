@@ -204,9 +204,16 @@ body{
   overflow-wrap: break-word;
 }
 
-/* Giữ một cụm từ liền mạch Ở KHỔ RỘNG để điều khiển chỗ xuống dòng
-   theo đúng bản thiết kế, nhưng thả ra khi màn hình hẹp — ở đó ép
-   giữ nguyên cụm sẽ đẩy vài chữ lẻ lên dòng riêng, nhìn còn tệ hơn. */
+/* Hai mức "không cho ngắt giữa cụm từ":
+
+   .keep-together — giữ liền ở MỌI khổ màn hình. Dùng cho cụm ngắn
+     (từ ghép 2–3 tiếng: "hệ thống", "kết quả", "nội dung"…) — luôn
+     lọt trong một dòng nên không bao giờ gây tràn.
+
+   .nowrap-wide — chỉ giữ liền TỪ 768px TRỞ LÊN. Dùng cho cụm dài,
+     nơi ta muốn điều khiển chỗ xuống dòng ở khổ rộng; xuống màn hẹp
+     thì thả ra, vì ép giữ nguyên sẽ đẩy vài chữ lẻ lên dòng riêng. */
+.keep-together,
 .nowrap-wide{ white-space: nowrap; }
 
 @media (max-width: 767px){
