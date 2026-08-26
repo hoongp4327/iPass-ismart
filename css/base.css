@@ -203,3 +203,12 @@ p, li, dd, dt, figcaption, blockquote{
 body{
   overflow-wrap: break-word;
 }
+
+/* Giữ một cụm từ liền mạch Ở KHỔ RỘNG để điều khiển chỗ xuống dòng
+   theo đúng bản thiết kế, nhưng thả ra khi màn hình hẹp — ở đó ép
+   giữ nguyên cụm sẽ đẩy vài chữ lẻ lên dòng riêng, nhìn còn tệ hơn. */
+.nowrap-wide{ white-space: nowrap; }
+
+@media (max-width: 767px){
+  .nowrap-wide{ white-space: normal; }
+}

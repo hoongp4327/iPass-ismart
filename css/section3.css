@@ -25,6 +25,9 @@
   /* lớp phủ "Color Fill 1" — #090079 @29% */
   --s3-veil:       rgba(9, 0, 121, .29);
   --s3-cyan:       #00F0FF; /* dòng tiêu đề thứ 2 */
+  /* ô "KẾT QUẢ" tách riêng dưới mỗi thẻ */
+  --s3-result-bg:   #EAF2FD; /* xanh rất nhạt, cùng tông với #123a7a */
+  --s3-result-line: #F4511E; /* vạch cam ở cạnh trên, trùng màu nhãn */
 }
 
 .s3{
@@ -163,10 +166,15 @@
    được bằng trình đọc màn hình, tự xuống dòng theo bề rộng), chỉ giữ
    lại phần icon cắt riêng ra từ ảnh gốc.                              */
 
-/* 4 hàng chung cho mọi thẻ: [số + icon] · [tên] · [mô tả] · [kết quả].
-   Mỗi thẻ là một subgrid mượn lại 4 hàng này, nên tên / mô tả / khối
-   "KẾT QUẢ" của cả 4 thẻ luôn bắt đầu cùng một độ cao dù chữ dài ngắn
-   khác nhau — không cần đoán trước số dòng cho từng khổ màn hình. */
+/* Mỗi mục gồm HAI Ô RỜI xếp chồng:
+     · ô trắng phía trên  (.s3__card-body)   — số + icon, tên, mô tả
+     · ô nhạt phía dưới   (.s3__card-result) — khối "KẾT QUẢ"
+
+   Lưới cha khai báo 4 hàng chung: [số + icon] · [tên] · [mô tả] ·
+   [kết quả]. Mỗi mục là một subgrid mượn lại đúng 4 hàng đó, còn ô
+   trắng là subgrid lồng bên trong mượn 3 hàng đầu. Nhờ vậy tên / mô
+   tả / khối "KẾT QUẢ" của cả 4 mục luôn bắt đầu cùng một độ cao —
+   và quan trọng hơn, ĐƯỜNG CẮT giữa 2 ô cũng nằm ngang bằng nhau. */
 .s3__cards{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -177,26 +185,37 @@
   list-style: none;
 }
 
+/* mục = khung trong suốt, chỉ giữ khoảng hở giữa 2 ô */
 .s3__card-item{
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 4;
-  row-gap: 0;               /* khoảng cách giữa các dòng do margin lo */
+  row-gap: 1cqw;            /* khe giữa ô trắng và ô "KẾT QUẢ" */
+}
+
+/* ô trắng: 3 hàng đầu */
+.s3__card-body{
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  row-gap: 0;               /* trong ô, khoảng cách dòng do margin lo */
   padding: 2.15cqw 1.9cqw 2.4cqw;
   border-radius: 1.2cqw;
   background: #fff;
   box-shadow: 0 10px 24px rgba(4, 18, 58, .18);
 }
 
-/* Trình duyệt chưa hỗ trợ subgrid: quay về flex + giữ chỗ số dòng
-   theo thẻ dài nhất (kém linh hoạt hơn nhưng vẫn thẳng hàng). */
+/* Trình duyệt chưa hỗ trợ subgrid: xếp chồng thường + giữ chỗ số dòng
+   theo mục dài nhất (kém linh hoạt hơn nhưng vẫn thẳng hàng). */
 @supports not (grid-template-rows: subgrid){
   .s3__card-item{
     display: flex;
     flex-direction: column;
   }
+  .s3__card-body{ display: block; }
   .s3__card-name{ min-height: calc(3 * 1.25em); }
   .s3__card-desc{ min-height: calc(6 * 1.5em); }
+  .s3__card-result{ min-height: calc(1.4em + 4 * 1.5em); }
 }
 
 /* hàng trên: số thứ tự lớn bên trái, icon tròn bên phải */
@@ -241,12 +260,13 @@
   color: #123a7a;
 }
 
-/* Khối "KẾT QUẢ" nằm ở hàng subgrid cuối nên nhãn của cả 4 thẻ luôn
-   cùng một độ cao. Phần chữ ngắn hơn để lại khoảng trống ở đáy thẻ,
-   không kéo nhãn tụt xuống như trước (khi còn margin-top: auto). */
+/* Ô "KẾT QUẢ" — ô rời nằm ngay dưới ô trắng, nền xanh rất nhạt để
+   tách khỏi phần nội dung mà vẫn cùng một mạch với thẻ. */
 .s3__card-result{
-  align-self: start;
-  padding-top: 1.5cqw;
+  padding: 1.5cqw 1.9cqw 1.7cqw;
+  border-radius: 1.2cqw;
+  background: var(--s3-result-bg);
+  border-top: .3cqw solid var(--s3-result-line);
 }
 
 .s3__card-result dt{
@@ -315,14 +335,19 @@
 
   /* dưới 1024px khung thẻ hẹp lại nhiều → khoá cỡ chữ bằng clamp
      thay cho cqw để không tụt xuống dưới ngưỡng đọc được */
-  .s3__card-item{ border-radius: 14px; padding: 20px 18px 22px; }
+  .s3__card-item{ row-gap: 10px; }
+  .s3__card-body{ border-radius: 14px; padding: 20px 18px 22px; }
   .s3__card-num { font-size: clamp(30px, 4.4vw, 40px); }
   .s3__card-icon{ width: clamp(42px, 6vw, 56px); }
   .s3__card-name{ font-size: clamp(14px, 1.9vw, 17px); margin-top: 14px; }
   .s3__card-desc,
   .s3__card-result dd{ font-size: clamp(12.5px, 1.6vw, 14px); }
   .s3__card-result dt{ font-size: clamp(11px, 1.4vw, 13px); }
-  .s3__card-result   { padding-top: 14px; }
+  .s3__card-result   {
+    border-radius: 14px;
+    border-top-width: 3px;
+    padding: 14px 18px 16px;
+  }
 }
 
 @media (max-width: 599px){

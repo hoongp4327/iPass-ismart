@@ -99,14 +99,18 @@
 
       <p class="hero__tagline">Pass hôm&nbsp;nay, Passport ngày&nbsp;mai</p>
 
+      <!-- Cả 2 nút đều dẫn xuống form đăng ký ở cuối trang.
+           Cuộn mượt do "scroll-behavior: smooth" trong base.css lo;
+           "scroll-margin-top" trong nav.css chừa sẵn chỗ cho thanh
+           điều hướng cố định để tiêu đề form không bị nó che. -->
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#">
+        <a class="btn btn--primary" href="#dang-ky">
           <span>Đánh giá năng lực</span>
           <i class="btn__arrow" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </i>
         </a>
-        <a class="btn btn--ghost" href="#">Tư vấn lộ trình học tập cá nhân hóa</a>
+        <a class="btn btn--ghost" href="#dang-ky">Tư vấn lộ trình học tập cá nhân hóa</a>
       </div>
     </div>
 
@@ -204,48 +208,56 @@
              dùng trực tiếp ảnh export, alt mô tả đầy đủ nội dung từng thẻ -->
         <ul class="s3__cards">
           <li class="s3__card-item">
-            <div class="s3__card-top">
-              <span class="s3__card-num">01</span>
-              <img class="s3__card-icon" src="assets/section3/icon-1.png" alt="" aria-hidden="true">
+            <div class="s3__card-body">
+              <div class="s3__card-top">
+                <span class="s3__card-num">01</span>
+                <img class="s3__card-icon" src="assets/section3/icon-1.png" alt="" aria-hidden="true">
+              </div>
+              <h3 class="s3__card-name">Nắm chắc kiến thức nền tảng</h3>
+              <p class="s3__card-desc">Con được hệ thống lại từ vựng, ngữ pháp và phát âm, đồng thời học đúng trọng tâm, củng cố đúng những phần kiến thức còn thiếu.</p>
             </div>
-            <h3 class="s3__card-name">Nắm chắc kiến thức nền tảng</h3>
-            <p class="s3__card-desc">Con được hệ thống lại từ vựng, ngữ pháp và phát âm, đồng thời học đúng trọng tâm, củng cố đúng những phần kiến thức còn thiếu.</p>
             <dl class="s3__card-result">
               <dt>Kết quả</dt>
               <dd>Con hiểu bài sâu hơn, ghi nhớ lâu hơn và vận dụng kiến thức chính xác.</dd>
             </dl>
           </li>
           <li class="s3__card-item">
-            <div class="s3__card-top">
-              <span class="s3__card-num">02</span>
-              <img class="s3__card-icon" src="assets/section3/icon-2.png" alt="" aria-hidden="true">
+            <div class="s3__card-body">
+              <div class="s3__card-top">
+                <span class="s3__card-num">02</span>
+                <img class="s3__card-icon" src="assets/section3/icon-2.png" alt="" aria-hidden="true">
+              </div>
+              <h3 class="s3__card-name">Phát triển toàn diện 4 kỹ năng</h3>
+              <p class="s3__card-desc">Con được rèn luyện đồng đều các kỹ năng nghe, nói, đọc và viết thông qua bài học cùng hoạt động thực hành phù hợp với trình độ.</p>
             </div>
-            <h3 class="s3__card-name">Phát triển toàn diện 4 kỹ năng</h3>
-            <p class="s3__card-desc">Con được rèn luyện đồng đều các kỹ năng nghe, nói, đọc và viết thông qua bài học cùng hoạt động thực hành phù hợp với trình độ.</p>
             <dl class="s3__card-result">
               <dt>Kết quả</dt>
               <dd>Con nâng cao khả năng đọc hiểu, diễn đạt rõ ràng và phản xạ tiếng Anh tốt hơn.</dd>
             </dl>
           </li>
           <li class="s3__card-item">
-            <div class="s3__card-top">
-              <span class="s3__card-num">03</span>
-              <img class="s3__card-icon" src="assets/section3/icon-3.png" alt="" aria-hidden="true">
+            <div class="s3__card-body">
+              <div class="s3__card-top">
+                <span class="s3__card-num">03</span>
+                <img class="s3__card-icon" src="assets/section3/icon-3.png" alt="" aria-hidden="true">
+              </div>
+              <h3 class="s3__card-name">Làm bài hiệu quả, nâng cao điểm số</h3>
+              <p class="s3__card-desc">Con được luyện tập theo cấu trúc bài kiểm tra, kỳ thi học kỳ và các cột mốc chuyển cấp, đồng thời rèn phương pháp xử lý từng dạng bài.</p>
             </div>
-            <h3 class="s3__card-name">Làm bài hiệu quả, nâng cao điểm số</h3>
-            <p class="s3__card-desc">Con được luyện tập theo cấu trúc bài kiểm tra, kỳ thi học kỳ và các cột mốc chuyển cấp, đồng thời rèn phương pháp xử lý từng dạng bài.</p>
             <dl class="s3__card-result">
               <dt>Kết quả</dt>
               <dd>Con giảm lỗi sai, làm bài hiệu quả, đạt điểm cao trong các kỳ thi quan trọng.</dd>
             </dl>
           </li>
           <li class="s3__card-item">
-            <div class="s3__card-top">
-              <span class="s3__card-num">04</span>
-              <img class="s3__card-icon" src="assets/section3/icon-4.png" alt="" aria-hidden="true">
+            <div class="s3__card-body">
+              <div class="s3__card-top">
+                <span class="s3__card-num">04</span>
+                <img class="s3__card-icon" src="assets/section3/icon-4.png" alt="" aria-hidden="true">
+              </div>
+              <h3 class="s3__card-name">Chủ động và tự tin trong học tập</h3>
+              <p class="s3__card-desc">Con được rèn tư duy phản biện, thói quen tự học và khả năng chủ động giải quyết vấn đề.</p>
             </div>
-            <h3 class="s3__card-name">Chủ động và tự tin trong học tập</h3>
-            <p class="s3__card-desc">Con được rèn tư duy phản biện, thói quen tự học và khả năng chủ động giải quyết vấn đề.</p>
             <dl class="s3__card-result">
               <dt>Kết quả</dt>
               <dd>Con biết cách học hiệu quả, mạnh dạn thể hiện bản thân và duy trì sự tiến bộ lâu dài.</dd>
@@ -560,8 +572,13 @@
         <span class="s8__title-b">Tự tin thể hiện năng lực tiếng Anh</span>
       </h2>
 
-      <p class="s8__desc">Định kỳ hai tháng một lần, mỗi học sinh iPass sẽ được tham gia 1 buổi Speak Up Day — thử thách thuyết trình và giao tiếp tiếng Anh trực tiếp cùng giáo viên nước ngoài.</p>
-      <p class="s8__desc">Thông qua các hoạt động như kể chuyện, thuyết trình, đóng vai, mô tả tranh và chia sẻ dự án, con có cơ hội vận dụng những kỹ năng đã học vào các tình huống giao tiếp thực tế.</p>
+      <!-- .nowrap-wide điều khiển chỗ xuống dòng ở khổ rộng: cả cụm
+           không bị cắt đôi nên nó cùng nhau rơi xuống dòng dưới.
+           · "thuyết trình"  → dòng 2 bắt đầu bằng "thuyết trình"
+           · "con có cơ hội" → dòng 2 bắt đầu bằng "con có cơ hội"
+           Dưới 768px lớp này tự nhả ra, chữ chảy tự nhiên. -->
+      <p class="s8__desc">Định kỳ hai tháng một lần, mỗi học sinh iPass sẽ được tham gia 1 buổi Speak Up Day — thử thách <span class="nowrap-wide">thuyết trình</span> và giao tiếp tiếng Anh trực tiếp cùng giáo viên nước ngoài.</p>
+      <p class="s8__desc">Thông qua các hoạt động như kể chuyện, thuyết trình, đóng vai, mô tả tranh và chia sẻ dự án, <span class="nowrap-wide">con có cơ hội</span> vận dụng những kỹ năng đã học vào các tình huống giao tiếp thực tế.</p>
     </header>
 
     <!-- khối hình chồng lớp: thẻ cam · cúp · ảnh · thẻ vàng -->
@@ -574,7 +591,8 @@
         </h3>
 
         <ul class="s8__list">
-          <li>Tự tin thể hiện sự tiến bộ và năng lực giao tiếp bằng tiếng Anh.</li>
+          <!-- khoá cả vế sau lại để dòng 2 bắt đầu bằng "giao tiếp" -->
+          <li>Tự tin thể hiện sự tiến bộ và năng lực <span class="nowrap-wide">giao tiếp bằng tiếng Anh.</span></li>
           <li>Diễn đạt suy nghĩ, chia sẻ ý tưởng và thể hiện cá tính theo cách riêng của mình.</li>
           <li>Rèn khả năng nghe hiểu, phản xạ và tương tác trực tiếp cùng giáo viên nước ngoài.</li>
           <li>Nhận đánh giá về điểm mạnh, kỹ năng cần cải thiện và mục tiêu cho chặng học tiếp theo.</li>
@@ -868,7 +886,6 @@
         <ul class="site-footer__list">
           <li><a href="tel:0967417895">Hotline: 0967 417 895</a></li>
           <li><a href="https://ismart.edu.vn/" target="_blank" rel="noopener">Website: ismart.edu.vn</a></li>
-          <!-- TODO: bổ sung khi có thông tin thật -->
         </ul>
       </div>
 
