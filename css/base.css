@@ -169,3 +169,37 @@ body.show-grid .grid-scope::before{
     width: 70px;
   }
 }
+
+/* =========================================================
+   NGẮT DÒNG — quy tắc chung cho toàn site
+
+   Tiếng Việt nhiều từ ngắn nên trình duyệt hay đẩy đúng 1 từ
+   xuống dòng cuối (orphan). Trong thẻ hẹp, dòng cuối trơ một
+   chữ khiến khối chữ nhìn lệch và thiếu chỉn chu.
+
+   · heading  → text-wrap: balance — chia đều chữ giữa các dòng
+   · đoạn văn → text-wrap: pretty  — tránh dòng cuối trơ 1 từ
+
+   Trình duyệt cũ không hiểu 2 giá trị này sẽ bỏ qua, giữ nguyên
+   cách ngắt dòng cũ — không vỡ bố cục.
+   ========================================================= */
+
+h1, h2, h3, h4, h5, h6{
+  text-wrap: balance;
+}
+
+p, li, dd, dt, figcaption, blockquote{
+  text-wrap: pretty;
+}
+
+/* Heading dài trên màn hẹp bị chia thành nhiều dòng, khi đó trình
+   duyệt bỏ qua "balance" → chuyển sang "pretty" để ít nhất không
+   còn dòng cuối trơ một từ. */
+@media (max-width: 767px){
+  h1, h2, h3, h4, h5, h6{ text-wrap: pretty; }
+}
+
+/* chuỗi dài bất thường (URL, mã) không được phá khung thẻ */
+body{
+  overflow-wrap: break-word;
+}

@@ -166,6 +166,10 @@
 
 .aces__card-desc{
   margin-top: 1.2cqi;
+  /* Thẻ canh giữa theo chiều dọc (justify-content: center) nên khối
+     chữ ngắn hơn sẽ nằm lệch xuống so với thẻ bên cạnh. Giữ chỗ 4
+     dòng — số dòng của thẻ dài nhất khi thu hẹp — để 4 thẻ cùng nhịp. */
+  min-height: calc(4 * 1.42em);
   font-weight: 500;
   font-size: 1.38cqi;           /* 13.3/963 */
   line-height: 1.42;
@@ -346,6 +350,27 @@
   .aces__card--communicate,
   .aces__card--extend{ padding-left: 7cqi; }
   .aces__card-desc{ font-size: 1.5cqi; }
+
+  /* Thẻ hẹp lại nhưng chữ chưa nhỏ theo kịp: mức chặn 68% khiến
+     "COMMUNICATE" — kicker dài nhất — bị bẻ làm 2 dòng, đẩy tiêu đề
+     và mô tả của riêng thẻ đó tụt xuống so với thẻ bên cạnh.
+     Nới lên 84% là vừa chạm mép huy hiệu, chưa đè lên nó. */
+  .aces__card-label,
+  .aces__kicker,
+  .aces__card-title{ max-width: 84%; }
+
+  /* "Đồng hành và theo dõi" dài hơn 3 tiêu đề còn lại nên xuống 2
+     dòng ở khổ này — giữ chỗ 2 dòng cho cả 4 thẻ để mô tả bên dưới
+     bắt đầu cùng độ cao. */
+  .aces__card-title{ min-height: calc(2 * 1.2em); }
+
+  /* Giữ nguyên tỉ lệ 963/442 của PSD ở khổ này thì chiều cao thẻ bị
+     khoá cứng, chữ tràn ra ngoài đáy. Thả tỉ lệ và cho 2 hàng thẻ
+     dùng 1fr — hàng tự cao theo nội dung nhưng vẫn bằng nhau. */
+  .aces__diagram{
+    aspect-ratio: auto;
+    grid-template-rows: 1fr clamp(24px, 4vw, 40px) 1fr;
+  }
 }
 
 /* --- Mobile: bỏ sơ đồ chữ thập, xếp 4 thẻ dọc ------------------------ */
@@ -400,7 +425,8 @@
   .aces__card-label{ font-size: 14px; }
   .aces__kicker    { font-size: 20px; margin-top: 4px; }
   .aces__card-title{ font-size: 14px; }
-  .aces__card-desc { font-size: 13px; margin-top: 8px; }
+  /* xếp dọc thì mỗi thẻ đứng riêng một hàng, không cần giữ chỗ dòng */
+  .aces__card-desc { font-size: 13px; margin-top: 8px; min-height: 0; }
 
   /* bỏ hẳn vòng tròn ACES ở giữa khi xuống mobile */
   .aces__center{ display: none; }

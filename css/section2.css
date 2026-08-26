@@ -192,6 +192,10 @@
 .s2__title-quote{
   font-size: clamp(26px, 2.65vw, 38.2px);
   line-height: 1.1;
+  /* Lời trích trong ngoặc kép phải đọc liền một mạch. Nếu để tự ngắt,
+     trên màn hẹp nó vỡ thành «…“Con» / «học rồi”» — dấu ngoặc mở bị bỏ
+     lại cuối dòng trên. Khoá lại thì cả cụm rơi xuống dòng dưới. */
+  white-space: nowrap;
 }
 
 .s2__title-accent{ color: var(--s2-orange); }

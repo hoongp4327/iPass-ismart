@@ -152,6 +152,9 @@
   line-height: 1.5;
   color: #fff;
   text-align: center;
+  /* đoạn dẫn canh giữa chỉ 2 dòng: balance chia đều chữ hai dòng,
+     tránh dòng dưới chỉ còn "tương lai." lửng lơ giữa thẻ */
+  text-wrap: balance;
 }
 
 /* --- hàng 4 thẻ trắng ---------------------------------------------------
@@ -160,9 +163,14 @@
    được bằng trình đọc màn hình, tự xuống dòng theo bề rộng), chỉ giữ
    lại phần icon cắt riêng ra từ ảnh gốc.                              */
 
+/* 4 hàng chung cho mọi thẻ: [số + icon] · [tên] · [mô tả] · [kết quả].
+   Mỗi thẻ là một subgrid mượn lại 4 hàng này, nên tên / mô tả / khối
+   "KẾT QUẢ" của cả 4 thẻ luôn bắt đầu cùng một độ cao dù chữ dài ngắn
+   khác nhau — không cần đoán trước số dòng cho từng khổ màn hình. */
 .s3__cards{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto auto auto;
   gap: 4.47cqw;             /* 54px giữa các thẻ */
   margin: 3.48cqw 0 0;      /* 42px dưới dòng mô tả */
   padding: 0;
@@ -170,12 +178,25 @@
 }
 
 .s3__card-item{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
+  row-gap: 0;               /* khoảng cách giữa các dòng do margin lo */
   padding: 2.15cqw 1.9cqw 2.4cqw;
   border-radius: 1.2cqw;
   background: #fff;
   box-shadow: 0 10px 24px rgba(4, 18, 58, .18);
+}
+
+/* Trình duyệt chưa hỗ trợ subgrid: quay về flex + giữ chỗ số dòng
+   theo thẻ dài nhất (kém linh hoạt hơn nhưng vẫn thẳng hàng). */
+@supports not (grid-template-rows: subgrid){
+  .s3__card-item{
+    display: flex;
+    flex-direction: column;
+  }
+  .s3__card-name{ min-height: calc(3 * 1.25em); }
+  .s3__card-desc{ min-height: calc(6 * 1.5em); }
 }
 
 /* hàng trên: số thứ tự lớn bên trái, icon tròn bên phải */
@@ -214,13 +235,17 @@
   margin-top: 1.2cqw;
   font-size: 1.16cqw;                /* ~14px */
   line-height: 1.5;
-  text-align: justify;
+  /* Cột chỉ ~227px: căn đều 2 biên kéo giãn khoảng cách chữ thành
+     "sông trắng" chạy dọc đoạn văn → căn trái cho nhịp chữ đều. */
+  text-align: left;
   color: #123a7a;
 }
 
-/* khối "KẾT QUẢ" đẩy xuống đáy để 4 thẻ thẳng hàng nhau */
+/* Khối "KẾT QUẢ" nằm ở hàng subgrid cuối nên nhãn của cả 4 thẻ luôn
+   cùng một độ cao. Phần chữ ngắn hơn để lại khoảng trống ở đáy thẻ,
+   không kéo nhãn tụt xuống như trước (khi còn margin-top: auto). */
 .s3__card-result{
-  margin-top: auto;
+  align-self: start;
   padding-top: 1.5cqw;
 }
 
@@ -236,7 +261,7 @@
   margin: .5cqw 0 0;
   font-size: 1.16cqw;
   line-height: 1.5;
-  text-align: justify;
+  text-align: left;                  /* xem chú thích ở .s3__card-desc */
   color: #123a7a;
 }
 
@@ -244,6 +269,22 @@
    RESPONSIVE — dưới 1024px bỏ tỉ lệ cqw cho chữ, chuyển sang clamp
    để chữ không nhỏ quá ngưỡng đọc được.
    ========================================================= */
+
+/* Khoảng 1024–1139px: giữ 4 cột thì mỗi cột chỉ còn ~145px, chữ
+   tiếng Việt vỡ thành rất nhiều dòng ngắn. Chuyển sang 2 cột sớm
+   hơn để mỗi thẻ luôn có bề rộng đọc được. */
+@media (max-width: 1139px){
+  .s3__cards{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3cqw;
+  }
+  /* 2 cột rộng gấp đôi, mỗi thẻ ít dòng hơn — bản dự phòng không
+     subgrid không cần giữ chỗ nhiều đến thế */
+  @supports not (grid-template-rows: subgrid){
+    .s3__card-name{ min-height: calc(2 * 1.25em); }
+    .s3__card-desc{ min-height: calc(4 * 1.5em); }
+  }
+}
 
 @media (max-width: 1023px){
   .s3__body{ padding: 32px 28px 40px; }

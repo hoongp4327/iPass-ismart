@@ -57,17 +57,23 @@
 
 /* --- 3 thẻ số ---------------------------------------------------------- */
 
+/* 3 hàng chung: [con số] · [tên hạng mục] · [nhãn GIÁO VIÊN].
+   Thẻ 03 có tên dài gấp đôi 2 thẻ kia nên xuống 2 dòng — subgrid cho
+   cả 3 thẻ dùng chung chiều cao hàng, nhãn dưới luôn thẳng nhau. */
 .team__grid{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
   gap: clamp(14px, 1.6vw, 24px);
   margin-top: clamp(28px, 3.4vw, 48px);
 }
 
 .team__card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  row-gap: 0;
+  justify-items: center;
   padding: clamp(26px, 2.8vw, 40px) clamp(18px, 1.9vw, 28px) clamp(30px, 3.2vw, 46px);
   border-radius: clamp(12px, 1.1vw, 16px);
   background: #fff;
@@ -96,6 +102,7 @@
   line-height: 1.4;
   letter-spacing: -.01em;
   text-align: center;
+  text-wrap: balance;
   color: var(--team-navy);
 }
 
@@ -120,4 +127,15 @@
 
 @media (max-width: 599px){
   .team{ padding-block: 36px; }
+}
+
+/* Trình duyệt chưa hỗ trợ subgrid: quay lại flex và giữ chỗ 2 dòng
+   cho tên hạng mục để nhãn "GIÁO VIÊN" vẫn thẳng hàng. */
+@supports not (grid-template-rows: subgrid){
+  .team__card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .team__card-title{ min-height: calc(2 * 1.4em); }
 }

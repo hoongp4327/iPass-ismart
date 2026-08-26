@@ -103,10 +103,15 @@
 
 /* --- lưới 3 thẻ ---------------------------------------------------------- */
 
+/* 6 hàng chung cho mọi thẻ: [số] · [tên VN] · [thuật ngữ EN] ·
+   [mô tả] · [kết quả] · [vạch màu]. Mỗi thẻ mượn lại đúng 6 hàng này
+   bằng subgrid nên các khối chữ của 3 thẻ luôn thẳng hàng nhau, kể cả
+   khi thuật ngữ hoặc mô tả của một thẻ dài hơn một dòng. */
 .s7__cards{
   margin-top: clamp(16px, 1.83cqw, 22px);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto auto auto auto;
   gap: clamp(8px, .83cqw, 10px);
   align-items: stretch;
 }
@@ -115,8 +120,10 @@
    PSD: 348 × 395, bo góc ~16, đổ bóng #949494 19% lệch xuống 6px       */
 
 .s7__card{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+  row-gap: 0;                /* khoảng cách giữa các dòng do margin lo */
   min-height: clamp(0px, 32.97cqw, 396px);
   background: #fff;
   border-radius: clamp(12px, 1.33cqw, 16px);
@@ -124,6 +131,14 @@
            clamp(16px, 2.66cqw, 32px)
            clamp(10px, .92cqw, 11px);
   box-shadow: 0 6px 14px rgba(148, 148, 148, .19);
+}
+
+/* Trình duyệt chưa hỗ trợ subgrid: quay lại flex như trước */
+@supports not (grid-template-rows: subgrid){
+  .s7__card{
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* số thứ tự — CAM, rất lớn, đậm; đứng riêng một dòng phía trên tên */
@@ -164,7 +179,10 @@
   color: var(--s7-blue);
 }
 
-/* mô tả — navy, căn đều 2 biên (justify-left trong PSD) */
+/* mô tả — navy.
+   PSD để căn đều 2 biên, nhưng cột thẻ chỉ ~345px: căn đều kéo giãn
+   khoảng cách chữ, tạo "sông trắng" chạy dọc đoạn văn. Căn trái cho
+   nhịp chữ đều, mép phải so le tự nhiên. */
 .s7__desc{
   margin-top: clamp(14px, 1.83cqw, 22px);
   font-family: var(--font-sans);
@@ -172,8 +190,7 @@
   font-size: clamp(13px, 1.22cqw, 14.64px);
   line-height: 1.2;
   letter-spacing: -.025em;
-  text-align: justify;
-  text-justify: inter-word;
+  text-align: left;
   color: var(--s7-navy);
 }
 
@@ -186,8 +203,7 @@
   font-size: clamp(13px, 1.22cqw, 14.64px);
   line-height: 1.2;
   letter-spacing: -.025em;
-  text-align: justify;
-  text-justify: inter-word;
+  text-align: left;                  /* xem chú thích ở .s7__desc */
   color: var(--s7-navy);
 }
 
@@ -200,7 +216,8 @@
 /* vạch trang trí — căn giữa theo chiều ngang thẻ, luôn nằm sát đáy */
 .s7__bar{
   display: block;
-  margin-top: auto;
+  align-self: end;           /* hàng subgrid cuối, ép sát đáy hàng */
+  margin-top: auto;          /* dự phòng cho bố cục flex */
   padding-top: clamp(16px, 2cqw, 24px);
 }
 
@@ -235,6 +252,15 @@
     gap: 16px;
   }
 
+  /* 3 thẻ trong lưới 2 cột → thẻ 03 rơi xuống hàng dưới một mình và
+     dính sát mép trái. Cho nó chiếm cả hàng nhưng khoá đúng bề rộng
+     một cột rồi canh giữa, để hàng dưới cân với hàng trên. */
+  .s7__card:nth-child(3){
+    grid-column: 1 / -1;
+    width: calc(50% - 8px);        /* 8px = nửa gap 16px */
+    margin-inline: auto;
+  }
+
   /* thẻ rộng ra → trả chữ về cỡ đọc được, không co theo cqw nữa */
   .s7__card{
     min-height: 0;
@@ -242,7 +268,9 @@
   }
   .s7__num  { font-size: 44px; }
   .s7__name { font-size: 18px; }
-  .s7__term { font-size: 21px; min-height: 0; }
+  /* vẫn giữ chỗ 2 dòng: "Task-Based Language Teaching" dài hơn hẳn
+     2 thuật ngữ kia, nếu bỏ min-height thì mô tả 3 thẻ so le nhau */
+  .s7__term { font-size: 21px; min-height: 2.3em; }
   .s7__desc,
   .s7__result{ font-size: 15px; line-height: 1.35; }
 
@@ -260,6 +288,17 @@
     max-width: 460px;
     margin-inline: auto;
   }
+
+  /* 1 cột thì không còn thẻ lẻ hàng — bỏ canh giữa của thẻ 03 */
+  .s7__card:nth-child(3){
+    grid-column: auto;
+    width: auto;
+    margin-inline: 0;
+  }
+
+  /* 1 cột rộng 460px, thuật ngữ nào cũng gói gọn 1–2 dòng tuỳ nội
+     dung — không cần giữ chỗ cố định nữa */
+  .s7__term{ min-height: 0; }
 }
 
 @media (max-width: 599px){

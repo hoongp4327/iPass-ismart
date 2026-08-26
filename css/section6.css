@@ -205,6 +205,11 @@
 
 .plan__card{
   position: relative;
+  display: flex;
+  flex-direction: column;
+  /* PSD vẽ cả 2 thẻ cao 235px. Thẻ P2 ít chữ hơn P1 một dòng nên
+     nếu để cao tự nhiên thì 2 thẻ sẽ so le — khoá cùng chiều cao. */
+  min-height: 235px;
   padding: 36px 40px 26.5px;
   border-radius: 30px;
 }
@@ -247,15 +252,16 @@
   font-size: 17px;
   font-weight: 500;
   line-height: 1.19;             /* 20.3px giữa 2 baseline */
-  text-align: justify;
+  /* căn trái thay vì căn đều: đoạn chỉ 2–3 dòng, căn đều làm dòng
+     áp chót giãn chữ rất rõ so với thẻ bên cạnh */
+  text-align: left;
   color: inherit;
 }
 
-/* thẻ P2 ít chữ hơn nên nội dung được đẩy xuống vài px so với thẻ P1 */
-.plan__card--p2{ padding-top: 41px; padding-bottom: 35px; }
-.plan__card--p2 .plan__card-tag{ top: 22px; }
-.plan__card--p2 .plan__card-title{ margin-top: 38px; }
-.plan__card--p2 .plan__card-desc{ margin-top: 6.5px; }
+/* Trước đây P2 được đẩy xuống bằng padding/margin riêng để "lấp"
+   phần chữ ngắn hơn P1 — hệ quả là eyebrow, tiêu đề và mô tả của 2
+   thẻ không bao giờ thẳng hàng nhau. Nay 2 thẻ dùng chung một nhịp,
+   phần chênh lệch do chữ ngắn hơn được min-height hấp thụ ở đáy. */
 
 /* =========================================================
    DÒNG CHỐT CUỐI SECTION
@@ -312,15 +318,13 @@
   .plan__pill{ font-size: 21px; padding: 9px 15px; }
 
   .plan__cards{ margin-top: 18px; }
-  .plan__card{ padding: 28px 28px 24px; border-radius: 24px; }
-  .plan__card--p2{ padding-top: 30px; padding-bottom: 28px; }
+  /* Trên điện thoại chữ nhỏ lại, giữ chiều cao 235px của PSD sẽ để
+     lại mảng trắng lớn dưới đáy — bỏ khoá, thẻ ôm đúng nội dung. */
+  .plan__card{ padding: 28px 28px 24px; border-radius: 24px; min-height: 0; }
   .plan__card-eyebrow{ font-size: 21px; }
   .plan__card-tag{ top: 22px; right: 24px; font-size: 44px; }
-  .plan__card--p2 .plan__card-tag{ top: 19px; }
   .plan__card-title{ margin-top: 20px; font-size: 21px; line-height: 1.15; }
-  .plan__card--p2 .plan__card-title{ margin-top: 26px; }
   .plan__card-desc{ margin-top: 10px; font-size: 15px; line-height: 1.35; }
-  .plan__card--p2 .plan__card-desc{ margin-top: 10px; }
 
   .plan__tagline{ font-size: 20px; line-height: 1.45; }
 }
@@ -333,12 +337,9 @@
   .plan__pill{ font-size: 16px; padding: 8px 13px; }
 
   .plan__card{ padding: 24px 22px 22px; border-radius: 20px; }
-  .plan__card--p2{ padding-top: 26px; padding-bottom: 24px; }
   .plan__card-eyebrow{ font-size: 18px; }
   .plan__card-tag{ top: 18px; right: 20px; font-size: 36px; }
-  .plan__card--p2 .plan__card-tag{ top: 16px; }
   .plan__card-title{ margin-top: 16px; font-size: 19px; }
-  .plan__card--p2 .plan__card-title{ margin-top: 20px; }
   .plan__card-desc{ font-size: 14px; text-align: left; }
 
   .plan__tagline{ font-size: 16px; }
