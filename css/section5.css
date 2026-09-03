@@ -120,8 +120,8 @@
   display: flex;
   flex-direction: column;
   /* Bám mép trên thay vì canh giữa dọc: 4 thẻ có độ dài chữ khác nhau,
-     canh giữa thì nhãn "Trước buổi học / Trong buổi học…" của mỗi thẻ
-     dừng ở một độ cao khác nhau. Bám mép trên thì cả 4 nhãn luôn cách
+     canh giữa thì dòng đầu ("Activate", "Communicate"…) của mỗi thẻ
+     dừng ở một độ cao khác nhau. Bám mép trên thì cả 4 dòng luôn cách
      đỉnh thẻ đúng bằng phần đệm, phần dư dồn xuống đáy. */
   justify-content: flex-start;
   padding: 2.4cqi 3.3cqi 2.6cqi;
@@ -137,25 +137,27 @@
    phải thu hẹp còn 68% bề ngang để né huy hiệu — nay không cần nữa,
    cả 4 dòng chữ dùng trọn bề ngang thẻ. */
 
-.aces__card-label{
-  font-weight: 700;
-  font-size: 2.09cqi;           /* 20.1/963 */
-  line-height: 1.2;
-  letter-spacing: -.01em;
-}
 
+/* Kicker nay là dòng đầu tiên của thẻ (đã bỏ nhãn "Trước buổi học…"
+   phía trên) nên phóng to hơn một chút: 26.7px → 30.7px @963.
+   Vạch ngăn chạy hết bề ngang thẻ, tách tên chặng khỏi phần nội dung
+   bên dưới. Dùng currentColor pha loãng để tự hợp với cả 4 màu thẻ. */
 .aces__kicker{
-  margin-top: .9cqi;
   font-weight: 800;
-  font-size: 2.77cqi;           /* 26.7/963 */
+  font-size: 3.19cqi;
   line-height: 1.1;
   letter-spacing: -.02em;
   text-transform: uppercase;
+
+  padding-bottom: 1.15cqi;
+  border-bottom: max(1px, .17cqi) solid
+                 color-mix(in srgb, currentColor 38%, transparent);
 }
 
 /* Hạ hẳn cỡ so với dòng kicker ("Activate", "Communicate"…): dòng này
    là mô tả ngắn, không phải tiêu đề chính của thẻ. 20.1px → 15.4px. */
 .aces__card-title{
+  margin-top: 1.15cqi;          /* cân với padding-bottom của vạch ngăn */
   font-weight: 700;
   font-size: 1.6cqi;
   line-height: 1.25;
@@ -356,10 +358,9 @@
   .aces__card--communicate,
   .aces__card--extend{ text-align: left; }
 
-  .aces__card-label{ font-size: 14px; }
-  .aces__kicker    { font-size: 20px; margin-top: 4px; }
+  .aces__kicker    { font-size: 23px; padding-bottom: 10px; }
   /* xếp dọc thì mỗi thẻ đứng riêng một hàng, không cần giữ chỗ dòng */
-  .aces__card-title{ font-size: 13.5px; min-height: 0; }
+  .aces__card-title{ font-size: 13.5px; min-height: 0; margin-top: 10px; }
   /* nâng từ 13px lên 14.5px cho đồng cỡ với các đoạn mô tả khác
      trên điện thoại; thẻ xếp dọc nên thừa chỗ */
   .aces__card-desc { font-size: 14.5px; line-height: 1.5; margin-top: 8px; }
