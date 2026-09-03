@@ -49,9 +49,6 @@
 .s8__head{ text-align: center; }
 
 .s8__eyebrow{
-  font-weight: 700;
-  font-size: clamp(12px, 1.09vw, 15.7px);
-  letter-spacing: .02em;
   text-transform: uppercase;
   color: var(--s8-navy);
 }
@@ -78,6 +75,18 @@
 }
 
 .s8__desc + .s8__desc{ margin-top: 10px; }
+
+/* "Speak Up Day" — bôi đậm + gạch chân cho nổi bật giữa đoạn văn.
+   Dùng text-underline-offset để nét gạch không cắt qua dấu tiếng Việt,
+   và keep-together ngăn cụm bị bẻ đôi giữa 2 dòng. */
+.s8__mark{
+  font-weight: 800;
+  color: var(--s8-orange);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .18em;
+  white-space: nowrap;
+}
 
 /* =========================================================
    KHỐI HÌNH — thẻ cam + cúp + ảnh + thẻ vàng chồng lớp

@@ -201,7 +201,15 @@
 
 /* --- 2 thẻ chương trình (PSD 488 × 235, bo góc 30) --------------------- */
 
-.plan__cards{ margin-top: 20px; }      /* đáy pill 181 → đỉnh thẻ 201 */
+/* Lưới 1 cột với grid-auto-rows: 1fr → 2 thẻ luôn cao bằng nhau theo
+   thẻ dài hơn, không cần đoán con số min-height mỗi lần đổi nội dung
+   (thêm dòng luồng 3 chặng là P1 đã cao hơn P2 20px). */
+.plan__cards{
+  margin-top: 20px;                    /* đáy pill 181 → đỉnh thẻ 201 */
+  display: grid;
+  gap: 16px;
+  grid-auto-rows: 1fr;
+}
 
 .plan__card{
   position: relative;
@@ -214,16 +222,20 @@
   border-radius: 30px;
 }
 
-.plan__card + .plan__card{ margin-top: 16px; }
 
 .plan__card--p1{ background: var(--plan-navy);   color: #fff; }
 .plan__card--p2{ background: var(--plan-yellow); color: var(--plan-navy); }
 
+/* "Performance" / "Proficiency" — hạ hẳn cỡ (27px → 18px): đây là
+   nhãn tiếng Anh phụ, không nên to ngang tiêu đề tiếng Việt bên dưới.
+   Bù lại tăng tracking cho ra dáng nhãn nhỏ. */
 .plan__card-eyebrow{
-  font-size: 27px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   line-height: 1;
+  letter-spacing: .06em;
   text-transform: uppercase;
+  opacity: .85;
   color: inherit;
 }
 
@@ -256,6 +268,33 @@
      áp chót giãn chữ rất rõ so với thẻ bên cạnh */
   text-align: left;
   color: inherit;
+  margin-bottom: 14px;   /* khoảng hở tối thiểu trước dòng luồng */
+}
+
+/* Dòng luồng 3 chặng dưới mỗi thẻ — nhỏ, in hoa, tách khỏi đoạn mô tả
+   bằng một vạch mảnh. Màu kế thừa từ thẻ (P1 chữ trắng / P2 chữ navy)
+   nên tự hợp nền, chỉ giảm độ đậm để không tranh chấp với tiêu đề. */
+.plan__card-flow{
+  /* ghim xuống đáy thẻ; khoảng hở tối thiểu phía trên do
+     margin-bottom của .plan__card-desc lo (auto có thể co về 0) */
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px solid currentColor;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+/* vạch ngăn mảnh và mờ, không cắt hẳn thẻ làm đôi */
+.plan__card-flow{ border-top-color: color-mix(in srgb, currentColor 28%, transparent); }
+
+.plan__card-arrow{
+  margin-inline: .18em;
+  font-weight: 600;
+  opacity: .75;
 }
 
 /* Trước đây P2 được đẩy xuống bằng padding/margin riêng để "lấp"
@@ -320,8 +359,10 @@
   .plan__cards{ margin-top: 18px; }
   /* Trên điện thoại chữ nhỏ lại, giữ chiều cao 235px của PSD sẽ để
      lại mảng trắng lớn dưới đáy — bỏ khoá, thẻ ôm đúng nội dung. */
+  .plan__cards{ grid-auto-rows: auto; }   /* điện thoại: thẻ cao tự nhiên */
   .plan__card{ padding: 28px 28px 24px; border-radius: 24px; min-height: 0; }
-  .plan__card-eyebrow{ font-size: 21px; }
+  .plan__card-eyebrow{ font-size: 16px; }
+  .plan__card-flow{ font-size: 14px; margin-top: 12px; padding-top: 10px; }
   .plan__card-tag{ top: 22px; right: 24px; font-size: 44px; }
   .plan__card-title{ margin-top: 20px; font-size: 21px; line-height: 1.15; }
   .plan__card-desc{ margin-top: 10px; font-size: 15px; line-height: 1.35; }
@@ -337,7 +378,8 @@
   .plan__pill{ font-size: 16px; padding: 8px 13px; }
 
   .plan__card{ padding: 24px 22px 22px; border-radius: 20px; }
-  .plan__card-eyebrow{ font-size: 18px; }
+  .plan__card-eyebrow{ font-size: 15px; }
+  .plan__card-flow{ font-size: 13px; }
   .plan__card-tag{ top: 18px; right: 20px; font-size: 36px; }
   .plan__card-title{ margin-top: 16px; font-size: 19px; }
   .plan__card-desc{ font-size: 14px; text-align: left; }

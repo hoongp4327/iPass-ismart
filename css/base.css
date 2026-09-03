@@ -219,3 +219,34 @@ body{
 @media (max-width: 767px){
   .nowrap-wide{ white-space: normal; }
 }
+
+/* =========================================================
+   TIÊU ĐỀ PHỤ (EYEBROW) — dòng chữ nhỏ IN HOA trên đầu mỗi section
+
+   Trước đây mỗi section tự đặt cỡ riêng: có chỗ 19px, có chỗ 14px,
+   độ đậm 700 lẫn 800, tracking từ .01em tới .12em — đứng cạnh nhau
+   nhìn rõ là lệch. Nay gom về MỘT bộ token dùng chung.
+
+   Section nào cần khác (màu chẳng hạn) thì chỉ ghi đè màu, đừng
+   ghi đè cỡ — sửa cỡ thì sửa ở biến này để cả trang đổi theo.
+   ========================================================= */
+
+:root{
+  --eyebrow-size:    clamp(12px, 1.09vw, 15.7px);
+  --eyebrow-weight:  700;
+  --eyebrow-track:   .02em;
+}
+
+.s2__eyebrow,
+.s3__eyebrow,
+.rm__eyebrow,
+.aces__eyebrow,
+.s7__title,
+.s8__eyebrow,
+.team__eyebrow,
+.cta__eyebrow{
+  font-size:      var(--eyebrow-size);
+  font-weight:    var(--eyebrow-weight);
+  letter-spacing: var(--eyebrow-track);
+  text-transform: uppercase;
+}

@@ -167,9 +167,6 @@
 }
 
 .s2__eyebrow{
-  font-size: clamp(12px, 1.09vw, 15.7px);
-  font-weight: 700;
-  letter-spacing: .01em;
   text-transform: uppercase;
   color: var(--s2-gray);
 }

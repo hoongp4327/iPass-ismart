@@ -43,10 +43,7 @@
    ========================================================= */
 
 .cta__eyebrow{
-  font-weight: 800;
-  font-size: clamp(12px, 1.04vw, 15px);
   line-height: 1.5;
-  letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--cta-orange);
 }

@@ -29,9 +29,6 @@
 .team__head{ text-align: center; }
 
 .team__eyebrow{
-  font-weight: 800;
-  font-size: clamp(11px, .97vw, 14px);
-  letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--team-orange);
 }

@@ -254,7 +254,6 @@
     reveal('.aces__desc',     { dir: 'up', delay: 0.2 });
     reveal('.aces__center',   { dir: 'scale', delay: 0.1 });
     revealStagger('.aces__card', { stagger: MOTION.stagger.loose });
-    pop('.aces__badge');
     reveal('.aces__bar', { dir: 'up' });
     float('.aces__mascot', { amount: -8, duration: 3.6 });
 
