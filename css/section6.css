@@ -307,7 +307,9 @@
    ========================================================= */
 
 .plan__tagline{
-  margin-top: -14px;             /* chữ nhô lên phần trong suốt dưới ảnh */
+  /* Trước để -14px cho chữ nhô lên phần trong suốt dưới ảnh, nhưng
+     nhìn ra thành dính sát khối bên trên. Đẩy xuống cho thoáng. */
+  margin-top: 22px;
   font-size: 26px;
   font-weight: 800;
   line-height: 1;

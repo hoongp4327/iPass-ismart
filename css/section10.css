@@ -54,13 +54,15 @@
 
 /* --- 3 thẻ số ---------------------------------------------------------- */
 
-/* 3 hàng chung: [con số] · [tên hạng mục] · [nhãn GIÁO VIÊN].
+/* 2 hàng chung: [con số] · [tên hạng mục]. (Nhãn "GIÁO VIÊN" dưới
+   mỗi thẻ đã bỏ theo yêu cầu.)
    Thẻ 03 có tên dài gấp đôi 2 thẻ kia nên xuống 2 dòng — subgrid cho
-   cả 3 thẻ dùng chung chiều cao hàng, nhãn dưới luôn thẳng nhau. */
+   cả 3 thẻ dùng chung chiều cao hàng, nên con số và dòng tên của cả
+   3 thẻ vẫn bắt đầu cùng một độ cao. */
 .team__grid{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto;
   gap: clamp(14px, 1.6vw, 24px);
   margin-top: clamp(28px, 3.4vw, 48px);
 }
@@ -68,7 +70,7 @@
 .team__card{
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: span 3;
+  grid-row: span 2;
   row-gap: 0;
   justify-items: center;
   padding: clamp(26px, 2.8vw, 40px) clamp(18px, 1.9vw, 28px) clamp(30px, 3.2vw, 46px);
@@ -103,14 +105,6 @@
   color: var(--team-navy);
 }
 
-.team__card-unit{
-  margin-top: clamp(14px, 1.5vw, 22px);
-  font-weight: 600;
-  font-size: clamp(9.5px, .8vw, 11.5px);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--team-muted);
-}
 
 
 /* =========================================================
@@ -127,7 +121,7 @@
 }
 
 /* Trình duyệt chưa hỗ trợ subgrid: quay lại flex và giữ chỗ 2 dòng
-   cho tên hạng mục để nhãn "GIÁO VIÊN" vẫn thẳng hàng. */
+   cho tên hạng mục để 3 thẻ vẫn cao bằng nhau. */
 @supports not (grid-template-rows: subgrid){
   .team__card{
     display: flex;
