@@ -47,8 +47,6 @@
 .team__desc{
   max-width: 780px;
   margin: clamp(16px, 1.8vw, 26px) auto 0;
-  font-size: clamp(12.5px, 1.04vw, 15px);
-  line-height: 1.6;
   color: var(--team-desc);
 }
 

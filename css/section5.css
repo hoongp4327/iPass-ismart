@@ -82,8 +82,6 @@
 .aces__desc{
   max-width: 1052px;
   margin: 16px auto 0;
-  font-size: clamp(13px, 1.16vw, 16.7px);
-  line-height: 1.62;
   text-align: center;
   color: var(--aces-ink);
 }

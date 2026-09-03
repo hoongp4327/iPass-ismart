@@ -250,3 +250,32 @@ body{
   letter-spacing: var(--eyebrow-track);
   text-transform: uppercase;
 }
+
+/* =========================================================
+   ĐOẠN DẪN (LEAD) — đoạn mô tả ngay dưới tiêu đề mỗi section
+
+   Cùng vấn đề với eyebrow: mỗi section một cỡ. Đo ở khổ 1440 —
+     S3  13.9px  (tính theo cqw của thẻ navy, lại còn co giãn khác
+                  hẳn 3 đoạn kia vì không dùng vw)
+     S5  16.7px
+     S8  16.7px
+     S10 15px
+   Gom về một token; 16.7px lấy theo PSD (S5/S8 vốn đã đúng).
+
+   Section nào cần khác thì chỉ ghi đè MÀU và bề rộng tối đa,
+   đừng ghi đè cỡ chữ.
+   ========================================================= */
+
+:root{
+  /* sàn 14px cho màn hẹp: 13px như cũ hơi nhỏ so với đoạn văn thân bài */
+  --lead-size:    clamp(14px, 1.16vw, 16.7px);
+  --lead-leading: 1.62;
+}
+
+.s3__desc,
+.aces__desc,
+.s8__desc,
+.team__desc{
+  font-size:   var(--lead-size);
+  line-height: var(--lead-leading);
+}

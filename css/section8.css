@@ -69,8 +69,6 @@
 .s8__desc{
   max-width: 890px;
   margin: 14px auto 0;
-  font-size: clamp(13px, 1.16vw, 16.7px);
-  line-height: 1.62;
   color: var(--s8-ink);
 }
 
@@ -291,5 +289,4 @@
 
 @media (max-width: 599px){
   .s8{ padding-block: 40px; }
-  .s8__desc{ font-size: 14px; }
 }
