@@ -43,6 +43,7 @@ window.IPASS_COURSES = {
       courses: [
         {
           grade: 3,
+          banner: { desktop: 'assets/courses/ipass-3-banner.webp', desktopSmall: 'assets/courses/ipass-3-banner-1000.webp', mobile: 'assets/courses/ipass-3-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-3-banner-mobile-800.webp', alt: 'Học sinh iPASS 3 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 3',
           slogan: 'Học vui, hiểu chắc – giúp con dùng tiếng Anh tự tin hơn mỗi ngày',
           topics: [
@@ -63,6 +64,7 @@ window.IPASS_COURSES = {
         },
         {
           grade: 4,
+          banner: { desktop: 'assets/courses/ipass-4-banner.webp', desktopSmall: 'assets/courses/ipass-4-banner-1000.webp', mobile: 'assets/courses/ipass-4-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-4-banner-mobile-800.webp', alt: 'Học sinh iPASS 4 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 4',
           slogan: 'Tăng tốc vừa đủ – để con hiểu bài, dùng được và tiến bộ bền vững',
           topics: [
@@ -83,6 +85,7 @@ window.IPASS_COURSES = {
         },
         {
           grade: 5,
+          banner: { desktop: 'assets/courses/ipass-5-banner.webp', desktopSmall: 'assets/courses/ipass-5-banner-1000.webp', mobile: 'assets/courses/ipass-5-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-5-banner-mobile-800.webp', alt: 'Học sinh iPASS 5 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 5',
           slogan: 'Sẵn sàng bứt phá – giúp con vững tiếng Anh và tự tin bước tiếp',
           topics: [
@@ -111,6 +114,7 @@ window.IPASS_COURSES = {
       courses: [
         {
           grade: 6,
+          banner: { desktop: 'assets/courses/ipass-6-banner.webp', desktopSmall: 'assets/courses/ipass-6-banner-1000.webp', mobile: 'assets/courses/ipass-6-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-6-banner-mobile-800.webp', alt: 'Học sinh iPASS 6 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 6',
           slogan: 'Khởi động THCS vững vàng – để con học chắc, hiểu sâu và tự tin hơn',
           topics: [
@@ -131,6 +135,7 @@ window.IPASS_COURSES = {
         },
         {
           grade: 7,
+          banner: { desktop: 'assets/courses/ipass-7-banner.webp', desktopSmall: 'assets/courses/ipass-7-banner-1000.webp', mobile: 'assets/courses/ipass-7-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-7-banner-mobile-800.webp', alt: 'Học sinh iPASS 7 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 7',
           slogan: 'Bứt phá đúng lúc – để con vững kiến thức và tiến bộ rõ ràng qua từng bài học',
           topics: [
@@ -151,6 +156,7 @@ window.IPASS_COURSES = {
         },
         {
           grade: 8,
+          banner: { desktop: 'assets/courses/ipass-8-banner.webp', desktopSmall: 'assets/courses/ipass-8-banner-1000.webp', mobile: 'assets/courses/ipass-8-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-8-banner-mobile-800.webp', alt: 'Học sinh iPASS 8 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 8',
           slogan: 'Vững kiến thức hôm nay – sẵn sàng bứt phá ở chặng học quan trọng phía trước',
           topics: [
@@ -171,6 +177,7 @@ window.IPASS_COURSES = {
         },
         {
           grade: 9,
+          banner: { desktop: 'assets/courses/ipass-9-banner.webp', desktopSmall: 'assets/courses/ipass-9-banner-1000.webp', mobile: 'assets/courses/ipass-9-banner-mobile.webp', mobileSmall: 'assets/courses/ipass-9-banner-mobile-800.webp', alt: 'Học sinh iPASS 9 tự tin với sách và ba lô trong khuôn viên trường' },
           title: 'iPASS 9',
           slogan: 'Vững vàng chặng cuối – để con tự tin bứt phá và sẵn sàng vào lớp 10',
           topics: [
