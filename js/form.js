@@ -152,4 +152,19 @@
       setError(field, '');
     }
   });
+
+  /* Người dùng tới từ trang chi tiết chương trình (chuong-trinh/ipass-n/)
+     thì link mang theo ?lop=n — chọn sẵn lớp đó trong form cho đỡ thao tác. */
+  (function preselectGrade() {
+    var raw = new URLSearchParams(window.location.search).get('lop');
+    if (!raw) return;
+
+    var select = document.getElementById('f-grade');
+    if (!select) return;
+
+    var ok = Array.prototype.some.call(select.options, function (o) {
+      return o.value === raw;
+    });
+    if (ok) select.value = raw;
+  })();
 })();

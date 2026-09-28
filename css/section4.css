@@ -78,12 +78,12 @@
   z-index: 0;
 }
 
-/* Mờ chuyển theo THẺ ĐANG CHỌN (trước là theo độ cuộn) nên cần
-   transition — trước đây độ cuộn tự lo việc chuyển dần. */
+/* --tbg do js/section4.js kéo theo độ cuộn (scrub) nên KHÔNG đặt
+   transition ở đây — để transition thì mỗi khung hình lại phải đuổi
+   theo giá trị mới, ảnh nền chạy trễ hơn tay cuộn. */
 .rm__bg--b{
   opacity: var(--tbg);
   transform: scale(calc(1.05 - .05 * var(--tbg)));
-  transition: opacity .45s ease, transform .45s ease;
   will-change: opacity, transform;
 }
 
@@ -145,22 +145,15 @@
 /* Mỗi thẻ TỰ khai báo container: ruột thẻ tính theo bề rộng chính nó,
    nên đứng cạnh nhau hay xếp dọc đều giữ đúng tỉ lệ.
    Lưu ý: phần tử đã khai báo container-type thì KHÔNG tự dùng cqw của
-   mình được → padding của thẻ chuyển sang %, bo góc sang clamp. */
+   mình được → padding của thẻ chuyển sang %, bo góc sang clamp.
+
+   Thẻ không còn là <button>: các link lớp nằm bên trong đã lo phần
+   điều hướng, nên thẻ chỉ là khối trình bày. */
 .rm__card{
   container-type: inline-size;
-
-  /* reset <button> */
-  appearance: none;
-  border: 0;
-  margin: 0;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-
   position: relative;
-  padding: 6.79% 5.35% 9.465% 7.819%;               /* 33 / 26 / 46 / 38 */
+  padding: 6.79% 5.35% 6.79% 7.819%;                /* 33 / 26 / 33 / 38 */
   border-radius: clamp(12px, 1.9vw, 24px);
-  transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease;
 }
 
 .rm__card--a{
@@ -172,41 +165,6 @@
   background: var(--rm-blue);
   box-shadow: 0 18px 44px rgba(16, 60, 160, .28);
 }
-
-/* Thẻ không được chọn lùi lại một bước: mờ bớt và hạ bóng, để thẻ
-   đang chọn nổi hẳn lên. */
-.rm__card:not(.is-active){
-  opacity: .62;
-  box-shadow: 0 8px 20px rgba(20, 60, 120, .10);
-}
-
-.rm__card:hover{ transform: translateY(-3px); }
-.rm__card:not(.is-active):hover{ opacity: .85; }
-
-.rm__card.is-active{
-  transform: translateY(-2px);
-  outline: max(2px, .28cqw) solid #fff;
-  outline-offset: max(2px, .28cqw);
-}
-
-/* mũi tên chỉ xuống panel, chỉ hiện ở thẻ đang chọn */
-.card__arrow{
-  position: absolute;
-  left: 50%;
-  bottom: max(-14px, -2.9cqw);
-  width: 0;
-  height: 0;
-  opacity: 0;
-  transform: translateX(-50%);
-  border-left:  max(9px, 1.9cqw) solid transparent;
-  border-right: max(9px, 1.9cqw) solid transparent;
-  border-top:   max(11px, 2.3cqw) solid currentColor;
-  transition: opacity .22s ease;
-}
-
-.rm__card--a .card__arrow{ color: var(--rm-cream); }
-.rm__card--b .card__arrow{ color: var(--rm-blue); }
-.rm__card.is-active .card__arrow{ opacity: 1; }
 
 /* --- nội dung thẻ ------------------------------------------------------- */
 
@@ -313,263 +271,113 @@
 .rm__card--a .card__badge{ background: #FF3D02; color: #fff; }
 .rm__card--b .card__badge{ background: #fff; color: #004EFF; }
 
-
 /* =========================================================
-   PANEL CHI TIẾT — chip chọn lớp + nội dung khoá
-   Toàn bộ ruột do js/section4.js dựng từ data/ipass-courses.js.
+   ĐÁY THẺ — "XEM CHI TIẾT CHƯƠNG TRÌNH" + link từng lớp
+   Mỗi link dẫn sang chuong-trinh/ipass-n/.
+   Cỡ chữ vẫn tính theo cqw của THẺ (phần tử con được phép),
+   nên thẻ co lại thì cả hàng link co theo đúng tỉ lệ.
    ========================================================= */
 
-.rm__detail{
-  margin-top: clamp(20px, 2.4vw, 34px);
-  padding: clamp(20px, 2.6vw, 36px) clamp(18px, 2.8vw, 40px) clamp(24px, 3vw, 40px);
-  border: 1px solid var(--rm-line);
-  border-radius: clamp(16px, 2vw, 28px);
-  background: #fff;
-  box-shadow: 0 18px 44px rgba(20, 60, 120, .08);
+.card__more{
+  margin-top:  clamp(16px, 5.6cqw, 27px);
+  padding-top: clamp(13px, 4.5cqw, 22px);
+  border-top: max(1px, .21cqw) solid;
 }
+.rm__card--a .card__more{ border-top-color: rgba(3, 27, 76, .14); }
+.rm__card--b .card__more{ border-top-color: rgba(255, 255, 255, .28); }
 
-/* --- hàng chip chọn lớp ------------------------------------------------- */
-
-.rm__grades{
-  display: flex;
-  gap: clamp(8px, .9vw, 12px);
-  padding-bottom: clamp(14px, 1.6vw, 20px);
-  border-bottom: 1px solid var(--rm-line);
-}
-
-.rm__grade{
-  appearance: none;
-  display: flex;
-  align-items: baseline;
-  gap: .32em;
-  flex: none;
-  margin: 0;
-  padding: clamp(9px, 1vw, 13px) clamp(14px, 1.5vw, 20px);
-  border: 1.5px solid var(--rm-line);
-  border-radius: 999px;
-  background: #fff;
-  font: inherit;
+.card__more-label{
+  /* cqw ở đây tính theo VÙNG NỘI DUNG của thẻ (~370px ở 1440), nên
+     3.9cqw ≈ 14.4px; sàn px lo cho lúc thẻ xếp dọc ở màn hẹp. */
+  font-size: clamp(11.5px, 3.9cqw, 15px);
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.01em;
-  color: var(--rm-muted);
-  cursor: pointer;
-  transition: border-color .2s ease, background-color .2s ease, color .2s ease;
-}
-
-.rm__grade-word{ font-size: clamp(12px, 1.04vw, 15px); }
-
-/* số lớp to và đậm hơn, màu xanh như logo flyer */
-.rm__grade-num{
-  font-size: clamp(17px, 1.6vw, 23px);
-  font-weight: 800;
-  color: var(--ipass-blue);
-}
-
-.rm__grade:hover{ border-color: var(--ipass-blue); }
-
-.rm__grade.is-active{
-  border-color: var(--ipass-blue);
-  background: var(--ipass-blue);
-  color: #fff;
-}
-.rm__grade.is-active .rm__grade-num{ color: #fff; }
-
-/* --- nội dung khoá ------------------------------------------------------ */
-
-/* min-height giữ chỗ để đổi lớp không làm trang nhảy giật */
-.rm__course{
-  min-height: 420px;
-  padding-top: clamp(16px, 1.9vw, 26px);
-  transition: opacity .18s ease, transform .18s ease;
-}
-
-/* trạng thái đang thay ruột: mờ đi + trượt nhẹ (brief: 8–12px) */
-.rm__course.is-swapping{
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.rm__course:focus-visible{ outline-offset: 6px; }
-
-.rm__course-title{
-  font-size: clamp(19px, 1.94vw, 28px);
-  font-weight: 800;
+  letter-spacing: .04em;
   line-height: 1.2;
-  letter-spacing: -.02em;
-  color: var(--rm-ink);
+  text-transform: uppercase;
 }
+.rm__card--a .card__more-label{ color: var(--rm-orange); }
+.rm__card--b .card__more-label{ color: #00FFFC; }
 
-.rm__course-slogan{
-  margin-top: 6px;
-  font-size: clamp(14px, 1.16vw, 16.7px);
-  font-weight: 500;
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--rm-muted);
-}
-
-/* --- 3 khối: chủ đề · lợi ích · phù hợp với ----------------------------- */
-
-.rm__group{ margin-top: clamp(20px, 2.2vw, 32px); }
-
-/* nhãn dạng pill như bộ flyer, mỗi khối một màu */
-.rm__block-label{
-  display: inline-flex;
-  align-items: center;
-  gap: .5em;
-  padding: clamp(7px, .75vw, 10px) clamp(13px, 1.4vw, 19px);
-  border-radius: 999px;
-  font-size: clamp(13px, 1.1vw, 15.7px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -.01em;
-  color: #fff;
-}
-
-.rm__block-icon{ font-size: 1.1em; line-height: 1; }
-
-.rm__block-label--topics  { background: linear-gradient(95deg, #FF7A1A, #F0402B); }
-.rm__block-label--benefits{ background: linear-gradient(95deg, #2B7BFF, #1546C8); }
-.rm__block-label--fit     { background: linear-gradient(95deg, #46C06A, #2C9B4C); }
-
-/* --- lưới 6 chủ đề ------------------------------------------------------ */
-
-.rm__topics{
+/* Lưới auto-fit thay cho flex-wrap: cột rỗng tự co lại nên thẻ 3 lớp
+   vẫn trải đều hết hàng, còn thẻ 4 lớp khi phải xuống hàng thì pill lẻ
+   giữ đúng bề rộng một cột chứ không bị kéo dài hết hàng. */
+.card__links{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(10px, 1.1vw, 15px);
-  margin: clamp(13px, 1.4vw, 19px) 0 0;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: clamp(8px, 2.05cqw, 10px);
+  margin: clamp(12px, 3.29cqw, 16px) 0 0;
   padding: 0;
   list-style: none;
 }
 
-.rm__topic{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: clamp(14px, 1.5vw, 20px) clamp(10px, 1.1vw, 14px);
-  border: 1px solid var(--rm-line);
-  border-radius: clamp(10px, 1.1vw, 16px);
-  background: var(--rm-tint);
-  text-align: center;
-}
+/* <li> chỉ là vỏ của một ô lưới — cho <a> chiếm trọn ô */
+.card__links li{ display: flex; }
 
-.rm__topic-icon{ font-size: clamp(22px, 2vw, 29px); line-height: 1; }
-
-.rm__topic-text{
-  font-size: clamp(12.5px, 1.04vw, 15px);
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--rm-ink);
-  text-wrap: balance;
-}
-
-/* --- 4 lợi ích ---------------------------------------------------------- */
-
-.rm__benefits{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(12px, 1.3vw, 18px);
-  margin: clamp(13px, 1.4vw, 19px) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.rm__benefit{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* chấm tròn màu cố định theo thứ tự, giống flyer */
-.rm__benefit-dot{
-  flex: none;
-  width: clamp(26px, 2.5vw, 36px);
-  height: clamp(26px, 2.5vw, 36px);
-  border-radius: 50%;
-}
-
-.rm__benefit-dot--green { background: var(--rm-green);   }
-.rm__benefit-dot--orange{ background: var(--rm-orange2); }
-.rm__benefit-dot--purple{ background: var(--rm-purple);  }
-.rm__benefit-dot--pink  { background: var(--rm-pink);    }
-
-.rm__benefit-text{
-  font-size: clamp(12.5px, 1.04vw, 15px);
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--rm-ink);
-}
-
-/* --- phù hợp với -------------------------------------------------------- */
-
-/* Nội dung chạy từ data (7 khoá, độ dài khác nhau) nên không khoá
-   từng cụm từ như các đoạn chữ cố định khác được — dùng balance để
-   trình duyệt tự chia đều các dòng, khỏi trơ dòng cuối 2 chữ. */
-.rm__fit{
-  margin-top: clamp(11px, 1.2vw, 16px);
-  max-width: 78ch;
-  font-size: clamp(13px, 1.08vw, 15.6px);
-  font-weight: 500;
-  line-height: 1.6;
-  color: var(--rm-muted);
-  text-wrap: balance;
-}
-
-/* --- CTA ---------------------------------------------------------------- */
-
-.rm__cta{
-  appearance: none;
+.card__link{
   display: inline-flex;
-  align-items: center;
-  gap: .55em;
-  margin-top: clamp(20px, 2.2vw, 32px);
-  padding: clamp(12px, 1.25vw, 17px) clamp(20px, 2.1vw, 30px);
-  border: 0;
+  width: 100%;
+  align-items: baseline;
+  justify-content: center;
+  gap: .4em;
+  padding: clamp(8px, 2.4cqw, 11px) clamp(8px, 2.6cqw, 14px);
   border-radius: 999px;
-  background: var(--ipass-orange);
-  font: inherit;
-  font-size: clamp(14px, 1.13vw, 16.2px);
-  font-weight: 800;
+  border: max(1.5px, .31cqw) solid;
+  font-size: clamp(12px, 3.6cqw, 14px);
+  font-weight: 700;
+  letter-spacing: .01em;
   line-height: 1;
-  letter-spacing: -.01em;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 12px 26px rgba(240, 78, 35, .28);
-  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+  white-space: nowrap;
+  transition: background-color .2s ease, color .2s ease,
+              border-color .2s ease, transform .2s ease;
 }
+.card__link b{ font-size: 1.32em; font-weight: 800; }
 
-.rm__cta:hover{
+/* bản kem: viền cam, nền trắng → hover thì đảo lại */
+.rm__card--a .card__link{
+  background: #fff;
+  border-color: rgba(255, 60, 0, .35);
+  color: var(--rm-orange);
+}
+.rm__card--a .card__link:hover{
+  background: var(--rm-orange);
+  border-color: var(--rm-orange);
+  color: #fff;
   transform: translateY(-2px);
-  background: var(--ipass-orange-2);
-  box-shadow: 0 16px 32px rgba(240, 78, 35, .34);
 }
 
-.rm__cta-arrow{ font-size: 1.15em; line-height: 1; }
-
+/* bản xanh: viền trắng mờ → hover thì nền trắng, chữ xanh */
+.rm__card--b .card__link{
+  background: rgba(255, 255, 255, .12);
+  border-color: rgba(255, 255, 255, .55);
+  color: #fff;
+}
+.rm__card--b .card__link:hover{
+  background: #fff;
+  border-color: #fff;
+  color: var(--rm-blue);
+  transform: translateY(-2px);
+}
 
 /* =========================================================
-   RESPONSIVE — chỉ cần chỉnh phần chữ tiêu đề và bề rộng thẻ,
-   ruột thẻ tự co theo cqw.
+   RESPONSIVE — cỡ chữ trong thẻ đã quy theo cqw của chính thẻ
+   nên tự co đúng tỉ lệ; chỉ can thiệp khi khung đổi hình dạng.
    ========================================================= */
 
-/* Cỡ chữ đã quy theo cqw của khung thẻ nên tự co đúng tỉ lệ —
-   chỉ cần can thiệp khi khung đổi hình dạng ở màn hình nhỏ. */
-
-/* --- Tablet: thẻ cao dần lên để chữ không quá bé -------------------- */
+/* --- Tablet ----------------------------------------------------------- */
 
 @media (max-width: 1023px){
   .rm__inner{ padding-inline: 7.5%; }
   .rm__cards{ max-width: 100%; }
-
-  /* brief: tablet → chủ đề 3 cột, lợi ích 2 cột */
-  .rm__benefits{ grid-template-columns: repeat(2, 1fr); }
-  .rm__course{ min-height: 520px; }
 }
 
-/* --- Mobile: nền lấy phần có nhân vật, 2 thẻ thu gọn ------------------- */
+/* Khoảng 768–1119px: 2 thẻ vẫn nằm ngang nhưng đã hẹp, hàng 4 pill của
+   bản THCS không đủ chỗ. Ép cả hai thẻ về 2 cột pill → bản tiểu học
+   thành 2+1, bản THCS thành 2+2: cùng 2 hàng nên đáy hai thẻ bằng nhau. */
+@media (min-width: 768px) and (max-width: 1119px){
+  .card__links{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Mobile: nền lấy phần có nhân vật, 2 thẻ xếp dọc -------------------- */
 
 @media (max-width: 767px){
   .rm__bg{ object-position: 78% top; }
@@ -580,15 +388,12 @@
   .rm__head{ text-shadow: 0 1px 14px rgba(255, 255, 255, .85); }
 
   /* khung hẹp lại nên cqw nhỏ đi nhiều → khoá lại bằng clamp */
-  /* cùng tỉ lệ thu nhỏ 20% như ở màn hình lớn */
   .rm__title   { font-size: clamp(19px, 6.08cqw, 27px); }
   .rm__subtitle{ font-size: clamp(15px, 4.72cqw, 22px); }
 
-  /* Brief cho 2 phương án ở mobile: "xếp ngang dạng compact HOẶC dọc
-     nếu quá chật". Ở 375px mà để ngang thì mỗi thẻ chỉ còn ~135px,
-     ruột thẻ (tính theo cqw của chính thẻ) tụt xuống cỡ 7px — không
-     đọc được. Nên xếp DỌC: thẻ rộng ~287px, chữ về lại cỡ đọc tốt và
-     giữ nguyên đủ nội dung thẻ như bản desktop. */
+  /* Để ngang ở 375px thì mỗi thẻ chỉ còn ~135px, ruột thẻ (tính theo
+     cqw của chính thẻ) tụt xuống cỡ 7px — không đọc được. Nên xếp DỌC:
+     thẻ rộng ~287px, chữ về lại cỡ đọc tốt và giữ nguyên đủ nội dung. */
   .rm__cards{
     grid-template-columns: 1fr;
     gap: 14px;
@@ -596,44 +401,14 @@
     margin-top: 7%;
   }
 
-  /* xếp dọc thì mũi tên của thẻ trên sẽ chỉ vào thẻ dưới — chỉ giữ
-     mũi tên khi thẻ đang chọn là thẻ cuối, còn lại ẩn cho đỡ rối */
-  .rm__card:not(:last-child) .card__arrow{ display: none; }
-
-  /* chip lớp: hàng cuộn ngang được, không làm tràn trang */
-  .rm__grades{
-    margin-inline: calc(-1 * clamp(18px, 2.8vw, 40px));
-    padding-inline: clamp(18px, 2.8vw, 40px);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .rm__grades::-webkit-scrollbar{ display: none; }
-
-  /* brief: mobile → chủ đề 2 cột, lợi ích 1 cột (icon trái – chữ phải) */
-  .rm__topics{ grid-template-columns: repeat(2, 1fr); }
-
-  .rm__benefits{ grid-template-columns: 1fr; gap: 12px; }
-  .rm__benefit{
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .rm__course{ min-height: 640px; }
-
-  .rm__cta{ display: flex; width: 100%; justify-content: center; }
 }
 
 /* --- Tôn trọng thiết lập giảm chuyển động ------------------------------ */
 
 @media (prefers-reduced-motion: reduce){
   .rm__bg--b,
-  .rm__card,
-  .rm__course,
-  .rm__cta{ transition: none; }
+  .card__link{ transition: none; }
 
   .rm__bg--b{ transform: none; }
-  .rm__card:hover,
-  .rm__card.is-active,
-  .rm__cta:hover{ transform: none; }
+  .card__link:hover{ transform: none; }
 }
