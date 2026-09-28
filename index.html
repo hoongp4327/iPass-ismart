@@ -280,16 +280,16 @@
      dẫn sang trang chi tiết của từng lớp (chuong-trinh/ipass-n/).
 
      Nội dung 7 khoá nằm ở data/ipass-courses.js và được dựng ở
-     chính các trang đó — section này chỉ là cửa vào.
+     chính các trang đó — section này chỉ là cửa vào, không có JS
+     riêng và không có hiệu ứng theo cuộn.
      ======================================================== -->
 <section class="rm" id="roadmap">
   <div class="rm__stage">
    <!-- khung bo góc 1200 × 638 nằm gọn trong cột nội dung (không tràn mép) -->
    <div class="rm__frame">
 
-    <!-- nền: 2 lớp chồng nhau, lớp B mờ dần hiện ra theo độ cuộn -->
-    <img class="rm__bg rm__bg--a" src="assets/section4/bg-tieuhoc.jpg"  alt="" aria-hidden="true">
-    <img class="rm__bg rm__bg--b" src="assets/section4/bg-trunghoc.jpg" alt="" aria-hidden="true">
+    <!-- nền tĩnh một lớp -->
+    <img class="rm__bg" src="assets/section4/bg-trunghoc.jpg" alt="" aria-hidden="true">
 
     <div class="rm__inner grid-scope">
       <div class="rm__block">
@@ -931,7 +931,6 @@
 
 <script src="js/nav.js"></script>
 <script src="js/section2.js"></script>
-<script src="js/section4.js"></script>
 <script src="js/form.js"></script>
 <script src="js/motion.js"></script>
 </body>

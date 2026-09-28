@@ -3,14 +3,9 @@
    Canvas thiết kế: 1440 × 721 · lưới 12 cột (lề 120)
    Toạ độ / màu / cỡ chữ đọc trực tiếp từ file PSD.
 
-   Tương tác: 2 thẻ cấp học là 2 NÚT nằm cạnh nhau; bấm thẻ nào
-   thì panel bên dưới đổi sang cấp đó và nền khung mờ chuyển theo
-   (biến --tbg: 0 = tiểu học · 1 = trung học).
-
-   Bản trước section này bị ghim (sticky) và dùng độ cuộn để mờ
-   chuyển giữa 2 thẻ — nghĩa là 2 thẻ không bao giờ hiện cùng lúc,
-   nên không thể làm nút chọn. Nay bỏ ghim, section cao theo nội
-   dung như mọi section khác.
+   2 thẻ cấp học nằm cạnh nhau, mỗi thẻ có hàng nút dẫn sang trang
+   chi tiết từng lớp. Section không ghim, không hiệu ứng theo cuộn,
+   nền là một ảnh tĩnh — nên cũng không cần file JS riêng.
 
    Bên trong thẻ dùng đơn vị cqw (% bề rộng CHÍNH THẺ ĐÓ — mỗi thẻ
    tự khai báo container) nên thẻ giữ đúng tỉ lệ bản vẽ ở mọi cỡ.
@@ -44,9 +39,6 @@
   max-width: calc(var(--content-max) + 2 * var(--page-pad));
   margin-inline: auto;
   padding-inline: var(--page-pad);
-
-  /* 0 = tiểu học · 1 = trung học, do js/section4.js ghi vào */
-  --tbg: 0;
 }
 
 /* Khung bo góc 1200 × 638 — đúng như "Group 12/13" trong PSD.
@@ -76,15 +68,6 @@
   object-fit: cover;
   object-position: center;
   z-index: 0;
-}
-
-/* --tbg do js/section4.js kéo theo độ cuộn (scrub) nên KHÔNG đặt
-   transition ở đây — để transition thì mỗi khung hình lại phải đuổi
-   theo giá trị mới, ảnh nền chạy trễ hơn tay cuộn. */
-.rm__bg--b{
-  opacity: var(--tbg);
-  transform: scale(calc(1.05 - .05 * var(--tbg)));
-  will-change: opacity, transform;
 }
 
 /* --- khung nội dung ----------------------------------------------------- */
@@ -406,9 +389,6 @@
 /* --- Tôn trọng thiết lập giảm chuyển động ------------------------------ */
 
 @media (prefers-reduced-motion: reduce){
-  .rm__bg--b,
   .card__link{ transition: none; }
-
-  .rm__bg--b{ transform: none; }
   .card__link:hover{ transform: none; }
 }
