@@ -276,8 +276,12 @@
 <!-- ================== /SECTION 03 · MỘT LỘ TRÌNH, TIẾN BỘ TOÀN DIỆN ==================== -->
 
 <!-- ============ SECTION 04 · LỘ TRÌNH HỌC TẬP ============
-     Cuộn tới section → hiện bản TIỂU HỌC.
-     Cuộn tiếp    → nền đổi dần + thẻ xanh TRUNG HỌC dâng từ dưới lên.
+     Bấm 1 trong 2 thẻ cấp học → panel bên dưới đổi sang cấp đó,
+     nền khung cũng mờ chuyển theo (tiểu học ↔ trung học).
+     Trong panel có hàng chip chọn lớp (iPASS 3–5 / 6–9).
+
+     Nội dung 7 khoá nằm ở data/ipass-courses.js, phần dựng ở
+     js/section4.js — markup dưới đây chỉ là khung rỗng.
      ======================================================== -->
 <section class="rm" id="roadmap">
   <div class="rm__stage">
@@ -297,10 +301,14 @@
           <p  class="rm__subtitle">VỮNG TỪNG CHẶNG CON ĐI</p>
         </header>
 
+        <!-- 2 thẻ = 2 nút chọn cấp học. Dùng <button> + aria-expanded/
+             aria-controls (không dùng role="tab") để khỏi lẫn với
+             tablist chọn lớp nằm trong panel bên dưới. -->
         <div class="rm__cards">
 
           <!-- ---- Bản A · TIỂU HỌC ---- -->
-          <article class="rm__card rm__card--a">
+          <button type="button" class="rm__card rm__card--a is-active"
+                  data-level="tieu-hoc" aria-expanded="true" aria-controls="rm-panel">
             <p class="card__level">TIỂU HỌC · LỚP 3–5</p>
 
             <div class="card__row">
@@ -317,10 +325,12 @@
               <p class="card__aim">Định hướng<br>năng lực cuối cấp</p>
               <span class="card__badge">A1<sup>+</sup></span>
             </div>
-          </article>
+            <span class="card__arrow" aria-hidden="true"></span>
+          </button>
 
           <!-- ---- Bản B · TRUNG HỌC CƠ SỞ ---- -->
-          <article class="rm__card rm__card--b">
+          <button type="button" class="rm__card rm__card--b"
+                  data-level="thcs" aria-expanded="false" aria-controls="rm-panel">
             <p class="card__level">TRUNG HỌC CƠ SỞ · LỚP 6–9</p>
 
             <div class="card__row">
@@ -337,13 +347,28 @@
               <p class="card__aim">Định hướng<br>năng lực cuối cấp</p>
               <span class="card__badge">A2<sup>+</sup></span>
             </div>
-          </article>
+            <span class="card__arrow" aria-hidden="true"></span>
+          </button>
 
         </div>
       </div>
     </div>
 
    </div>
+
+   <!-- PANEL CHI TIẾT — js/section4.js dựng toàn bộ ruột từ data.
+        Mặc định mở sẵn cấp Tiểu học, lớp 3 (không ẩn nội dung với
+        người chỉ cuộn qua). -->
+   <div class="rm__detail" id="rm-panel">
+
+     <!-- hàng chip chọn lớp: tablist đúng chuẩn WAI-ARIA -->
+     <div class="rm__grades" role="tablist" aria-label="Chọn lớp"></div>
+
+     <!-- nội dung khoá đang chọn -->
+     <div class="rm__course" role="tabpanel" tabindex="0"></div>
+
+   </div>
+
   </div>
 </section>
 <!-- ========== /SECTION 04 ========== -->
@@ -907,6 +932,8 @@
 
 <script src="js/nav.js"></script>
 <script src="js/section2.js"></script>
+<!-- dữ liệu phải nạp TRƯỚC section4.js vì file đó đọc window.IPASS_COURSES -->
+<script src="data/ipass-courses.js"></script>
 <script src="js/section4.js"></script>
 <script src="js/form.js"></script>
 <script src="js/motion.js"></script>
