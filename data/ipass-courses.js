@@ -31,7 +31,20 @@ window.IPASS_COURSES = {
 
     /* 4 lợi ích luôn theo đúng thứ tự này, màu icon cố định như flyer:
        xanh lá (từ vựng) · cam (nghe–nói) · tím (ngữ pháp) · hồng đỏ (kết quả) */
-    benefitTones: ['green', 'orange', 'purple', 'pink']
+    benefitTones: ['green', 'orange', 'purple', 'pink'],
+
+    /* Thời lượng — giống nhau ở cả 7 khoá nên để chung ở đây.
+       Tiêu đề section ghép thêm đầu ra của cấp:
+       "Lộ trình A1+ trong 72 buổi" / "Lộ trình A2+ trong 72 buổi". */
+    duration: {
+      eyebrow:  'Thời lượng khoá học',
+      sessions: 72,
+      stats: [
+        { value: '72', label: 'buổi học'    },
+        { value: '90', label: 'phút / buổi' },
+        { value: '2',  label: 'buổi / tuần' }
+      ]
+    }
   },
 
   levels: [
