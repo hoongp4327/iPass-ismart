@@ -10,7 +10,7 @@
    đưa chuột vào, khi chạm, khi có phần tử trong dải nhận focus bàn
    phím, và không chạy khi máy bật chế độ giảm chuyển động.
 
-   Hướng chạy: thẻ trôi từ TRÁI sang PHẢI, tức scrollLeft giảm dần.
+   Hướng chạy: thẻ trôi từ PHẢI sang TRÁI, tức scrollLeft tăng dần.
    ========================================================= */
 
 (function () {
@@ -31,7 +31,7 @@
   /* giữ nguyên 10 thẻ, không nhân đôi, không chạy — vẫn vuốt tay được */
   if (reduceMotion.matches) return;
 
-  var SPEED = 40;            /* px mỗi giây — một vòng 10 thẻ hết ~75 giây */
+  var SPEED = 32;            /* px mỗi giây — một vòng 10 thẻ hết ~90 giây */
   var RESUME_DELAY = 1200;   /* rời chuột bao lâu thì chạy tiếp */
 
   /* ---------------------------------------------------------
@@ -80,8 +80,8 @@
     var span = loopWidth();
     if (span <= 0) return;
 
-    var next = viewport.scrollLeft - SPEED * dt;
-    if (next <= 0) next += span;   /* chạm mép trái → vòng lại */
+    var next = viewport.scrollLeft + SPEED * dt;
+    if (next >= span) next -= span;   /* đi hết một vòng → lùi về mốc tương đương */
 
     viewport.scrollLeft = next;
   }
@@ -106,9 +106,9 @@
   function start() {
     cloneTrack();
 
-    /* đứng ở đầu bản sao: còn chỗ trôi sang phải ngay từ giây đầu,
-       không phải đợi chạm mép mới vòng lại */
-    viewport.scrollLeft = loopWidth();
+    /* bắt đầu từ thẻ đầu tiên; cả quãng [0, một vòng] đều có thẻ nhờ
+       bản sao nằm ngay sau, nên không bao giờ lọt khoảng trống */
+    viewport.scrollLeft = 0;
 
     window.requestAnimationFrame(tick);
 
