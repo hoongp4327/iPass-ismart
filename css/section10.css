@@ -131,10 +131,13 @@
 
 /* =========================================================
    DẢI CHÂN DUNG GIÁO VIÊN
-   Thẻ trắng trên nền xanh nhạt của section, ảnh cắt tròn từ bộ
-   card cam nên khuôn hình và nền của 10 người đồng nhất.
-   Lướt ngang bằng scroll-snap — không cần thư viện; chấm trang và
-   nút mũi tên do js/section10.js dựng, thiếu JS vẫn vuốt được.
+
+   Thẻ KHÔNG có nền riêng — ảnh và chữ nằm thẳng trên nền section,
+   nhìn nhẹ và không tạo mảng xám chen giữa các thẻ.
+
+   Dải tự trôi ngang nhờ js/section10.js nhân đôi danh sách rồi đẩy
+   scrollLeft từng khung hình. Vẫn là vùng cuộn thật nên người dùng
+   vuốt tay được; đưa chuột vào hoặc chạm thì dải dừng.
    ========================================================= */
 
 .teachers{
@@ -150,22 +153,25 @@
   text-align: center;
 }
 
-/* Vùng lướt tràn ra sát mép màn hình để thẻ cuối không bị "kẹt" lề,
-   phần đệm bù lại đúng bằng lề trang. */
+/* Tràn hết bề ngang màn hình và KHÔNG có đệm hai bên.
+   Có đệm thì dải chạy vòng sẽ lộ vết nối: ở scrollLeft = 0 dải đệm
+   bên trái trống, còn ở điểm vòng lại thì chỗ đó là mép thẻ phía
+   trước — nhảy một cái 24px. Bỏ đệm thì hai cảnh trùng khít. */
 .teachers__viewport{
   margin-inline: calc(-1 * var(--page-pad));
-  padding-inline: var(--page-pad);
-  padding-block: 4px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  /* proximity chứ không mandatory: mandatory giành quyền với scrollTo()
-     mượt của JS, cuộn đang chạy bị kéo giật về điểm neo gần nhất. */
-  scroll-snap-type: x proximity;
-  /* để điểm neo trùng mép lề, nhờ vậy thẻ đầu đứng ở scrollLeft = 0 */
-  scroll-padding-inline: var(--page-pad);
   scrollbar-width: none;
+  /* KHÔNG dùng scroll-snap: điểm neo sẽ kéo giật dải đang tự trôi */
 }
 .teachers__viewport::-webkit-scrollbar{ display: none; }
+
+/* hai mép mờ dần, để thẻ trôi vào/ra không bị cắt cụt đột ngột */
+@supports (mask-image: linear-gradient(90deg, #000, #000)){
+  .teachers__viewport{
+    mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  }
+}
 
 .teachers__track{
   display: flex;
@@ -178,7 +184,6 @@
 /* 4 thẻ một màn ở desktop */
 .teachers__item{
   flex: 0 0 calc((100% - 3 * var(--tc-gap)) / 4);
-  scroll-snap-align: start;
 }
 
 .tcard{
@@ -186,10 +191,8 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: clamp(20px, 2vw, 28px) clamp(14px, 1.4vw, 20px) clamp(22px, 2.2vw, 30px);
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 10px 26px rgba(13, 42, 92, .07);
+  padding-inline: clamp(6px, .8vw, 12px);
+  background: none;
   text-align: center;
 }
 
@@ -199,12 +202,10 @@
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
-  /* viền trắng mảnh tách ảnh nền cam khỏi thẻ trắng */
-  box-shadow: 0 0 0 4px #fff, 0 6px 16px rgba(13, 42, 92, .14);
 }
 
 .tcard__name{
-  margin-top: clamp(16px, 1.6vw, 22px);
+  margin-top: clamp(14px, 1.5vw, 20px);
   color: var(--team-navy);
   font-size: clamp(15px, 1.25vw, 18px);
   font-weight: 800;
@@ -231,59 +232,37 @@
   text-wrap: pretty;
 }
 
-/* --- chấm trang + mũi tên --------------------------------------------- */
+/* --- nút xem chi tiết -------------------------------------------------- */
 
-.teachers__nav{
+.teachers__more{
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 14px;
-  margin-top: clamp(18px, 2vw, 26px);
+  margin-top: clamp(22px, 2.4vw, 34px);
 }
-/* không có JS thì khối này rỗng — giấu đi cho khỏi chiếm chỗ */
-.teachers__nav:empty{ display: none; }
 
-.teachers__arrow{
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1.5px solid #cfe2f2;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--team-navy);
-  font-size: 16px;
-  line-height: 1;
-  cursor: pointer;
-  transition: border-color .2s ease, color .2s ease, opacity .2s ease;
-}
-.teachers__arrow:hover:not(:disabled){
-  border-color: var(--team-orange);
-  color: var(--team-orange);
-}
-.teachers__arrow:disabled{ opacity: .35; cursor: default; }
-
-.teachers__dots{
-  display: flex;
+.teachers__more a{
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-
-.teachers__dot{
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #b9cfe2;
-  cursor: pointer;
-  transition: background .2s ease, width .2s ease;
-}
-.teachers__dot.is-active{
-  width: 24px;
+  gap: 10px;
+  padding: 13px 26px;
+  border: 1.5px solid var(--team-orange);
   border-radius: 999px;
+  color: var(--team-orange);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 700;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+.teachers__more a:hover{
   background: var(--team-orange);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.teachers__more svg{
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
 }
 
 /* --- màn hẹp ----------------------------------------------------------- */
@@ -302,6 +281,6 @@
 }
 
 @media (prefers-reduced-motion: reduce){
-  .teachers__arrow,
-  .teachers__dot{ transition: none; }
+  .teachers__more a{ transition: none; }
+  .teachers__more a:hover{ transform: none; }
 }
